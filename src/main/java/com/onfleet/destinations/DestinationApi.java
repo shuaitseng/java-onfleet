@@ -9,6 +9,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+//TODO: improve error handling
 public class DestinationApi {
 	private final String URL = OnFleet.URL + "/destinations";
 	private final OkHttpClient client;
