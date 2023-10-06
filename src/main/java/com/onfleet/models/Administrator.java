@@ -1,6 +1,9 @@
 package com.onfleet.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.onfleet.utils.TypeDeserializer;
 
 public class Administrator {
 	@JsonProperty("name")
@@ -13,6 +16,19 @@ public class Administrator {
 	private Boolean isReadOnly;
 	@JsonProperty("type")
 	private Type type;
+	private String id;
+	private Long timeCreated;
+	private Long timeLastModified;
+	private String organization;
+	@JsonProperty("isActive")
+	private Boolean isActive;
+	private String[] metadata;
+	@JsonProperty("isAccountOwner")
+	private Boolean isAccountOwner;
+	private String[] teams;
+
+	public Administrator() {
+	}
 
 	public Administrator(String name, String email, String phone, Boolean isReadOnly, Type type) {
 		this.name = name;
@@ -22,6 +38,7 @@ public class Administrator {
 		this.type = type;
 	}
 
+	@JsonDeserialize(using = TypeDeserializer.class)
 	public enum Type {
 		SUPER("super"),
 		STANDARD("standard");
@@ -70,5 +87,69 @@ public class Administrator {
 
 	public void setType(Type type) {
 		this.type = type;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Long getTimeCreated() {
+		return timeCreated;
+	}
+
+	public void setTimeCreated(Long timeCreated) {
+		this.timeCreated = timeCreated;
+	}
+
+	public Long getTimeLastModified() {
+		return timeLastModified;
+	}
+
+	public void setTimeLastModified(Long timeLastModified) {
+		this.timeLastModified = timeLastModified;
+	}
+
+	public String getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(String organization) {
+		this.organization = organization;
+	}
+
+	public Boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean active) {
+		this.isActive = active;
+	}
+
+	public String[] getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(String[] metadata) {
+		this.metadata = metadata;
+	}
+
+	public Boolean isAccountOwner() {
+		return isAccountOwner;
+	}
+
+	public void setAccountOwner(boolean accountOwner) {
+		isAccountOwner = accountOwner;
+	}
+
+	public String[] getTeams() {
+		return teams;
+	}
+
+	public void setTeams(String[] teams) {
+		this.teams = teams;
 	}
 }
