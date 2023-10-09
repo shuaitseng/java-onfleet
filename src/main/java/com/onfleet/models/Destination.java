@@ -11,6 +11,7 @@ public class Destination {
 	private String notes;
 	@JsonProperty("options")
 	private Options options;
+	private String[] warnings;
 
 	public Address getAddress() {
 		return address;
