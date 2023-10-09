@@ -1,12 +1,17 @@
 package com.onfleet.api;
 
+import com.google.gson.reflect.TypeToken;
+import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.Hub;
+import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
-import com.onfleet.utils.JsonUtils;
 import com.onfleet.utils.MediaTypes;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HubApi extends ApiBase {
 
@@ -14,23 +19,23 @@ public class HubApi extends ApiBase {
 		super(client, "/hubs");
 	}
 
-	public void createHub(Hub hub) throws Exception {
-		String jsonPayload = JsonUtils.toJson(hub);
+	public Hub createHub(Hub hub) throws ApiException {
+		String jsonPayload = GsonSingleton.getInstance().toJson(hub);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.POST, body, baseUrl);
-		System.out.println(response.body().string());
+		return handleResponse(response, Hub.class);
 	}
 
-	public void updateHub(String hubId, Hub hub) throws Exception {
+	public Hub updateHub(String hubId, Hub hub) throws ApiException {
 		String url = String.format("%s/%s", baseUrl, hubId);
-		String jsonPayload = JsonUtils.toJson(hub);
+		String jsonPayload = GsonSingleton.getInstance().toJson(hub);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.PUT, body, url);
-		System.out.println(response.body().string());
+		return handleResponse(response, Hub.class);
 	}
 
-	public void listHubs() throws Exception {
+	public List<Hub> listHubs() throws ApiException {
 		Response response = sendRequest(HttpMethodType.GET, baseUrl);
-		System.out.println(response.body().string());
+		return handleResponse(response, new TypeToken<ArrayList<Hub>>(){}.getType());
 	}
 }
