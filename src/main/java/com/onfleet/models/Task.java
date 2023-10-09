@@ -2,26 +2,38 @@ package com.onfleet.models;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Task<T> {
+public class Task {
+    private String id;
+    private long timeCreated;
+    private long timeLastModified;
+    private String organization;
+    private String shortId;
+    private String trackingURL;
+    private String worker;
     private String merchant;
     private String executor;
-    private String destination;
-    private ArrayList<T> recipients;
-    private Integer completeAfter;
-    private Integer completeBefore;
+    private String creator;
+    private List<String> dependencies;
+    private int state;
     private Boolean pickupTask;
-    private ArrayList<String> dependencies;
     private String notes;
-    /*private var autoAssign;*/
-    /*private var container;*/
-    private Integer quantity;
-    private Integer serviceTime;
-    private String recipientName;
-    private String recipientNotes;
-    private Boolean recipientSkipSMSNotifications;
-    private Boolean useMerchantForProxy;
-    /*private Requirements requirements;*/
+    private CompletionDetails completionDetails;
+    private List<String> feedback;
+    private List<String> metadata;
+    private AdditionalQuantities additionalQuantities;
+    private int serviceTime;
+    private Identity identity;
+    private Appearance appearance;
     private Boolean scanOnlyRequiredBarcodes;
-    /*private Appeareance appeareance;*/
+    private Container container;
+    private Boolean trackingViewed;
+    private List<String> recipients;
+    private Long delayTime;
+    private Long estimatedCompletionTime;
+    private Long estimatedArrivalTime;
+    private Long eta;
+    private Destination destination;
+
 }
