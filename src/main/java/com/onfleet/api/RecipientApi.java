@@ -25,8 +25,11 @@ public class RecipientApi extends ApiBase {
 		return handleResponse(response, Recipient.class);
 	}
 
-	public void updateRecipient() {
-
+	public Recipient updateRecipient(Recipient recipient) throws ApiException {
+		String jsonPayload = GsonSingleton.getInstance().toJson(recipient);
+		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
+		Response response = sendRequest(HttpMethodType.PUT, body, baseUrl);
+		return handleResponse(response, Recipient.class);
 	}
 
 	public Recipient findRecipientByName(String name) throws ApiException {
