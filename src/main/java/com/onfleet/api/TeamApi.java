@@ -82,8 +82,21 @@ public class TeamApi extends ApiBase {
 		return handleResponse(response, WorkerRoute.class);
 	}
 
-	public Tasks getUnassignedTasks(String teamId) throws ApiException {
+	public Tasks getUnassignedTasks(String teamId, Boolean isPickupTask, Long from, Long to, String lastId) throws ApiException {
 		String url = String.format("%s/%s/tasks", baseUrl, teamId);
+		HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+		if (isPickupTask != null) {
+			urlBuilder.addQueryParameter("isPickupTask", isPickupTask.toString());
+		}
+		if (from != null) {
+			urlBuilder.addQueryParameter("from", from.toString());
+		}
+		if (to != null) {
+			urlBuilder.addQueryParameter("to", to.toString());
+		}
+		if (!lastId.isEmpty()) {
+			urlBuilder.addQueryParameter("lastId", lastId);
+		}
 		return handleResponse(sendRequest(HttpMethodType.GET, url), Tasks.class);
 	}
 
