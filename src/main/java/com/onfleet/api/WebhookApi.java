@@ -14,6 +14,7 @@ import okhttp3.Response;
 import java.util.List;
 
 public class WebhookApi extends BaseApi {
+
 	public WebhookApi(OkHttpClient client) {
 		super(client, "/webhooks");
 	}

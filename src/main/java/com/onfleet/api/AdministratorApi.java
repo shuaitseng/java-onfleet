@@ -13,6 +13,7 @@ import okhttp3.Response;
 import java.util.List;
 
 public class AdministratorApi extends BaseApi {
+
 	public AdministratorApi(OkHttpClient client) {
 		super(client, "/admins");
 	}
