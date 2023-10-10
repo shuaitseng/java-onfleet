@@ -85,8 +85,18 @@ public class WorkerApi extends ApiBase {
 		return handleResponse(response, Worker.class);
 	}
 
-	public Worker getWorker() {
-		return null;
+	public Worker getSingleWorker(String workerId, String[] filterFields, Boolean enableAnalytics) throws ApiException {
+		String url = String.format("%s/%s", baseUrl, workerId);
+		HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+		if (filterFields != null && filterFields.length > 0) {
+			String filterQuery = String.join(",", filterFields);
+			urlBuilder.addQueryParameter("filter", filterQuery);
+		}
+		if (enableAnalytics != null) {
+			urlBuilder.addQueryParameter("analytics", enableAnalytics.toString());
+		}
+		Response response = sendRequest(HttpMethodType.GET, urlBuilder.build().toString());
+		return handleResponse(response, Worker.class);
 	}
 
 	public Worker updateWorker(Worker worker) throws ApiException {
