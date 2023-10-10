@@ -9,7 +9,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-// TODO: leave this one for later
 public class ContainerApi extends ApiBase {
 	private OkHttpClient client;
 
