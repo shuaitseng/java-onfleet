@@ -2,7 +2,7 @@ package com.onfleet.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class WokerRoute {
+public class WorkerRoute {
 	private String workerId;
 	@JsonProperty("vehicle")
 	private VehicleType vehicleType;

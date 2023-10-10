@@ -5,6 +5,7 @@ import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.Tasks;
 import com.onfleet.models.Team;
 import com.onfleet.models.VehicleType;
+import com.onfleet.models.WorkerRoute;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import com.onfleet.utils.MediaTypes;
@@ -55,13 +56,12 @@ public class TeamApi extends ApiBase {
 				String.format("%s/%s", baseUrl, teamId));
 	}
 
-	// TODO: replace void with object once it is created
-	public void getDriverTimeEstimate(String teamId,
-	                                  String dropoffLocation,
-	                                  String pickupLocation,
-	                                  Long pickupTime,
-	                                  VehicleType[] restrictedVehicleTypes,
-	                                  Long serviceTime) throws ApiException {
+	public WorkerRoute getDriverTimeEstimate(String teamId,
+	                                         String dropoffLocation,
+	                                         String pickupLocation,
+	                                         Long pickupTime,
+	                                         VehicleType[] restrictedVehicleTypes,
+	                                         Long serviceTime) throws ApiException {
 		String url = String.format("%s/%s", baseUrl, teamId);
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
 		if (!dropoffLocation.isEmpty())
@@ -79,6 +79,7 @@ public class TeamApi extends ApiBase {
 		if (serviceTime != null)
 			urlBuilder.addQueryParameter("serviceTime", serviceTime.toString());
 		Response response = sendRequest(HttpMethodType.GET, urlBuilder.build().toString());
+		return handleResponse(response, WorkerRoute.class);
 	}
 
 	public Tasks getUnassignedTasks(String teamId) throws ApiException {
