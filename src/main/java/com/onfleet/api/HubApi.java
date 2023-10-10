@@ -13,7 +13,7 @@ import okhttp3.Response;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HubApi extends ApiBase {
+public class HubApi extends BaseApi {
 
 	public HubApi(OkHttpClient client) {
 		super(client, "/hubs");

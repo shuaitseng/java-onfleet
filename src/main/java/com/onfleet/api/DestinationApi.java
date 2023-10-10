@@ -9,7 +9,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class DestinationApi extends ApiBase {
+public class DestinationApi extends BaseApi {
 
 	public DestinationApi(OkHttpClient client) {
 		super(client, "/destinations");

@@ -17,7 +17,7 @@ import okhttp3.Response;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WorkerApi extends ApiBase {
+public class WorkerApi extends BaseApi {
 
 	public WorkerApi(OkHttpClient client) {
 		super(client, "/workers");

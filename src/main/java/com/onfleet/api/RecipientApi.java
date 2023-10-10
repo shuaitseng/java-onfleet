@@ -11,7 +11,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-public class RecipientApi extends ApiBase {
+public class RecipientApi extends BaseApi {
 	private final String URL = OnFleet.URL + "/recipients";
 
 	public RecipientApi(OkHttpClient client) {

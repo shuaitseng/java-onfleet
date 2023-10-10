@@ -13,11 +13,11 @@ import okhttp3.ResponseBody;
 import java.io.IOException;
 import java.lang.reflect.Type;
 
-public class ApiBase {
+public class BaseApi {
 	protected final String baseUrl;
 	protected final OkHttpClient client;
 
-	public ApiBase(OkHttpClient client, String endpoint) {
+	public BaseApi(OkHttpClient client, String endpoint) {
 		this.client = client;
 		this.baseUrl = OnFleet.URL + endpoint;
 	}

@@ -6,7 +6,7 @@ import com.onfleet.utils.HttpMethodType;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
-public class OrganizationApi extends ApiBase {
+public class OrganizationApi extends BaseApi {
 
 	public OrganizationApi(OkHttpClient client) {
 		super(client, "/organizations");
