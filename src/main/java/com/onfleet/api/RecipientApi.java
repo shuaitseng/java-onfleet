@@ -1,6 +1,5 @@
 package com.onfleet.api;
 
-import com.onfleet.OnFleet;
 import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.Recipient;
 import com.onfleet.utils.GsonSingleton;
@@ -12,7 +11,6 @@ import okhttp3.Response;
 
 
 public class RecipientApi extends BaseApi {
-	private final String URL = OnFleet.URL + "/recipients";
 
 	public RecipientApi(OkHttpClient client) {
 		super(client, "/recipients");
@@ -33,19 +31,19 @@ public class RecipientApi extends BaseApi {
 	}
 
 	public Recipient findRecipientByName(String name) throws ApiException {
-		String url = String.format("%s/name/%s", URL, name);
+		String url = String.format("%s/name/%s", baseUrl, name);
 		Response response = sendRequest(HttpMethodType.GET, url);
 		return handleResponse(response, Recipient.class);
 	}
 
 	public Recipient findRecipientByPhone(String phone) throws ApiException {
-		String url = String.format("%s/phone/%s", URL, phone);
+		String url = String.format("%s/phone/%s", baseUrl, phone);
 		Response response = sendRequest(HttpMethodType.GET, url);
 		return handleResponse(response, Recipient.class);
 	}
 
 	public Recipient getSingleRecipient(String recipientId) throws ApiException {
-		String url = String.format("%s/%s", URL, recipientId);
+		String url = String.format("%s/%s", baseUrl, recipientId);
 		Response response = sendRequest(HttpMethodType.GET, url);
 		return handleResponse(response, Recipient.class);
 	}
