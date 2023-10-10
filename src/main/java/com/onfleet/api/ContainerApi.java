@@ -10,7 +10,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ContainerApi extends BaseApi {
-	private OkHttpClient client;
 
 	public ContainerApi(OkHttpClient client) {
 		super(client, "/containers/workers");
