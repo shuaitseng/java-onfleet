@@ -6,35 +6,26 @@ import com.onfleet.models.ErrorResponse;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class ContainerApiTest {
-	private MockWebServer mockWebServer;
+class ContainerApiTest extends BaseApiTest {
 	private ContainerApi containerApi;
 
 	@BeforeEach
 	public void setup() throws Exception {
-		mockWebServer = new MockWebServer();
-		mockWebServer.start();
 		HttpUrl baseUrl = mockWebServer.url("/containers/workers");
-		OkHttpClient okHttpClient = new OkHttpClient();
 		containerApi = new ContainerApi(okHttpClient);
-		Field baseUrlField = BaseApi.class.getDeclaredField("baseUrl");
-		baseUrlField.setAccessible(true);
-		baseUrlField.set(containerApi, baseUrl.toString());
+		setBaseUrl(containerApi, baseUrl.toString());
 	}
 
 	@Test
