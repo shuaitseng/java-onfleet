@@ -1,5 +1,6 @@
 package com.onfleet.api;
 
+import com.onfleet.OnFleet;
 import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.Organization;
 import com.onfleet.utils.HttpMethodType;
@@ -18,7 +19,7 @@ public class OrganizationApi extends BaseApi {
 	}
 
 	public Organization getDelegateeDetails(String id) throws ApiException {
-		String url = String.format("%s/%s", baseUrl, id);
+		String url = String.format("%s/%s", baseUrl + "s", id);
 		Response response = sendRequest(HttpMethodType.GET, url);
 		return handleResponse(response, Organization.class);
 	}
