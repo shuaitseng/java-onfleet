@@ -1,5 +1,7 @@
 package com.onfleet.api;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.Container;
 import com.onfleet.utils.GsonSingleton;
@@ -21,11 +23,32 @@ public class ContainerApi extends BaseApi {
 		return handleResponse(response, Container.class);
 	}
 
-	public Container updateTasks(String id, String[] tasksIds) throws ApiException{
+	public Container insertTasks(String id, int index, String[] taskIds) throws ApiException {
+		String url = String.format("%s/%s", baseUrl, id);
+		String jsonPayload = buildInsertTasksJson(index, taskIds);
+		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
+		Response response = sendRequest(HttpMethodType.PUT, body, url);
+		return handleResponse(response, Container.class);
+
+	}
+
+	public Container updateTasks(String id, String[] tasksIds) throws ApiException {
 		String url = String.format("%s/%s", baseUrl, id);
 		String jsonPayload = GsonSingleton.getInstance().toJson(tasksIds);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.PUT, body, url);
 		return handleResponse(response, Container.class);
 	}
+
+	private String buildInsertTasksJson(int index, String[] ids) {
+		JsonObject payload = new JsonObject();
+		payload.addProperty("tasks", index);
+		JsonArray taskArray = new JsonArray();
+		for (String id : ids) {
+			taskArray.add(id);
+		}
+		payload.add("taskIds", taskArray);
+		return payload.toString();
+	}
+
 }
