@@ -9,7 +9,7 @@ import okhttp3.Response;
 public class OrganizationApi extends BaseApi {
 
 	public OrganizationApi(OkHttpClient client) {
-		super(client, "/organizations");
+		super(client, "/organization");
 	}
 
 	public Organization getDetails() throws ApiException {
