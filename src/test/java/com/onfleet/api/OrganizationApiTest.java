@@ -6,36 +6,27 @@ import com.onfleet.models.Organization;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-class OrganizationApiTest {
-	private MockWebServer mockWebServer;
+class OrganizationApiTest extends BaseApiTest {
 	private OrganizationApi organizationApi;
 
 	@BeforeEach
 	public void setup() throws Exception {
-		mockWebServer = new MockWebServer();
-		mockWebServer.start();
 		HttpUrl baseUrl = mockWebServer.url("/organization");
-		OkHttpClient okHttpClient = new OkHttpClient();
 		organizationApi = new OrganizationApi(okHttpClient);
-		Field baseUrlField = BaseApi.class.getDeclaredField("baseUrl");
-		baseUrlField.setAccessible(true);
-		baseUrlField.set(organizationApi, baseUrl.toString());
+		setBaseUrl(organizationApi, baseUrl.toString());
 	}
 
 	@Test
