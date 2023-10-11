@@ -19,4 +19,5 @@ public class ErrorResponse {
     public void setMessage(ErrorResponseMessage message) {
         this.message = message;
     }
+
 }

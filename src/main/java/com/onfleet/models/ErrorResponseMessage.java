@@ -1,9 +1,12 @@
 package com.onfleet.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ErrorResponseMessage {
     private Integer error;
     private String message;
-    private String cause;
+    @JsonProperty("cause")
+    private Object cause;
     private String request;
 
     public Integer getError() {
@@ -22,7 +25,7 @@ public class ErrorResponseMessage {
         this.message = message;
     }
 
-    public String getCause() {
+    public Object getCause() {
         return cause;
     }
 
