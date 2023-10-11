@@ -1,6 +1,5 @@
 package com.onfleet.api;
 
-import com.onfleet.OnFleet;
 import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.Organization;
 import com.onfleet.utils.HttpMethodType;
