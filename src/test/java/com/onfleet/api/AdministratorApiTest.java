@@ -31,18 +31,21 @@ class AdministratorApiTest extends BaseApiTest {
 	}
 
 	@Test
-	void testCreateAdmin() throws Exception {
+	void testCreateAdminSuccessfully() throws Exception {
 		String mockResponseJson = "{\"id\": \"8AxaiKwMd~np7I*YP2NfukBE\", \"timeCreated\": 1455156651000, \"timeLastModified\": 1455156651779, \"organization\": \"yAM*fDkztrT3gUcz9mNDgNOL\", \"email\": \"cm@onf.lt\", \"type\": \"standard\", \"name\": \"Chelsea M\", \"isActive\": false, \"metadata\": [],\"isAccountOwner\": false, \"teams\": []}";
 		MockResponse mockResponse = new MockResponse()
 				.setResponseCode(HttpURLConnection.HTTP_OK)
 				.setBody(mockResponseJson);
-		mockWebServer.enqueue(mockResponse);
 		Administrator administrator = new Administrator("name", "cm@onf.lt", "8885551234", true, Administrator.Type.SUPER);
+
+		mockWebServer.enqueue(mockResponse);
 		Administrator admin = administratorApi.createAdministrator(administrator);
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
+
 		assertEquals(HttpMethodType.POST.name(), recordedRequest.getMethod());
 		assertEquals("/admins", recordedRequest.getPath());
 		assertEquals("8AxaiKwMd~np7I*YP2NfukBE", admin.getId());
+		Assertions.assertThat(admin).usingRecursiveComparison().isEqualTo(GsonSingleton.getInstance().fromJson(mockResponseJson, Administrator.class));
 	}
 
 	@Test
@@ -52,9 +55,11 @@ class AdministratorApiTest extends BaseApiTest {
 				.setResponseCode(HttpURLConnection.HTTP_BAD_REQUEST)
 				.setBody(mockResponseJson);
 		mockWebServer.enqueue(mockResponse);
+
 		Administrator administrator = new Administrator("name", "cm@onf.lt", "8885551234", true, Administrator.Type.SUPER);
 		ApiException apiException = assertThrows(ApiException.class, () -> administratorApi.createAdministrator(administrator));
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
+
 		assertEquals(HttpMethodType.POST.name(), recordedRequest.getMethod());
 		assertEquals("/admins", recordedRequest.getPath());
 		Assertions.assertThat(apiException.getErrorResponse())
@@ -69,8 +74,10 @@ class AdministratorApiTest extends BaseApiTest {
 				.setResponseCode(HttpURLConnection.HTTP_OK)
 				.setBody(mockResponseJson);
 		mockWebServer.enqueue(mockResponse);
+
 		List<Administrator> admins = administratorApi.listAdministrators();
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
+
 		assertEquals(HttpMethodType.GET.name(), recordedRequest.getMethod());
 		assertEquals("/admins", recordedRequest.getPath());
 		Assertions.assertThat(admins)
@@ -111,8 +118,10 @@ class AdministratorApiTest extends BaseApiTest {
 				.setResponseCode(HttpURLConnection.HTTP_UNAUTHORIZED)
 				.setBody(mockResponseJson);
 		mockWebServer.enqueue(mockResponse);
+
 		ApiException apiException = assertThrows(ApiException.class, () -> administratorApi.listAdministrators());
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
+
 		assertEquals(HttpMethodType.GET.name(), recordedRequest.getMethod());
 		assertEquals("/admins", recordedRequest.getPath());
 		Assertions.assertThat(apiException.getErrorResponse())
