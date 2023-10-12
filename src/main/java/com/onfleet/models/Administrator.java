@@ -1,26 +1,18 @@
 package com.onfleet.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Administrator {
-	@JsonProperty("name")
 	private String name;
-	@JsonProperty("email")
 	private String email;
-	@JsonProperty("phone")
 	private String phone;
-	@JsonProperty("isReadOnly")
 	private Boolean isReadOnly;
-	@JsonProperty("type")
 	private Type type;
 	private String id;
 	private Long timeCreated;
 	private Long timeLastModified;
 	private String organization;
-	@JsonProperty("isActive")
 	private Boolean isActive;
 	private String[] metadata;
-	@JsonProperty("isAccountOwner")
 	private Boolean isAccountOwner;
 	private String[] teams;
 
@@ -152,4 +144,6 @@ public class Administrator {
 	public void setTeams(String[] teams) {
 		this.teams = teams;
 	}
+
+
 }
