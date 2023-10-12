@@ -1,6 +1,15 @@
 package com.onfleet;
 
-import com.onfleet.api.*;
+import com.onfleet.api.AdministratorApi;
+import com.onfleet.api.ContainerApi;
+import com.onfleet.api.DestinationApi;
+import com.onfleet.api.HubApi;
+import com.onfleet.api.OrganizationApi;
+import com.onfleet.api.RecipientApi;
+import com.onfleet.api.TaskApi;
+import com.onfleet.api.TeamApi;
+import com.onfleet.api.WebhookApi;
+import com.onfleet.api.WorkerApi;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
