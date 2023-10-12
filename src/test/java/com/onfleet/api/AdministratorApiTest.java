@@ -81,6 +81,11 @@ class AdministratorApiTest extends BaseApiTest {
 
 	@Test
 	void testUpdateAdmin() {
+		String mockResponseJson = "{\"id\": \"8AxaiKwMd~np7I*YP2NfukBE\", \"timeCreated\": 1455156651000, \"timeLastModified\": 1455156651779, \"organization\": \"yAM*fDkztrT3gUcz9mNDgNOL\", \"email\": \"cm@onf.lt\", \"type\": \"standard\", \"name\": \"Chelsea M\", \"isActive\": false, \"metadata\": [],\"isAccountOwner\": false, \"teams\": []}";
+		MockResponse mockResponse = new MockResponse()
+				.setResponseCode(HttpURLConnection.HTTP_OK)
+				.setBody(mockResponseJson);
+		mockWebServer.enqueue(mockResponse);
 
 	}
 
