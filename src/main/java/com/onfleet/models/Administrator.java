@@ -1,9 +1,6 @@
 package com.onfleet.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.onfleet.utils.TypeDeserializer;
 
 public class Administrator {
 	@JsonProperty("name")
@@ -38,7 +35,6 @@ public class Administrator {
 		this.type = type;
 	}
 
-	@JsonDeserialize(using = TypeDeserializer.class)
 	public enum Type {
 		SUPER("super"),
 		STANDARD("standard");
@@ -46,6 +42,10 @@ public class Administrator {
 
 		Type(String stringValue) {
 			this.stringValue = stringValue;
+		}
+
+		public String getStringValue() {
+			return stringValue;
 		}
 	}
 
