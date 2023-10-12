@@ -36,15 +36,11 @@ class HubApiTest extends BaseApiTest {
 				.setResponseCode(HttpURLConnection.HTTP_OK)
 				.setBody(mockResponseJson);
 		mockWebServer.enqueue(mockResponse);
-		Address address = new Address.Builder()
-				.setNumber("1315")
-				.setStreet("Obispo Trejo")
-				.setCity("Cordoba")
-				.setCountry("Argentina")
-				.build();
-		Hub hub = new Hub(address, Collections.singletonList("kq5MFBzYNWhp1rumJEfGUTqS"), "VIP customer");
+
+		Hub hub = getHub();
 		Hub hubResponse = hubApi.createHub(hub);
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
+
 		assertEquals(HttpMethodType.POST.name(), recordedRequest.getMethod());
 		assertEquals("/hubs", recordedRequest.getPath());
 		Assertions.assertThat(hubResponse).usingRecursiveComparison().isEqualTo(GsonSingleton.getInstance().fromJson(mockResponseJson, Hub.class));
@@ -58,15 +54,11 @@ class HubApiTest extends BaseApiTest {
 				.setResponseCode(HttpURLConnection.HTTP_OK)
 				.setBody(mockResponseJson);
 		mockWebServer.enqueue(mockResponse);
-		Address address = new Address.Builder()
-				.setNumber("1315")
-				.setStreet("Obispo Trejo")
-				.setCity("Cordoba")
-				.setCountry("Argentina")
-				.build();
-		Hub hub = new Hub(address, Collections.singletonList("kq5MFBzYNWhp1rumJEfGUTqS"), "VIP customer");
+
+		Hub hub = getHub();
 		Hub hubResponse = hubApi.updateHub("i4FoP*dTVrdnGqvIVvvA69aB", hub);
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
+
 		assertEquals(HttpMethodType.PUT.name(), recordedRequest.getMethod());
 		assertEquals("/hubs/i4FoP*dTVrdnGqvIVvvA69aB", recordedRequest.getPath());
 		Assertions.assertThat(hubResponse).usingRecursiveComparison().isEqualTo(GsonSingleton.getInstance().fromJson(mockResponseJson, Hub.class));
@@ -79,17 +71,32 @@ class HubApiTest extends BaseApiTest {
 				.setResponseCode(HttpURLConnection.HTTP_OK)
 				.setBody(mockResponseJson);
 		mockWebServer.enqueue(mockResponse);
+
 		List<Hub> hubs = hubApi.listHubs();
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
+
 		assertEquals(HttpMethodType.GET.name(), recordedRequest.getMethod());
 		assertEquals("/hubs", recordedRequest.getPath());
 		Assertions.assertThat(hubs).usingRecursiveComparison()
 				.isEqualTo(GsonSingleton.getInstance().fromJson(mockResponseJson, new TypeToken<List<Hub>>() {
-		}.getType()));
+				}.getType()));
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		mockWebServer.shutdown();
+	}
+
+	private Address getAddress() {
+		return new Address.Builder()
+				.setNumber("1315")
+				.setStreet("Obispo Trejo")
+				.setCity("Cordoba")
+				.setCountry("Argentina")
+				.build();
+	}
+
+	private Hub getHub() {
+		return new Hub(getAddress(), Collections.singletonList("kq5MFBzYNWhp1rumJEfGUTqS"), "VIP customer");
 	}
 }
