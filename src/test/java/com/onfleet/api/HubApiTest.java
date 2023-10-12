@@ -54,6 +54,10 @@ class HubApiTest extends BaseApiTest {
 	@Test
 	void testUpdateHub() throws Exception {
 		String mockResponseJson = "{\"id\":\"i4FoP*dTVrdnGqvIVvvA69aB\",\"name\":\"VIP customer Hub\",\"location\":[-118.2673597,34.0430058],\"address\":{\"number\":\"1111\",\"street\":\"South Figueroa Street\",\"city\":\"Los Angeles\",\"county\":\"Los Angeles County\",\"state\":\"California\",\"country\":\"United States\",\"postalCode\":\"90015\",\"name\":\"VIP customer\",\"apartment\":\"\"},\"teams\":[\"kq5MFBzYNWhp1rumJEfGUTqS\"]}";
+		MockResponse mockResponse = new MockResponse()
+				.setResponseCode(HttpURLConnection.HTTP_OK)
+				.setBody(mockResponseJson);
+		mockWebServer.enqueue(mockResponse);
 		Address address = new Address.Builder()
 				.setNumber("1315")
 				.setStreet("Obispo Trejo")
