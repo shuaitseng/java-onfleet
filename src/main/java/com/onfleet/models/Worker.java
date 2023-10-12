@@ -65,4 +65,48 @@ public class Worker {
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
+
+	public static class Builder {
+		private final Worker worker = new Worker();
+
+		public Builder setId(String id) {
+			worker.setId(id);
+			return this;
+		}
+
+		public Builder setName(String name) {
+			worker.setName(name);
+			return this;
+		}
+
+		public Builder setPhone(String phone) {
+			worker.setPhone(phone);
+			return this;
+		}
+
+		public Builder setTeams(String[] teams) {
+			worker.setTeams(teams);
+			return this;
+		}
+
+		public Builder setVehicle(Vehicle vehicle) {
+			worker.setVehicle(vehicle);
+			return this;
+		}
+
+		public Builder setCapacity(int capacity) {
+			worker.setCapacity(capacity);
+			return this;
+		}
+
+		public Builder setdisplayName(String displayName) {
+			worker.setDisplayName(displayName);
+			return this;
+		}
+
+		public Worker build() {
+			return worker;
+		}
+	}
+
 }
