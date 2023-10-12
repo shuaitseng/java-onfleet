@@ -56,7 +56,8 @@ class HubApiTest extends BaseApiTest {
 		mockWebServer.enqueue(mockResponse);
 
 		Hub hub = getHub();
-		Hub hubResponse = hubApi.updateHub("i4FoP*dTVrdnGqvIVvvA69aB", hub);
+		hub.setId("i4FoP*dTVrdnGqvIVvvA69aB");
+		Hub hubResponse = hubApi.updateHub(hub);
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
 		assertEquals(HttpMethodType.PUT.name(), recordedRequest.getMethod());
