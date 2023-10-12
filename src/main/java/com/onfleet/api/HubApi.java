@@ -26,8 +26,8 @@ public class HubApi extends BaseApi {
 		return handleResponse(response, Hub.class);
 	}
 
-	public Hub updateHub(String hubId, Hub hub) throws ApiException {
-		String url = String.format("%s/%s", baseUrl, hubId);
+	public Hub updateHub(Hub hub) throws ApiException {
+		String url = String.format("%s/%s", baseUrl, hub.getId());
 		String jsonPayload = GsonSingleton.getInstance().toJson(hub);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.PUT, body, url);
