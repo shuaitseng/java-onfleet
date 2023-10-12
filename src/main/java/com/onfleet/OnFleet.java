@@ -1,9 +1,6 @@
 package com.onfleet;
 
-import com.onfleet.api.AdministratorApi;
-import com.onfleet.api.ContainerApi;
-import com.onfleet.api.DestinationApi;
-import com.onfleet.api.TaskApi;
+import com.onfleet.api.*;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
@@ -16,6 +13,8 @@ public class OnFleet {
 	private final DestinationApi destinationApi;
 	private final ContainerApi containerApi;
 	private final AdministratorApi administratorApi;
+	private final OrganizationApi organizationApi;
+	private final HubApi hubApi;
 
 	public OnFleet(String apiKey) {
 		initClient(apiKey);
@@ -23,6 +22,8 @@ public class OnFleet {
 		destinationApi = new DestinationApi(client);
 		containerApi = new ContainerApi(client);
 		administratorApi = new AdministratorApi(client);
+		organizationApi = new OrganizationApi(client);
+		hubApi = new HubApi(client);
 	}
 
 	public TaskApi getTaskApi() {
@@ -39,6 +40,14 @@ public class OnFleet {
 
 	public AdministratorApi getAdministratorApi() {
 		return administratorApi;
+	}
+
+	public OrganizationApi getOrganizationApi() {
+		return organizationApi;
+	}
+
+	public HubApi getHubApi() {
+		return hubApi;
 	}
 
 	private void initClient(String apiKey) {
