@@ -97,6 +97,6 @@ class HubApiTest extends BaseApiTest {
 	}
 
 	private Hub getHub() {
-		return new Hub(getAddress(), Collections.singletonList("kq5MFBzYNWhp1rumJEfGUTqS"), "VIP customer");
+		return new Hub("VIP customer", getAddress(), Collections.singletonList("kq5MFBzYNWhp1rumJEfGUTqS"));
 	}
 }

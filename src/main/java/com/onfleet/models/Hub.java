@@ -15,10 +15,10 @@ public class Hub {
 	private List<String> team;
 
 	// TODO: reorder constructor parameters
-	public Hub(Address address, List<String> team, String name) {
+	public Hub(String name, Address address, List<String> team) {
+		this.name = name;
 		this.address = address;
 		this.team = team;
-		this.name = name;
 	}
 
 	public Address getAddress() {
