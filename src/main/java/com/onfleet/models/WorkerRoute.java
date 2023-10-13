@@ -2,11 +2,13 @@ package com.onfleet.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class WorkerRoute {
 	private String workerId;
 	@JsonProperty("vehicle")
 	private VehicleType vehicleType;
-	private RouteStep steps;
+	private List<RouteStep> steps;
 
 	public String getWorkerId() {
 		return workerId;
@@ -24,11 +26,11 @@ public class WorkerRoute {
 		this.vehicleType = vehicleType;
 	}
 
-	public RouteStep getSteps() {
+	public List<RouteStep> getSteps() {
 		return steps;
 	}
 
-	public void setSteps(RouteStep steps) {
+	public void setSteps(List<RouteStep> steps) {
 		this.steps = steps;
 	}
 }
