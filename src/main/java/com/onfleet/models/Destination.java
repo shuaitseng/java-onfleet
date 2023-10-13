@@ -2,7 +2,10 @@ package com.onfleet.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class Destination {
+	private String id;
 	@JsonProperty("address")
 	private Address address;
 	@JsonProperty("location")
@@ -12,6 +15,10 @@ public class Destination {
 	@JsonProperty("options")
 	private Options options;
 	private String[] warnings;
+	private Long timeCreated;
+	private Long timeLastModified;
+	private List<Metadata> metadata;
+	private Boolean useGPS;
 
 	public Address getAddress() {
 		return address;
