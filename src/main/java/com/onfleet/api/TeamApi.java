@@ -62,9 +62,12 @@ public class TeamApi extends BaseApi {
 	                                         Long pickupTime,
 	                                         VehicleType[] restrictedVehicleTypes,
 	                                         Long serviceTime) throws ApiException {
-		String url = String.format("%s/%s", baseUrl, teamId);
+		if ((dropoffLocation == null || dropoffLocation.isEmpty()) && (pickupLocation == null || pickupLocation.isEmpty())) {
+			throw new IllegalArgumentException("Request must have at least one of dropoffLocation or pickupLocation.");
+		}
+		String url = String.format("%s/%s/estimate", baseUrl, teamId);
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-		if (!dropoffLocation.isEmpty())
+		if (dropoffLocation != null && !dropoffLocation.isEmpty())
 			urlBuilder.addQueryParameter("dropoffLocation", dropoffLocation);
 		if (!pickupLocation.isEmpty())
 			urlBuilder.addQueryParameter("pickupLocation", pickupLocation);
