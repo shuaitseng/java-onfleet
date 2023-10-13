@@ -1,11 +1,15 @@
 package com.onfleet.api;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.ScheduleEntries;
 import com.onfleet.models.ScheduleEntry;
 import com.onfleet.models.Tasks;
 import com.onfleet.models.Worker;
+import com.onfleet.models.WorkerFilterFields;
+import com.onfleet.models.Workers;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import com.onfleet.utils.MediaTypes;
@@ -74,15 +78,19 @@ public class WorkerApi extends BaseApi {
 		return handleResponse(response, Tasks.class);
 	}
 
-	public Worker getWorkersByLocation(Long longitude, Long latitude, Integer radius) throws ApiException {
-		HttpUrl.Builder urlBuilder = HttpUrl.parse(baseUrl).newBuilder();
+	public Tasks getWorkersTasks(String workerId) throws ApiException {
+		return this.getWorkersTasks(workerId, null, null, null, null);
+	}
+
+	public Workers getWorkersByLocation(Double longitude, Double latitude, Integer radius) throws ApiException {
+		HttpUrl.Builder urlBuilder = HttpUrl.parse(baseUrl + "/location").newBuilder();
 		urlBuilder.addQueryParameter("longitude", longitude.toString());
 		urlBuilder.addQueryParameter("latitude", latitude.toString());
 		if (radius != null) {
 			urlBuilder.addQueryParameter("radius", radius.toString());
 		}
 		Response response = sendRequest(HttpMethodType.GET, urlBuilder.build().toString());
-		return handleResponse(response, Worker.class);
+		return handleResponse(response, Workers.class);
 	}
 
 	public Worker getSingleWorker(String workerId, List<WorkerFilterFields> filterFields, Boolean enableAnalytics) throws ApiException {
