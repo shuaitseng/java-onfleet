@@ -11,6 +11,7 @@ public class CompletionDetails {
 	private List<String> firstLocation;
 	private List<String> lastLocation;
 	private List<String> unavailableAttachments;
+	private String successNotes;
 
 	public String getFailureNotes() {
 		return failureNotes;
