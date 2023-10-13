@@ -85,11 +85,13 @@ public class WorkerApi extends BaseApi {
 		return handleResponse(response, Worker.class);
 	}
 
-	public Worker getSingleWorker(String workerId, String[] filterFields, Boolean enableAnalytics) throws ApiException {
+	public Worker getSingleWorker(String workerId, List<WorkerFilterFields> filterFields, Boolean enableAnalytics) throws ApiException {
 		String url = String.format("%s/%s", baseUrl, workerId);
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-		if (filterFields != null && filterFields.length > 0) {
-			String filterQuery = String.join(",", filterFields);
+		if (filterFields != null && !filterFields.isEmpty()) {
+			String filterQuery = filterFields.stream()
+					.map(WorkerFilterFields::getValue)
+					.collect(Collectors.joining(","));
 			urlBuilder.addQueryParameter("filter", filterQuery);
 		}
 		if (enableAnalytics != null) {
