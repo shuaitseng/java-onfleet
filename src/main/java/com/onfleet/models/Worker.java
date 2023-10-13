@@ -1,5 +1,7 @@
 package com.onfleet.models;
 
+import java.util.List;
+
 public class Worker {
 	private String id;
 	private String name;
@@ -8,6 +10,18 @@ public class Worker {
 	private Vehicle vehicle;
 	private int capacity;
 	private String displayName;
+	private Long timeCreated;
+	private Long timeLastModified;
+	private String organization;
+	private String activeTask;
+	private List<String> tasks;
+	private Boolean onDuty;
+	private Long timeLastSeen;
+	private Long delayTime; // Use Long to handle nullable values
+	private List<Object> metadata; // TODO: Define metadata object
+	private List<Double> location;
+	private Analytics analytics;
+
 	/*address.routing	object	Optional. This value is used to set the worker's address.*/
 
 	public String getId() {
@@ -64,6 +78,94 @@ public class Worker {
 
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
+	}
+
+	public Long getTimeCreated() {
+		return timeCreated;
+	}
+
+	public void setTimeCreated(Long timeCreated) {
+		this.timeCreated = timeCreated;
+	}
+
+	public Long getTimeLastModified() {
+		return timeLastModified;
+	}
+
+	public void setTimeLastModified(Long timeLastModified) {
+		this.timeLastModified = timeLastModified;
+	}
+
+	public String getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(String organization) {
+		this.organization = organization;
+	}
+
+	public String getActiveTask() {
+		return activeTask;
+	}
+
+	public void setActiveTask(String activeTask) {
+		this.activeTask = activeTask;
+	}
+
+	public List<String> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<String> tasks) {
+		this.tasks = tasks;
+	}
+
+	public Boolean getOnDuty() {
+		return onDuty;
+	}
+
+	public void setOnDuty(Boolean onDuty) {
+		this.onDuty = onDuty;
+	}
+
+	public Long getTimeLastSeen() {
+		return timeLastSeen;
+	}
+
+	public void setTimeLastSeen(Long timeLastSeen) {
+		this.timeLastSeen = timeLastSeen;
+	}
+
+	public Long getDelayTime() {
+		return delayTime;
+	}
+
+	public void setDelayTime(Long delayTime) {
+		this.delayTime = delayTime;
+	}
+
+	public List<Object> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(List<Object> metadata) {
+		this.metadata = metadata;
+	}
+
+	public List<Double> getLocation() {
+		return location;
+	}
+
+	public void setLocation(List<Double> location) {
+		this.location = location;
+	}
+
+	public Analytics getAnalytics() {
+		return analytics;
+	}
+
+	public void setAnalytics(Analytics analytics) {
+		this.analytics = analytics;
 	}
 
 	public static class Builder {
