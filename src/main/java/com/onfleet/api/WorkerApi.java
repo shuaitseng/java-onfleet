@@ -118,8 +118,26 @@ public class WorkerApi extends BaseApi {
 
 	public ScheduleEntries setWorkerSchedule(String workerId, List<ScheduleEntry> entries) throws ApiException {
 		String url = String.format("%s/%s/schedule", baseUrl, workerId);
-		String jsonPayload = GsonSingleton.getInstance().toJson(entries);
-		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
+		JsonObject jsonPayload = new JsonObject();
+		JsonArray entriesArray = new JsonArray();
+
+		for (ScheduleEntry entry : entries) {
+			JsonObject entryObject = new JsonObject();
+			entryObject.addProperty("date", entry.getDate());
+			entryObject.addProperty("timezone", entry.getTimezone());
+
+			JsonArray shiftsArray = new JsonArray();
+			for (List<Long> shift : entry.getShifts()) {
+				JsonArray shiftArray = new JsonArray();
+				shiftArray.add(shift.get(0));
+				shiftArray.add(shift.get(1));
+				shiftsArray.add(shiftArray);
+			}
+			entryObject.add("shifts", shiftsArray);
+			entriesArray.add(entryObject);
+		}
+		jsonPayload.add("entries", entriesArray);
+		RequestBody body = RequestBody.create(jsonPayload.toString(), MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.POST, body, url);
 		return handleResponse(response, ScheduleEntries.class);
 	}
