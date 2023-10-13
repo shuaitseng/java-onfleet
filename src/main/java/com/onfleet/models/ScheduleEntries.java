@@ -17,4 +17,8 @@ public class ScheduleEntries {
 	public void setEntries(List<ScheduleEntry> entries) {
 		this.entries = entries;
 	}
+
+	public void addEntry(ScheduleEntry entry) {
+		this.entries.add(entry);
+	}
 }
