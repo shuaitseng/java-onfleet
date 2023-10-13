@@ -7,6 +7,8 @@ public class Task {
     private String id;
     private long timeCreated;
     private long timeLastModified;
+    private Long completeAfter;
+    private Long completeBefore;
     private String organization;
     private String shortId;
     private String trackingURL;
@@ -28,7 +30,7 @@ public class Task {
     private Boolean scanOnlyRequiredBarcodes;
     private Container container;
     private Boolean trackingViewed;
-    private List<String> recipients;
+    private List<Recipient> recipients;
     private Long delayTime;
     private Long estimatedCompletionTime;
     private Long estimatedArrivalTime;
@@ -227,11 +229,11 @@ public class Task {
         this.trackingViewed = trackingViewed;
     }
 
-    public List<String> getRecipients() {
+    public List<Recipient> getRecipients() {
         return recipients;
     }
 
-    public void setRecipients(List<String> recipients) {
+    public void setRecipients(List<Recipient> recipients) {
         this.recipients = recipients;
     }
 
@@ -273,5 +275,21 @@ public class Task {
 
     public void setDestination(Object destination) {
         this.destination = destination;
+    }
+
+    public Long getCompleteAfter() {
+        return completeAfter;
+    }
+
+    public void setCompleteAfter(Long completeAfter) {
+        this.completeAfter = completeAfter;
+    }
+
+    public Long getCompleteBefore() {
+        return completeBefore;
+    }
+
+    public void setCompleteBefore(Long completeBefore) {
+        this.completeBefore = completeBefore;
     }
 }
