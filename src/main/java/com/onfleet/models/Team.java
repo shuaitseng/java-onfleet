@@ -2,11 +2,13 @@ package com.onfleet.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class Team {
 	private String id;
 	private String name;
-	private String[] workers;
-	private String[] managers;
+	private List<String> workers;
+	private List<String> managers;
 	@JsonProperty("hub")
 	private String hubId;
 	private Boolean enableSelfAssignment;
@@ -30,19 +32,19 @@ public class Team {
 		this.name = name;
 	}
 
-	public String[] getWorkers() {
+	public List<String> getWorkers() {
 		return workers;
 	}
 
-	public void setWorkers(String[] workers) {
+	public void setWorkers(List<String> workers) {
 		this.workers = workers;
 	}
 
-	public String[] getManagers() {
+	public List<String> getManagers() {
 		return managers;
 	}
 
-	public void setManagers(String[] managers) {
+	public void setManagers(List<String> managers) {
 		this.managers = managers;
 	}
 
