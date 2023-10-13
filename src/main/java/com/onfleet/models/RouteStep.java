@@ -1,18 +1,18 @@
 package com.onfleet.models;
 
 public class RouteStep {
-	private Long[] location;
+	private Double[] location;
 	private Integer travelTime;
 	private Integer distance;
 	private Integer serviceTime;
 	private Integer arrivalTime;
 	private Integer completionTime;
 
-	public Long[] getLocation() {
+	public Double[] getLocation() {
 		return location;
 	}
 
-	public void setLocation(Long[] location) {
+	public void setLocation(Double[] location) {
 		this.location = location;
 	}
 
