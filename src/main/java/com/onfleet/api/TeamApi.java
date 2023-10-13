@@ -100,7 +100,7 @@ public class TeamApi extends BaseApi {
 		if (!lastId.isEmpty()) {
 			urlBuilder.addQueryParameter("lastId", lastId);
 		}
-		return handleResponse(sendRequest(HttpMethodType.GET, url), Tasks.class);
+		return handleResponse(sendRequest(HttpMethodType.GET, urlBuilder.build().toString()), Tasks.class);
 	}
 
 }
