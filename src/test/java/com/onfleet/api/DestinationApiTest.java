@@ -50,7 +50,7 @@ class DestinationApiTest extends BaseApiTest {
 		Destination destination = destinationApi.getDestination("456");
 
 		RecordedRequest request = mockWebServer.takeRequest();
-		assertEquals("GET", request.getMethod());
+		assertEquals(HttpMethodType.GET.name(), request.getMethod());
 		assertEquals("/destinations/456", request.getPath());
 		assertEquals("456", destination.getId());
 	}

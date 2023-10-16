@@ -55,7 +55,7 @@ class WorkerApiTest extends BaseApiTest {
 		Worker createdWorker = workerApi.createWorker(worker);
 		RecordedRequest request = mockWebServer.takeRequest();
 
-		assertEquals("POST", request.getMethod());
+		assertEquals(HttpMethodType.POST.name(), request.getMethod());
 		assertEquals("/workers", request.getPath());
 		assertEquals("sFtvhYK2l26zS0imptJJdC2q", createdWorker.getId());
 		Assertions.assertThat(createdWorker).usingRecursiveComparison().isEqualTo(GsonSingleton.getInstance().fromJson(mockResponseJson, Worker.class));
@@ -129,7 +129,7 @@ class WorkerApiTest extends BaseApiTest {
 		);
 
 		RecordedRequest request = mockWebServer.takeRequest();
-		assertEquals("GET", request.getMethod());
+		assertEquals(HttpMethodType.GET.name(), request.getMethod());
 		assert request.getPath() != null;
 		assertEquals("/workers?fields=name,phone&teamsIds=team1,team2&states=1,2,3&phoneNumbers=1234567890,9876543210&includePasswordDetails=true",
 				URLDecoder.decode(request.getPath(), StandardCharsets.UTF_8.name()));
