@@ -2,20 +2,14 @@ package com.onfleet.models;
 
 public class Webhook {
 	private String id;
-	private int count;
+	private Integer count;
 	private String url;
-	private int trigger;
-	private boolean isEnabled;
+	private Integer trigger;
+	private Boolean isEnabled;
 	private String name;
 	private Double threshold;
 
-	public int getCount() {
-		return count;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
+	public Webhook() {}
 
 	public String getId() {
 		return id;
@@ -25,11 +19,35 @@ public class Webhook {
 		this.id = id;
 	}
 
-	public boolean isEnabled() {
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Integer getTrigger() {
+		return trigger;
+	}
+
+	public void setTrigger(Integer trigger) {
+		this.trigger = trigger;
+	}
+
+	public Boolean getEnabled() {
 		return isEnabled;
 	}
 
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(Boolean enabled) {
 		isEnabled = enabled;
 	}
 
@@ -47,21 +65,5 @@ public class Webhook {
 
 	public void setThreshold(Double threshold) {
 		this.threshold = threshold;
-	}
-
-	public int getTrigger() {
-		return trigger;
-	}
-
-	public void setTrigger(int trigger) {
-		this.trigger = trigger;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
 	}
 }
