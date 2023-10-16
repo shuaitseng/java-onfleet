@@ -2,8 +2,8 @@ package com.onfleet.api;
 
 import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.ErrorResponse;
-import com.onfleet.models.Task;
-import com.onfleet.models.Tasks;
+import com.onfleet.models.task.Task;
+import com.onfleet.models.task.Tasks;
 import com.onfleet.models.Team;
 import com.onfleet.models.VehicleType;
 import com.onfleet.models.WorkerRoute;

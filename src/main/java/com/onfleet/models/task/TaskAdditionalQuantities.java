@@ -1,6 +1,6 @@
-package com.onfleet.models;
+package com.onfleet.models.task;
 
-public class AdditionalQuantities {
+public class TaskAdditionalQuantities {
 	private int quantityA;
 	private int quantityB;
 	private int quantityC;

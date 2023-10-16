@@ -2,7 +2,7 @@ package com.onfleet.api;
 
 import com.google.gson.reflect.TypeToken;
 import com.onfleet.exceptions.ApiException;
-import com.onfleet.models.Tasks;
+import com.onfleet.models.task.Tasks;
 import com.onfleet.models.Team;
 import com.onfleet.models.VehicleType;
 import com.onfleet.models.WorkerRoute;

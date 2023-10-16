@@ -1,6 +1,6 @@
-package com.onfleet.models;
+package com.onfleet.models.task;
 
-public class Appearance {
+public class TaskAppearance {
 	private String triangleColor;
 
 	public String getTriangleColor() {

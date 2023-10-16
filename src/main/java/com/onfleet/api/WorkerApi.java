@@ -6,7 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.ScheduleEntries;
 import com.onfleet.models.ScheduleEntry;
-import com.onfleet.models.Tasks;
+import com.onfleet.models.task.Tasks;
 import com.onfleet.models.Worker;
 import com.onfleet.models.WorkerFilterFields;
 import com.onfleet.models.Workers;

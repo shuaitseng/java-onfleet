@@ -1,4 +1,4 @@
-package com.onfleet.models;
+package com.onfleet.models.task;
 
 public class TaskOverrides {
 	private String recipientName;

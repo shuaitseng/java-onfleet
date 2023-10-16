@@ -1,4 +1,4 @@
-package com.onfleet.models;
+package com.onfleet.models.task;
 
 import java.util.List;
 
