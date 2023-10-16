@@ -13,9 +13,9 @@ public class Administrator {
 	private Long timeCreated;
 	private Long timeLastModified;
 	private String organization;
+	private Boolean isAccountOwner;
 	private Boolean isActive;
 	private List<Metadata> metadata;
-	private Boolean isAccountOwner;
 	private String[] teams;
 
 	public Administrator() {
@@ -162,6 +162,5 @@ public class Administrator {
 	public void setTeams(String[] teams) {
 		this.teams = teams;
 	}
-
 
 }
