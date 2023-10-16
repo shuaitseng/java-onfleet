@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Task {
     private String id;
-    private long timeCreated;
-    private long timeLastModified;
+    private Long timeCreated;
+    private Long timeLastModified;
     private Long completeAfter;
     private Long completeBefore;
     private String organization;
@@ -17,14 +17,14 @@ public class Task {
     private String executor;
     private String creator;
     private List<String> dependencies;
-    private int state;
+    private Integer state;
     private Boolean pickupTask;
     private String notes;
     private CompletionDetails completionDetails;
     private List<String> feedback;
-    private List<String> metadata;
+    private List<Metadata> metadata;
     private AdditionalQuantities additionalQuantities;
-    private int serviceTime;
+    private Integer serviceTime;
     private Identity identity;
     private Appearance appearance;
     private Boolean scanOnlyRequiredBarcodes;
