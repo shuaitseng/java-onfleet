@@ -165,11 +165,11 @@ public class Task {
         this.feedback = feedback;
     }
 
-    public List<String> getMetadata() {
+    public List<Metadata> getMetadata() {
         return metadata;
     }
 
-    public void setMetadata(List<String> metadata) {
+    public void setMetadata(List<Metadata> metadata) {
         this.metadata = metadata;
     }
 
