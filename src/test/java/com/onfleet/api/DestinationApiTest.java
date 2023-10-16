@@ -44,14 +44,17 @@ class DestinationApiTest extends BaseApiTest {
 
 	@Test
 	void testGetDestination() throws Exception {
-		String mockResponseJson = "{\"id\":\"456\",\"name\":\"Destination 2\"}";
+		String mockResponseJson = "{\"id\":\"RR0SUIculbRFsIse6MENg\",\"timeCreated\":1455156664000,\"timeLastModified\":1455156664697,\"location\":[-122.4052935,37.7721234],\"address\":{\"apartment\":\"\",\"state\":\"California\",\"postalCode\":\"94103\",\"country\":\"United States\",\"city\":\"San Francisco\",\"street\":\"Brannan Street\",\"number\":\"888\"},\"notes\":\"\",\"metadata\":[]}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
 
-		Destination destination = destinationApi.getDestination("456");
-
+		Destination destination = destinationApi.getDestination("RR0SUIculbRFsIse6MENg");
 		RecordedRequest request = mockWebServer.takeRequest();
+
 		assertEquals(HttpMethodType.GET.name(), request.getMethod());
-		assertEquals("/destinations/456", request.getPath());
-		assertEquals("456", destination.getId());
+		assertEquals("/destinations/RR0SUIculbRFsIse6MENg", request.getPath());
+		assertEquals("RR0SUIculbRFsIse6MENg", destination.getId());
+		Assertions.assertThat(destination)
+				.usingRecursiveComparison()
+				.isEqualTo(GsonSingleton.getInstance().fromJson(mockResponseJson, Destination.class));
 	}
 }
