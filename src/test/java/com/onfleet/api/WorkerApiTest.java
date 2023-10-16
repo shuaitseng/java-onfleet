@@ -6,7 +6,7 @@ import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.ErrorResponse;
 import com.onfleet.models.ScheduleEntries;
 import com.onfleet.models.ScheduleEntry;
-import com.onfleet.models.Tasks;
+import com.onfleet.models.task.Tasks;
 import com.onfleet.models.Vehicle;
 import com.onfleet.models.VehicleType;
 import com.onfleet.models.Worker;
