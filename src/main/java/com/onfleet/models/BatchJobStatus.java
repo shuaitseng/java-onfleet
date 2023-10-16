@@ -1,5 +1,7 @@
 package com.onfleet.models;
 
+import com.onfleet.models.task.Task;
+
 import java.util.List;
 
 public class BatchJobStatus {
