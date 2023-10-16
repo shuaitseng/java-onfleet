@@ -19,11 +19,11 @@ public class WebhookApi extends BaseApi {
 		super(client, "/webhooks");
 	}
 
-	public WebhookApi create(WebhookCreateParams params) throws ApiException {
+	public Webhook create(WebhookCreateParams params) throws ApiException {
 		String jsonPayload = GsonSingleton.getInstance().toJson(params);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.POST, body, baseUrl);
-		return handleResponse(response, WebhookApi.class);
+		return handleResponse(response, Webhook.class);
 	}
 
 	public List<Webhook> list() throws ApiException {
