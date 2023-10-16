@@ -20,6 +20,14 @@ public class Destination {
 	private List<Metadata> metadata;
 	private Boolean useGPS;
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public Address getAddress() {
 		return address;
 	}
@@ -50,6 +58,46 @@ public class Destination {
 
 	public void setOptions(Options options) {
 		this.options = options;
+	}
+
+	public String[] getWarnings() {
+		return warnings;
+	}
+
+	public void setWarnings(String[] warnings) {
+		this.warnings = warnings;
+	}
+
+	public Long getTimeCreated() {
+		return timeCreated;
+	}
+
+	public void setTimeCreated(Long timeCreated) {
+		this.timeCreated = timeCreated;
+	}
+
+	public Long getTimeLastModified() {
+		return timeLastModified;
+	}
+
+	public void setTimeLastModified(Long timeLastModified) {
+		this.timeLastModified = timeLastModified;
+	}
+
+	public List<Metadata> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(List<Metadata> metadata) {
+		this.metadata = metadata;
+	}
+
+	public Boolean getUseGPS() {
+		return useGPS;
+	}
+
+	public void setUseGPS(Boolean useGPS) {
+		this.useGPS = useGPS;
 	}
 
 	public static class Builder {

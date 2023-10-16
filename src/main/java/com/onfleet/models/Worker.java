@@ -17,8 +17,8 @@ public class Worker {
 	private List<String> tasks;
 	private Boolean onDuty;
 	private Long timeLastSeen;
-	private Long delayTime; // Use Long to handle nullable values
-	private List<Object> metadata; // TODO: Define metadata object
+	private Long delayTime;
+	private List<Metadata> metadata;
 	private List<Double> location;
 	private Analytics analytics;
 
@@ -144,11 +144,11 @@ public class Worker {
 		this.delayTime = delayTime;
 	}
 
-	public List<Object> getMetadata() {
+	public List<Metadata> getMetadata() {
 		return metadata;
 	}
 
-	public void setMetadata(List<Object> metadata) {
+	public void setMetadata(List<Metadata> metadata) {
 		this.metadata = metadata;
 	}
 
@@ -203,6 +203,41 @@ public class Worker {
 
 		public Builder setdisplayName(String displayName) {
 			worker.setDisplayName(displayName);
+			return this;
+		}
+
+		public Builder setActiveTask(String activeTask) {
+			worker.setActiveTask(activeTask);
+			return this;
+		}
+
+		public Builder setOnDuty(Boolean onDuty) {
+			worker.setOnDuty(onDuty);
+			return this;
+		}
+
+		public Builder setTimeLastSeen(Long timeLastSeen) {
+			worker.setTimeLastSeen(timeLastSeen);
+			return this;
+		}
+
+		public Builder setDelayTime(Long delayTime) {
+			worker.setDelayTime(delayTime);
+			return this;
+		}
+
+		public Builder setMetadata(List<Metadata> metadata) {
+			worker.setMetadata(metadata);
+			return this;
+		}
+
+		public Builder setLocation(List<Double> location) {
+			worker.setLocation(location);
+			return this;
+		}
+
+		public Builder setAnalytics(Analytics analytics) {
+			worker.setAnalytics(analytics);
 			return this;
 		}
 

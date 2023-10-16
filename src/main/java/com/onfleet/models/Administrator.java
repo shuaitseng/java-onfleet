@@ -1,6 +1,8 @@
 package com.onfleet.models;
 
 
+import java.util.List;
+
 public class Administrator {
 	private String name;
 	private String email;
@@ -12,7 +14,7 @@ public class Administrator {
 	private Long timeLastModified;
 	private String organization;
 	private Boolean isActive;
-	private String[] metadata;
+	private List<Metadata> metadata;
 	private Boolean isAccountOwner;
 	private String[] teams;
 
@@ -121,12 +123,28 @@ public class Administrator {
 		this.isActive = active;
 	}
 
-	public String[] getMetadata() {
+	public Boolean getActive() {
+		return isActive;
+	}
+
+	public void setActive(Boolean active) {
+		isActive = active;
+	}
+
+	public List<Metadata> getMetadata() {
 		return metadata;
 	}
 
-	public void setMetadata(String[] metadata) {
+	public void setMetadata(List<Metadata> metadata) {
 		this.metadata = metadata;
+	}
+
+	public Boolean getAccountOwner() {
+		return isAccountOwner;
+	}
+
+	public void setAccountOwner(Boolean accountOwner) {
+		isAccountOwner = accountOwner;
 	}
 
 	public Boolean isAccountOwner() {
