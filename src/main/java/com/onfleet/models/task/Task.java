@@ -7,7 +7,6 @@ import com.onfleet.models.Recipient;
 
 import java.util.List;
 
-// TODO: what can Feedback be?
 public class Task {
 	private TaskAdditionalQuantities additionalQuantities;
 	private TaskAppearance appearance;
@@ -24,7 +23,7 @@ public class Task {
 	private Long estimatedCompletionTime;
 	private Long eta;
 	private String executor;
-	/*Feedback                 []any                    `json:"feedback"`*/
+	private Object feedback;
 	private String id;
 	private TaskIdentity identity;
 	private String merchant;
@@ -324,5 +323,13 @@ public class Task {
 
 	public void setWorker(String worker) {
 		this.worker = worker;
+	}
+
+	public Object getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(Object feedback) {
+		this.feedback = feedback;
 	}
 }
