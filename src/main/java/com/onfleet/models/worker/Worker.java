@@ -1,4 +1,7 @@
-package com.onfleet.models;
+package com.onfleet.models.worker;
+
+import com.onfleet.models.Metadata;
+import com.onfleet.models.Vehicle;
 
 import java.util.List;
 

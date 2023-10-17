@@ -1,4 +1,4 @@
-package com.onfleet.models;
+package com.onfleet.models.administrator;
 
 public class AdministratorBuilder {
 	private String name;

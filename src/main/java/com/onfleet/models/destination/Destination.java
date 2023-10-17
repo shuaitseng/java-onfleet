@@ -1,6 +1,9 @@
-package com.onfleet.models;
+package com.onfleet.models.destination;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.onfleet.models.Address;
+import com.onfleet.models.Metadata;
+import com.onfleet.models.Options;
 
 import java.util.List;
 

@@ -1,5 +1,7 @@
-package com.onfleet.models;
+package com.onfleet.models.hub;
 
+
+import com.onfleet.models.Address;
 
 import java.util.List;
 

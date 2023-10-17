@@ -1,17 +1,17 @@
-package com.onfleet.models;
+package com.onfleet.models.container;
+
+import java.util.List;
 
 public class Container {
 	private String id;
 	private Long timeCreated;
 	private Long timeLastModified;
 	private String organization;
-	private String type;
+	private ContainerType type;
 	private String activeTask;
-	private String[] tasks;
+	private List<String> tasks;
 	private String worker;
-
-	public Container() {
-	}
+	private String team;
 
 	public String getId() {
 		return id;
@@ -45,11 +45,11 @@ public class Container {
 		this.organization = organization;
 	}
 
-	public String getType() {
+	public ContainerType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(ContainerType type) {
 		this.type = type;
 	}
 
@@ -61,11 +61,11 @@ public class Container {
 		this.activeTask = activeTask;
 	}
 
-	public String[] getTasks() {
+	public List<String> getTasks() {
 		return tasks;
 	}
 
-	public void setTasks(String[] tasks) {
+	public void setTasks(List<String> tasks) {
 		this.tasks = tasks;
 	}
 
@@ -75,5 +75,13 @@ public class Container {
 
 	public void setWorker(String worker) {
 		this.worker = worker;
+	}
+
+	public String getTeam() {
+		return team;
+	}
+
+	public void setTeam(String team) {
+		this.team = team;
 	}
 }

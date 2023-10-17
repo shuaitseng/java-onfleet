@@ -1,4 +1,4 @@
-package com.onfleet.models;
+package com.onfleet.models.webhook;
 
 public class Webhook {
 	private String id;

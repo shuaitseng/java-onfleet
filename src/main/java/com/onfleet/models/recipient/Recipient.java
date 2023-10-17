@@ -1,7 +1,8 @@
-package com.onfleet.models;
+package com.onfleet.models.recipient;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.onfleet.models.Metadata;
 
 import java.util.List;
 

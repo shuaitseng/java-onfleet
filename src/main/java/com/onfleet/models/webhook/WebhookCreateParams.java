@@ -1,4 +1,4 @@
-package com.onfleet.models;
+package com.onfleet.models.webhook;
 
 public class WebhookCreateParams {
 	private String name;
