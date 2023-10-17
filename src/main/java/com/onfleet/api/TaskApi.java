@@ -4,15 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.BatchJobStatus;
 import com.onfleet.models.Metadata;
-import com.onfleet.models.task.Task;
-import com.onfleet.models.task.TaskBatchCreateResponse;
-import com.onfleet.models.task.TaskCloneParams;
-import com.onfleet.models.task.TaskForceCompletionParams;
-import com.onfleet.models.task.TaskListQueryParams;
-import com.onfleet.models.task.TaskParams;
-import com.onfleet.models.task.TaskState;
-import com.onfleet.models.task.Tasks;
-import com.onfleet.models.task.TasksPaginated;
+import com.onfleet.models.task.*;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import com.onfleet.utils.MediaTypes;
@@ -167,12 +159,12 @@ public class TaskApi extends BaseApi {
 		sendRequest(HttpMethodType.DELETE, url);
 	}
 
-    /*public void autoAssign(TaskAutoAssignMultiParams params) throws ApiException {
-	    String url = String.format("%s/autoAssign", baseUrl);
-	    String jsonPayload = GsonSingleton.getInstance().toJson(params);
-	    RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
-	    Response response = sendRequest(HttpMethodType.POST, body, url);
-	    return handleResponse(response, Task.class);
-    }*/
+	public AutomaticallyAssignTaskResult autoAssign(TaskAutoAssignMultiParams params) throws ApiException {
+		String url = String.format("%s/autoAssign", baseUrl);
+		String jsonPayload = GsonSingleton.getInstance().toJson(params);
+		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
+		Response response = sendRequest(HttpMethodType.POST, body, url);
+		return handleResponse(response, AutomaticallyAssignTaskResult.class);
+	}
 
 }
