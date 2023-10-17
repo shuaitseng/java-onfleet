@@ -3,7 +3,7 @@ package com.onfleet.models.task;
 import java.util.List;
 
 public class TaskCompletionDetails {
-	/*Actions[] any                 `json:"actions"`*/
+	private List<Object> actions;
 	private Double distance;
 	private TaskCompletionEvent events;
 	private String failureNotes;
