@@ -9,8 +9,6 @@ public class Webhook {
 	private String name;
 	private Double threshold;
 
-	public Webhook() {}
-
 	public String getId() {
 		return id;
 	}

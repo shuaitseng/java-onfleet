@@ -6,9 +6,6 @@ public class WebhookCreateParams {
 	private int trigger;
 	private Integer threshold;
 
-	public WebhookCreateParams() {
-	}
-
 	public WebhookCreateParams(String name, String url, int trigger, Integer threshold) {
 		this.name = name;
 		this.url = url;
