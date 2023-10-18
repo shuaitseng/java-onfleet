@@ -2,10 +2,13 @@ package com.onfleet.api;
 
 import com.google.gson.reflect.TypeToken;
 import com.onfleet.exceptions.ApiException;
-import com.onfleet.models.task.Tasks;
-import com.onfleet.models.Team;
 import com.onfleet.models.VehicleType;
-import com.onfleet.models.WorkerRoute;
+import com.onfleet.models.team.Team;
+import com.onfleet.models.team.TeamDriverEtaQueryParams;
+import com.onfleet.models.team.TeamParams;
+import com.onfleet.models.team.TeamTasks;
+import com.onfleet.models.team.TeamTasksQueryParams;
+import com.onfleet.models.team.WorkerRoute;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import com.onfleet.utils.MediaTypes;
@@ -24,19 +27,11 @@ public class TeamApi extends BaseApi {
 		super(client, "/teams");
 	}
 
-	public Team createTeam(Team team) throws ApiException {
-		String jsonPayload = GsonSingleton.getInstance().toJson(team);
-		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
-		Response response = sendRequest(HttpMethodType.POST, body, baseUrl);
-		return handleResponse(response, Team.class);
-	}
-
-	public Team updateTeam(Team team) throws ApiException {
-		String url = String.format("%s/%s", baseUrl, team.getId());
-		String jsonPayload = GsonSingleton.getInstance().toJson(team);
-		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
-		Response response = sendRequest(HttpMethodType.PUT, body, url);
-		return handleResponse(response, Team.class);
+	public Team getTeam(String teamId) throws ApiException {
+		return handleResponse(
+				sendRequest(HttpMethodType.GET,
+						String.format("%s/%s", baseUrl, teamId)),
+				Team.class);
 	}
 
 	public List<Team> listTeams() throws ApiException {
@@ -44,11 +39,19 @@ public class TeamApi extends BaseApi {
 		}.getType());
 	}
 
-	public Team getTeam(String teamId) throws ApiException {
-		return handleResponse(
-				sendRequest(HttpMethodType.GET,
-						String.format("%s/%s", baseUrl, teamId)),
-				Team.class);
+	public Team createTeam(TeamParams team) throws ApiException {
+		String jsonPayload = GsonSingleton.getInstance().toJson(team);
+		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
+		Response response = sendRequest(HttpMethodType.POST, body, baseUrl);
+		return handleResponse(response, Team.class);
+	}
+
+	public Team updateTeam(String teamId, TeamParams params) throws ApiException {
+		String url = String.format("%s/%s", baseUrl, teamId);
+		String jsonPayload = GsonSingleton.getInstance().toJson(params);
+		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
+		Response response = sendRequest(HttpMethodType.PUT, body, url);
+		return handleResponse(response, Team.class);
 	}
 
 	public void deleteTeam(String teamId) throws ApiException {
@@ -57,50 +60,46 @@ public class TeamApi extends BaseApi {
 	}
 
 	public WorkerRoute getDriverTimeEstimate(String teamId,
-	                                         String dropoffLocation,
-	                                         String pickupLocation,
-	                                         Long pickupTime,
-	                                         VehicleType[] restrictedVehicleTypes,
-	                                         Long serviceTime) throws ApiException {
-		if ((dropoffLocation == null || dropoffLocation.isEmpty()) && (pickupLocation == null || pickupLocation.isEmpty())) {
+	                                         TeamDriverEtaQueryParams params) throws ApiException {
+		if ((params.getDropoffLocation() == null || params.getDropoffLocation().isEmpty()) && (params.getPickupLocation() == null || params.getPickupLocation().isEmpty())) {
 			throw new IllegalArgumentException("Request must have at least one of dropoffLocation or pickupLocation.");
 		}
 		String url = String.format("%s/%s/estimate", baseUrl, teamId);
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-		if (dropoffLocation != null && !dropoffLocation.isEmpty())
-			urlBuilder.addQueryParameter("dropoffLocation", dropoffLocation);
-		if (!pickupLocation.isEmpty())
-			urlBuilder.addQueryParameter("pickupLocation", pickupLocation);
-		if (pickupTime != null)
-			urlBuilder.addQueryParameter("pickupTime", pickupTime.toString());
-		if (restrictedVehicleTypes != null && restrictedVehicleTypes.length > 0) {
-			String restrictedTypesString = Arrays.stream(restrictedVehicleTypes)
+		if (params.getDropoffLocation() != null && !params.getDropoffLocation().isEmpty())
+			urlBuilder.addQueryParameter("dropoffLocation", params.getDropoffLocation());
+		if (!params.getPickupLocation().isEmpty())
+			urlBuilder.addQueryParameter("pickupLocation", params.getPickupLocation());
+		if (params.getPickupTime() != null)
+			urlBuilder.addQueryParameter("pickupTime", params.getPickupTime().toString());
+		if (params.getRestrictedVehicleTypes() != null && params.getRestrictedVehicleTypes().length > 0) {
+			String restrictedTypesString = Arrays.stream(params.getRestrictedVehicleTypes())
 					.map(VehicleType::getValue)
 					.collect(Collectors.joining(","));
 			urlBuilder.addQueryParameter("restrictedVehiclesTypes", restrictedTypesString);
 		}
-		if (serviceTime != null)
-			urlBuilder.addQueryParameter("serviceTime", serviceTime.toString());
+		if (params.getServiceTime() != null)
+			urlBuilder.addQueryParameter("serviceTime", params.getServiceTime().toString());
 		Response response = sendRequest(HttpMethodType.GET, urlBuilder.build().toString());
 		return handleResponse(response, WorkerRoute.class);
 	}
 
-	public Tasks getUnassignedTasks(String teamId, Boolean isPickupTask, Long from, Long to, String lastId) throws ApiException {
+	public TeamTasks getUnassignedTasks(String teamId, TeamTasksQueryParams params) throws ApiException {
 		String url = String.format("%s/%s/tasks", baseUrl, teamId);
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-		if (isPickupTask != null) {
-			urlBuilder.addQueryParameter("isPickupTask", isPickupTask.toString());
+		if (params.getIsPickupTask() != null) {
+			urlBuilder.addQueryParameter("isPickupTask", params.getIsPickupTask().toString());
 		}
-		if (from != null) {
-			urlBuilder.addQueryParameter("from", from.toString());
+		if (params.getFrom() != null) {
+			urlBuilder.addQueryParameter("from", params.getFrom().toString());
 		}
-		if (to != null) {
-			urlBuilder.addQueryParameter("to", to.toString());
+		if (params.getTo() != null) {
+			urlBuilder.addQueryParameter("to", params.getTo().toString());
 		}
-		if (!lastId.isEmpty()) {
-			urlBuilder.addQueryParameter("lastId", lastId);
+		if (!params.getLastId().isEmpty()) {
+			urlBuilder.addQueryParameter("lastId", params.getLastId());
 		}
-		return handleResponse(sendRequest(HttpMethodType.GET, urlBuilder.build().toString()), Tasks.class);
+		return handleResponse(sendRequest(HttpMethodType.GET, urlBuilder.build().toString()), TeamTasks.class);
 	}
 
 }
