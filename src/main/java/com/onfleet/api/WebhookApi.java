@@ -2,8 +2,8 @@ package com.onfleet.api;
 
 import com.google.gson.reflect.TypeToken;
 import com.onfleet.exceptions.ApiException;
-import com.onfleet.models.Webhook;
-import com.onfleet.models.WebhookCreateParams;
+import com.onfleet.models.webhook.Webhook;
+import com.onfleet.models.webhook.WebhookCreateParams;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import com.onfleet.utils.MediaTypes;
