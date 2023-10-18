@@ -1,27 +1,20 @@
 package com.onfleet.models.destination;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onfleet.models.Address;
 import com.onfleet.models.Metadata;
-import com.onfleet.models.Options;
 
 import java.util.List;
 
 public class Destination {
 	private String id;
-	@JsonProperty("address")
 	private Address address;
-	@JsonProperty("location")
-	private Double[] location;
-	@JsonProperty("notes")
+	private String googlePlaceId;
+	private List<Double> location;
+	private List<Metadata> metadata;
 	private String notes;
-	@JsonProperty("options")
-	private Options options;
-	private String[] warnings;
 	private Long timeCreated;
 	private Long timeLastModified;
-	private List<Metadata> metadata;
-	private Boolean useGPS;
+	private List<String> warnings;
 
 	public String getId() {
 		return id;
@@ -39,12 +32,28 @@ public class Destination {
 		this.address = address;
 	}
 
-	public Double[] getLocation() {
+	public String getGooglePlaceId() {
+		return googlePlaceId;
+	}
+
+	public void setGooglePlaceId(String googlePlaceId) {
+		this.googlePlaceId = googlePlaceId;
+	}
+
+	public List<Double> getLocation() {
 		return location;
 	}
 
-	public void setLocation(Double[] location) {
+	public void setLocation(List<Double> location) {
 		this.location = location;
+	}
+
+	public List<Metadata> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(List<Metadata> metadata) {
+		this.metadata = metadata;
 	}
 
 	public String getNotes() {
@@ -53,22 +62,6 @@ public class Destination {
 
 	public void setNotes(String notes) {
 		this.notes = notes;
-	}
-
-	public Options getOptions() {
-		return options;
-	}
-
-	public void setOptions(Options options) {
-		this.options = options;
-	}
-
-	public String[] getWarnings() {
-		return warnings;
-	}
-
-	public void setWarnings(String[] warnings) {
-		this.warnings = warnings;
 	}
 
 	public Long getTimeCreated() {
@@ -87,48 +80,12 @@ public class Destination {
 		this.timeLastModified = timeLastModified;
 	}
 
-	public List<Metadata> getMetadata() {
-		return metadata;
+	public List<String> getWarnings() {
+		return warnings;
 	}
 
-	public void setMetadata(List<Metadata> metadata) {
-		this.metadata = metadata;
-	}
-
-	public Boolean getUseGPS() {
-		return useGPS;
-	}
-
-	public void setUseGPS(Boolean useGPS) {
-		this.useGPS = useGPS;
-	}
-
-	public static class Builder {
-		private final Destination destination = new Destination();
-
-		public Builder setAddress(Address address) {
-			destination.setAddress(address);
-			return this;
-		}
-
-		public Builder setLocation(Double[] location) {
-			destination.setLocation(location);
-			return this;
-		}
-
-		public Builder setNotes(String notes) {
-			destination.setNotes(notes);
-			return this;
-		}
-
-		public Builder setOptions(Options options) {
-			destination.setOptions(options);
-			return this;
-		}
-
-		public Destination build() {
-			return destination;
-		}
+	public void setWarnings(List<String> warnings) {
+		this.warnings = warnings;
 	}
 
 }
