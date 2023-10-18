@@ -2,7 +2,8 @@ package com.onfleet.api;
 
 import com.google.gson.reflect.TypeToken;
 import com.onfleet.exceptions.ApiException;
-import com.onfleet.models.Hub;
+import com.onfleet.models.hub.Hub;
+import com.onfleet.models.hub.HubParams;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import com.onfleet.utils.MediaTypes;
@@ -19,15 +20,15 @@ public class HubApi extends BaseApi {
 		super(client, "/hubs");
 	}
 
-	public Hub createHub(Hub hub) throws ApiException {
+	public Hub createHub(HubParams hub) throws ApiException {
 		String jsonPayload = GsonSingleton.getInstance().toJson(hub);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.POST, body, baseUrl);
 		return handleResponse(response, Hub.class);
 	}
 
-	public Hub updateHub(Hub hub) throws ApiException {
-		String url = String.format("%s/%s", baseUrl, hub.getId());
+	public Hub updateHub(String hubId, HubParams hub) throws ApiException {
+		String url = String.format("%s/%s", baseUrl, hubId);
 		String jsonPayload = GsonSingleton.getInstance().toJson(hub);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.PUT, body, url);
