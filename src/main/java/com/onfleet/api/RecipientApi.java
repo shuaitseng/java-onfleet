@@ -1,7 +1,11 @@
 package com.onfleet.api;
 
+import com.google.gson.reflect.TypeToken;
 import com.onfleet.exceptions.ApiException;
-import com.onfleet.models.Recipient;
+import com.onfleet.models.Metadata;
+import com.onfleet.models.recipient.Recipient;
+import com.onfleet.models.recipient.RecipientCreateParams;
+import com.onfleet.models.recipient.RecipientUpdateParams;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import com.onfleet.utils.MediaTypes;
@@ -16,17 +20,9 @@ public class RecipientApi extends BaseApi {
 		super(client, "/recipients");
 	}
 
-	public Recipient createRecipient(Recipient recipient) throws ApiException {
-		String jsonPayload = GsonSingleton.getInstance().toJson(recipient);
-		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
-		Response response = sendRequest(HttpMethodType.POST, body, baseUrl);
-		return handleResponse(response, Recipient.class);
-	}
-
-	public Recipient updateRecipient(Recipient recipient) throws ApiException {
-		String jsonPayload = GsonSingleton.getInstance().toJson(recipient);
-		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
-		Response response = sendRequest(HttpMethodType.PUT, body, baseUrl);
+	public Recipient getSingleRecipient(String recipientId) throws ApiException {
+		String url = String.format("%s/%s", baseUrl, recipientId);
+		Response response = sendRequest(HttpMethodType.GET, url);
 		return handleResponse(response, Recipient.class);
 	}
 
@@ -42,9 +38,17 @@ public class RecipientApi extends BaseApi {
 		return handleResponse(response, Recipient.class);
 	}
 
-	public Recipient getSingleRecipient(String recipientId) throws ApiException {
-		String url = String.format("%s/%s", baseUrl, recipientId);
-		Response response = sendRequest(HttpMethodType.GET, url);
+	public Recipient createRecipient(RecipientCreateParams createParams) throws ApiException {
+		String jsonPayload = GsonSingleton.getInstance().toJson(createParams);
+		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
+		Response response = sendRequest(HttpMethodType.POST, body, baseUrl);
+		return handleResponse(response, Recipient.class);
+	}
+
+	public Recipient updateRecipient(String recipientId, RecipientUpdateParams updateParams) throws ApiException {
+		String jsonPayload = GsonSingleton.getInstance().toJson(updateParams);
+		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
+		Response response = sendRequest(HttpMethodType.PUT, body, baseUrl);
 		return handleResponse(response, Recipient.class);
 	}
 }
