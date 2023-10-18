@@ -12,9 +12,9 @@ public class Team {
 	@JsonProperty("hub")
 	private String hubId;
 	private Boolean enableSelfAssignment;
-
-	public Team() {
-	}
+	private List<String> tasks;
+	private Long timeCreated;
+	private Long timeLastModified;
 
 	public String getId() {
 		return id;
@@ -62,5 +62,29 @@ public class Team {
 
 	public void setEnableSelfAssignment(Boolean enableSelfAssignment) {
 		this.enableSelfAssignment = enableSelfAssignment;
+	}
+
+	public List<String> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<String> tasks) {
+		this.tasks = tasks;
+	}
+
+	public Long getTimeCreated() {
+		return timeCreated;
+	}
+
+	public void setTimeCreated(Long timeCreated) {
+		this.timeCreated = timeCreated;
+	}
+
+	public Long getTimeLastModified() {
+		return timeLastModified;
+	}
+
+	public void setTimeLastModified(Long timeLastModified) {
+		this.timeLastModified = timeLastModified;
 	}
 }
