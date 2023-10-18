@@ -13,6 +13,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import java.util.List;
+
 
 public class RecipientApi extends BaseApi {
 
@@ -50,5 +52,13 @@ public class RecipientApi extends BaseApi {
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.PUT, body, baseUrl);
 		return handleResponse(response, Recipient.class);
+	}
+
+	public List<Recipient> queryWithMetadata(List<Metadata> metadata) throws ApiException {
+		String jsonPayload = GsonSingleton.getInstance().toJson(metadata);
+		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
+		Response response = sendRequest(HttpMethodType.POST, body, baseUrl);
+		return handleResponse(response, new TypeToken<List<Recipient>>() {
+		}.getType());
 	}
 }

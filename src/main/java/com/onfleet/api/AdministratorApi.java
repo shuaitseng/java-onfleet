@@ -34,7 +34,7 @@ public class AdministratorApi extends BaseApi {
 		}.getType());
 	}
 
-	public List<Administrator> listAdministratorsWithMetadataQuery(List<Metadata> metadata) throws ApiException {
+	public List<Administrator> queryByMetadata(List<Metadata> metadata) throws ApiException {
 		String jsonPayload = GsonSingleton.getInstance().toJson(metadata);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.POST, body, baseUrl);
