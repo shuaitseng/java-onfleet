@@ -1,4 +1,4 @@
-package com.onfleet.models;
+package com.onfleet.models.container;
 
 public enum ContainerType {
 	ORGANIZATION("organization"),
@@ -13,5 +13,9 @@ public enum ContainerType {
 
 	public String getValue() {
 		return value;
+	}
+
+	public String getPluralName() {
+		return value + "s";
 	}
 }
