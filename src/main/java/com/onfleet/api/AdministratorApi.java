@@ -2,7 +2,10 @@ package com.onfleet.api;
 
 import com.google.gson.reflect.TypeToken;
 import com.onfleet.exceptions.ApiException;
-import com.onfleet.models.Administrator;
+import com.onfleet.models.administrator.AdminCreateParams;
+import com.onfleet.models.administrator.AdminUpdateParams;
+import com.onfleet.models.administrator.Administrator;
+import com.onfleet.models.Metadata;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import com.onfleet.utils.MediaTypes;
@@ -18,8 +21,8 @@ public class AdministratorApi extends BaseApi {
 		super(client, "/admins");
 	}
 
-	public Administrator createAdministrator(Administrator admin) throws ApiException {
-		String jsonPayload = GsonSingleton.getInstance().toJson(admin);
+	public Administrator createAdministrator(AdminCreateParams createParams) throws ApiException {
+		String jsonPayload = GsonSingleton.getInstance().toJson(createParams);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.POST, body, baseUrl);
 		return handleResponse(response, Administrator.class);
@@ -31,9 +34,17 @@ public class AdministratorApi extends BaseApi {
 		}.getType());
 	}
 
-	public Administrator updateAdministrator(String adminId, Administrator admin) throws ApiException {
+	public List<Administrator> listAdministratorsWithMetadataQuery(List<Metadata> metadata) throws ApiException {
+		String jsonPayload = GsonSingleton.getInstance().toJson(metadata);
+		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
+		Response response = sendRequest(HttpMethodType.POST, body, baseUrl);
+		return handleResponse(response, new TypeToken<List<Administrator>>() {
+		}.getType());
+	}
+
+	public Administrator updateAdministrator(String adminId, AdminUpdateParams updateParams) throws ApiException {
 		String url = String.format("%s/%s", baseUrl, adminId);
-		String jsonPayload = GsonSingleton.getInstance().toJson(admin);
+		String jsonPayload = GsonSingleton.getInstance().toJson(updateParams);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.PUT, body, url);
 		return handleResponse(response, Administrator.class);
