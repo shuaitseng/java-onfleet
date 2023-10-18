@@ -1,24 +1,19 @@
 package com.onfleet.models.organization;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 public class Organization {
-	@JsonProperty("id")
 	private String id;
-	@JsonProperty("timeCreated")
 	private Long timeCreated;
-	@JsonProperty("name")
+	private Long timeLastModified;
 	private String name;
-	@JsonProperty("email")
 	private String email;
-	@JsonProperty("image")
-	private String image;
-	@JsonProperty("timezone")
+	private String driverSupportEmail;
 	private String timezone;
-	@JsonProperty("country")
+	private String image;
 	private String country;
-	@JsonProperty("delegatees")
-	private String[] delegatees;
+	private List<String> delegatees;
 
 	public String getId() {
 		return id;
@@ -34,6 +29,14 @@ public class Organization {
 
 	public void setTimeCreated(Long timeCreated) {
 		this.timeCreated = timeCreated;
+	}
+
+	public Long getTimeLastModified() {
+		return timeLastModified;
+	}
+
+	public void setTimeLastModified(Long timeLastModified) {
+		this.timeLastModified = timeLastModified;
 	}
 
 	public String getName() {
@@ -52,12 +55,12 @@ public class Organization {
 		this.email = email;
 	}
 
-	public String getImage() {
-		return image;
+	public String getDriverSupportEmail() {
+		return driverSupportEmail;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setDriverSupportEmail(String driverSupportEmail) {
+		this.driverSupportEmail = driverSupportEmail;
 	}
 
 	public String getTimezone() {
@@ -68,6 +71,14 @@ public class Organization {
 		this.timezone = timezone;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	public String getCountry() {
 		return country;
 	}
@@ -76,11 +87,11 @@ public class Organization {
 		this.country = country;
 	}
 
-	public String[] getDelegatees() {
+	public List<String> getDelegatees() {
 		return delegatees;
 	}
 
-	public void setDelegatees(String[] delegatees) {
+	public void setDelegatees(List<String> delegatees) {
 		this.delegatees = delegatees;
 	}
 }
