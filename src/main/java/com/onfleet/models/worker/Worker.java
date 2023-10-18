@@ -1,31 +1,107 @@
 package com.onfleet.models.worker;
 
 import com.onfleet.models.Metadata;
-import com.onfleet.models.Vehicle;
 
 import java.util.List;
 
 public class Worker {
-	private String id;
-	private String name;
-	private String phone;
-	private String[] teams;
-	private Vehicle vehicle;
-	private int capacity;
+	private WorkerAccountStatus accountStatus;
+	private String activeTask;
+	private WorkerAdditionalCapacities additionalCapacities;
+	private WorkerAddresses addresses;
+	private WorkerAnalytics analytics;
+	private Double capacity;
+	private Double delayTime;
 	private String displayName;
+	private Boolean hasRecentlyUsedSpoofedLocations;
+	private String id;
+	private String imageUrl;
+	private List<Double> location;
+	private List<Metadata> metadata;
+	private String name;
+	private Boolean onDuty;
+	private String organization;
+	private String phone;
+	private List<String> tasks;
+	private List<String> teams;
 	private Long timeCreated;
 	private Long timeLastModified;
-	private String organization;
-	private String activeTask;
-	private List<String> tasks;
-	private Boolean onDuty;
 	private Long timeLastSeen;
-	private Long delayTime;
-	private List<Metadata> metadata;
-	private List<Double> location;
-	private Analytics analytics;
+	private WorkerUserData userData;
+	private String Timezone;
+	private WorkerVehicle vehicle;
 
-	/*address.routing	object	Optional. This value is used to set the worker's address.*/
+	public WorkerAccountStatus getAccountStatus() {
+		return accountStatus;
+	}
+
+	public void setAccountStatus(WorkerAccountStatus accountStatus) {
+		this.accountStatus = accountStatus;
+	}
+
+	public String getActiveTask() {
+		return activeTask;
+	}
+
+	public void setActiveTask(String activeTask) {
+		this.activeTask = activeTask;
+	}
+
+	public WorkerAdditionalCapacities getAdditionalCapacities() {
+		return additionalCapacities;
+	}
+
+	public void setAdditionalCapacities(WorkerAdditionalCapacities additionalCapacities) {
+		this.additionalCapacities = additionalCapacities;
+	}
+
+	public WorkerAddresses getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(WorkerAddresses addresses) {
+		this.addresses = addresses;
+	}
+
+	public WorkerAnalytics getAnalytics() {
+		return analytics;
+	}
+
+	public void setAnalytics(WorkerAnalytics analytics) {
+		this.analytics = analytics;
+	}
+
+	public Double getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(Double capacity) {
+		this.capacity = capacity;
+	}
+
+	public Double getDelayTime() {
+		return delayTime;
+	}
+
+	public void setDelayTime(Double delayTime) {
+		this.delayTime = delayTime;
+	}
+
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
+
+	public Boolean getHasRecentlyUsedSpoofedLocations() {
+		return hasRecentlyUsedSpoofedLocations;
+	}
+
+	public void setHasRecentlyUsedSpoofedLocations(Boolean hasRecentlyUsedSpoofedLocations) {
+		this.hasRecentlyUsedSpoofedLocations = hasRecentlyUsedSpoofedLocations;
+	}
 
 	public String getId() {
 		return id;
@@ -33,6 +109,30 @@ public class Worker {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public List<Double> getLocation() {
+		return location;
+	}
+
+	public void setLocation(List<Double> location) {
+		this.location = location;
+	}
+
+	public List<Metadata> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(List<Metadata> metadata) {
+		this.metadata = metadata;
 	}
 
 	public String getName() {
@@ -43,6 +143,22 @@ public class Worker {
 		this.name = name;
 	}
 
+	public Boolean getOnDuty() {
+		return onDuty;
+	}
+
+	public void setOnDuty(Boolean onDuty) {
+		this.onDuty = onDuty;
+	}
+
+	public String getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(String organization) {
+		this.organization = organization;
+	}
+
 	public String getPhone() {
 		return phone;
 	}
@@ -51,36 +167,20 @@ public class Worker {
 		this.phone = phone;
 	}
 
-	public String[] getTeams() {
+	public List<String> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<String> tasks) {
+		this.tasks = tasks;
+	}
+
+	public List<String> getTeams() {
 		return teams;
 	}
 
-	public void setTeams(String[] teams) {
+	public void setTeams(List<String> teams) {
 		this.teams = teams;
-	}
-
-	public Vehicle getVehicle() {
-		return vehicle;
-	}
-
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
-
-	public int getCapacity() {
-		return capacity;
-	}
-
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
-	}
-
-	public String getDisplayName() {
-		return displayName;
-	}
-
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
 	}
 
 	public Long getTimeCreated() {
@@ -99,38 +199,6 @@ public class Worker {
 		this.timeLastModified = timeLastModified;
 	}
 
-	public String getOrganization() {
-		return organization;
-	}
-
-	public void setOrganization(String organization) {
-		this.organization = organization;
-	}
-
-	public String getActiveTask() {
-		return activeTask;
-	}
-
-	public void setActiveTask(String activeTask) {
-		this.activeTask = activeTask;
-	}
-
-	public List<String> getTasks() {
-		return tasks;
-	}
-
-	public void setTasks(List<String> tasks) {
-		this.tasks = tasks;
-	}
-
-	public Boolean getOnDuty() {
-		return onDuty;
-	}
-
-	public void setOnDuty(Boolean onDuty) {
-		this.onDuty = onDuty;
-	}
-
 	public Long getTimeLastSeen() {
 		return timeLastSeen;
 	}
@@ -139,237 +207,27 @@ public class Worker {
 		this.timeLastSeen = timeLastSeen;
 	}
 
-	public Long getDelayTime() {
-		return delayTime;
+	public WorkerUserData getUserData() {
+		return userData;
 	}
 
-	public void setDelayTime(Long delayTime) {
-		this.delayTime = delayTime;
+	public void setUserData(WorkerUserData userData) {
+		this.userData = userData;
 	}
 
-	public List<Metadata> getMetadata() {
-		return metadata;
+	public String getTimezone() {
+		return Timezone;
 	}
 
-	public void setMetadata(List<Metadata> metadata) {
-		this.metadata = metadata;
+	public void setTimezone(String timezone) {
+		Timezone = timezone;
 	}
 
-	public List<Double> getLocation() {
-		return location;
+	public WorkerVehicle getVehicle() {
+		return vehicle;
 	}
 
-	public void setLocation(List<Double> location) {
-		this.location = location;
+	public void setVehicle(WorkerVehicle vehicle) {
+		this.vehicle = vehicle;
 	}
-
-	public Analytics getAnalytics() {
-		return analytics;
-	}
-
-	public void setAnalytics(Analytics analytics) {
-		this.analytics = analytics;
-	}
-
-	public static class Builder {
-		private final Worker worker = new Worker();
-
-		public Builder setId(String id) {
-			worker.setId(id);
-			return this;
-		}
-
-		public Builder setName(String name) {
-			worker.setName(name);
-			return this;
-		}
-
-		public Builder setPhone(String phone) {
-			worker.setPhone(phone);
-			return this;
-		}
-
-		public Builder setTeams(String[] teams) {
-			worker.setTeams(teams);
-			return this;
-		}
-
-		public Builder setVehicle(Vehicle vehicle) {
-			worker.setVehicle(vehicle);
-			return this;
-		}
-
-		public Builder setCapacity(int capacity) {
-			worker.setCapacity(capacity);
-			return this;
-		}
-
-		public Builder setdisplayName(String displayName) {
-			worker.setDisplayName(displayName);
-			return this;
-		}
-
-		public Builder setActiveTask(String activeTask) {
-			worker.setActiveTask(activeTask);
-			return this;
-		}
-
-		public Builder setOnDuty(Boolean onDuty) {
-			worker.setOnDuty(onDuty);
-			return this;
-		}
-
-		public Builder setTimeLastSeen(Long timeLastSeen) {
-			worker.setTimeLastSeen(timeLastSeen);
-			return this;
-		}
-
-		public Builder setDelayTime(Long delayTime) {
-			worker.setDelayTime(delayTime);
-			return this;
-		}
-
-		public Builder setMetadata(List<Metadata> metadata) {
-			worker.setMetadata(metadata);
-			return this;
-		}
-
-		public Builder setLocation(List<Double> location) {
-			worker.setLocation(location);
-			return this;
-		}
-
-		public Builder setAnalytics(Analytics analytics) {
-			worker.setAnalytics(analytics);
-			return this;
-		}
-
-		public Worker build() {
-			return worker;
-		}
-	}
-
-	public static class Analytics {
-		private List<AnalyticsEvent> events;
-		private Distance distances;
-		private Time times;
-		private TaskCounts taskCounts;
-
-		public List<AnalyticsEvent> getEvents() {
-			return events;
-		}
-
-		public void setEvents(List<AnalyticsEvent> events) {
-			this.events = events;
-		}
-
-		public Distance getDistances() {
-			return distances;
-		}
-
-		public void setDistances(Distance distances) {
-			this.distances = distances;
-		}
-
-		public Time getTimes() {
-			return times;
-		}
-
-		public void setTimes(Time times) {
-			this.times = times;
-		}
-
-		public TaskCounts getTaskCounts() {
-			return taskCounts;
-		}
-
-		public void setTaskCounts(TaskCounts taskCounts) {
-			this.taskCounts = taskCounts;
-		}
-
-		public static class AnalyticsEvent {
-			private String action;
-			private Long time;
-
-			public String getAction() {
-				return action;
-			}
-
-			public void setAction(String action) {
-				this.action = action;
-			}
-
-			public Long getTime() {
-				return time;
-			}
-
-			public void setTime(Long time) {
-				this.time = time;
-			}
-		}
-
-		public static class Distance {
-			private double enroute;
-			private double idle;
-
-			public double getEnroute() {
-				return enroute;
-			}
-
-			public void setEnroute(double enroute) {
-				this.enroute = enroute;
-			}
-
-			public double getIdle() {
-				return idle;
-			}
-
-			public void setIdle(double idle) {
-				this.idle = idle;
-			}
-		}
-
-		public static class Time {
-			private Double enroute;
-			private Double idle;
-
-			public Double getEnroute() {
-				return enroute;
-			}
-
-			public void setEnroute(Double enroute) {
-				this.enroute = enroute;
-			}
-
-			public Double getIdle() {
-				return idle;
-			}
-
-			public void setIdle(Double idle) {
-				this.idle = idle;
-			}
-		}
-
-		public static class TaskCounts {
-			private Integer succeeded;
-			private Integer failed;
-
-			public Integer getSucceeded() {
-				return succeeded;
-			}
-
-			public void setSucceeded(Integer succeeded) {
-				this.succeeded = succeeded;
-			}
-
-			public Integer getFailed() {
-				return failed;
-			}
-
-			public void setFailed(Integer failed) {
-				this.failed = failed;
-			}
-		}
-	}
-
 }
