@@ -15,7 +15,13 @@ public class DestinationApi extends BaseApi {
 		super(client, "/destinations");
 	}
 
-	public Destination createDestination(Destination destination) throws ApiException {
+	public Destination getDestination(String id) throws ApiException {
+		String url = String.format("%s/%s", baseUrl, id);
+		Response response = sendRequest(HttpMethodType.GET, url);
+		return handleResponse(response, Destination.class);
+	}
+
+	public Destination createDestination(DestinationCreateParams destination) throws ApiException {
 		String jsonPayload = GsonSingleton.getInstance().toJson(destination);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.POST, body, baseUrl);
