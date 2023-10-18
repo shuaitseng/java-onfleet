@@ -1,12 +1,14 @@
-package com.onfleet.models;
+package com.onfleet.models.worker;
 
-public class Vehicle {
+import com.onfleet.models.VehicleType;
+
+public class WorkerVehicle {
 	private String type;
 	private String description;
 	private String licensePlate;
 	private String color;
 
-	public Vehicle(VehicleType type, String description, String licensePlate, String color) {
+	public WorkerVehicle(VehicleType type, String description, String licensePlate, String color) {
 		this.type = type.getValue();
 		this.description = description;
 		this.licensePlate = licensePlate;
