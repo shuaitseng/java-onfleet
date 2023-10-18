@@ -1,42 +1,44 @@
 package com.onfleet.models;
 
+import java.util.List;
+
 public class RouteStep {
-	private Double[] location;
-	private Integer travelTime;
-	private Integer distance;
-	private Integer serviceTime;
+	private List<Double> location;
+	private Double travelTime;
+	private Double distance;
+	private Double serviceTime;
 	private Integer arrivalTime;
 	private Integer completionTime;
 
-	public Double[] getLocation() {
+	public List<Double> getLocation() {
 		return location;
 	}
 
-	public void setLocation(Double[] location) {
+	public void setLocation(List<Double> location) {
 		this.location = location;
 	}
 
-	public Integer getTravelTime() {
+	public Double getTravelTime() {
 		return travelTime;
 	}
 
-	public void setTravelTime(Integer travelTime) {
+	public void setTravelTime(Double travelTime) {
 		this.travelTime = travelTime;
 	}
 
-	public Integer getDistance() {
+	public Double getDistance() {
 		return distance;
 	}
 
-	public void setDistance(Integer distance) {
+	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
 
-	public Integer getServiceTime() {
+	public Double getServiceTime() {
 		return serviceTime;
 	}
 
-	public void setServiceTime(Integer serviceTime) {
+	public void setServiceTime(Double serviceTime) {
 		this.serviceTime = serviceTime;
 	}
 
