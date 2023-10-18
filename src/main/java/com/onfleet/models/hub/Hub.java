@@ -6,10 +6,10 @@ import com.onfleet.models.Address;
 import java.util.List;
 
 public class Hub {
-	private String id;
-	private String name;
-	private List<Double> location;
 	private Address address;
+	private String id;
+	private List<Double> location;
+	private String name;
 	private List<String> team;
 
 	public Hub(String name, Address address, List<String> team) {
