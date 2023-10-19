@@ -3,23 +3,23 @@ package com.onfleet.models.worker;
 import com.onfleet.models.VehicleType;
 
 public class WorkerVehicle {
-	private String type;
+	private VehicleType type;
 	private String description;
 	private String licensePlate;
 	private String color;
 
 	public WorkerVehicle(VehicleType type, String description, String licensePlate, String color) {
-		this.type = type.getValue();
+		this.type = type;
 		this.description = description;
 		this.licensePlate = licensePlate;
 		this.color = color;
 	}
 
-	public String getType() {
+	public VehicleType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(VehicleType type) {
 		this.type = type;
 	}
 
