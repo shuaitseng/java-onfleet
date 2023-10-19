@@ -1,4 +1,4 @@
-package com.onfleet.models;
+package com.onfleet.models.task;
 
 import com.onfleet.models.task.Task;
 import com.onfleet.models.task.TaskBatchCreateError;
