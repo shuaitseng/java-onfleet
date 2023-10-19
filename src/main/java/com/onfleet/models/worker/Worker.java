@@ -28,7 +28,7 @@ public class Worker {
 	private Long timeLastModified;
 	private Long timeLastSeen;
 	private WorkerUserData userData;
-	private String Timezone;
+	private String timezone;
 	private WorkerVehicle vehicle;
 
 	public WorkerAccountStatus getAccountStatus() {
@@ -216,11 +216,11 @@ public class Worker {
 	}
 
 	public String getTimezone() {
-		return Timezone;
+		return timezone;
 	}
 
 	public void setTimezone(String timezone) {
-		Timezone = timezone;
+		timezone = timezone;
 	}
 
 	public WorkerVehicle getVehicle() {
