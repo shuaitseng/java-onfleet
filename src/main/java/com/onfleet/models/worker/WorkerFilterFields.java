@@ -1,4 +1,4 @@
-package com.onfleet.models;
+package com.onfleet.models.worker;
 
 public enum WorkerFilterFields {
 	ID("id"),

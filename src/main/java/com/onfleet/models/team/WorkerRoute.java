@@ -1,7 +1,7 @@
 package com.onfleet.models.team;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.onfleet.models.RouteStep;
+import com.onfleet.models.worker.RouteStep;
 import com.onfleet.models.VehicleType;
 
 import java.util.List;

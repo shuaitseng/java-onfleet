@@ -1,4 +1,4 @@
-package com.onfleet.models;
+package com.onfleet.models.worker;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.onfleet.models.worker.Worker;

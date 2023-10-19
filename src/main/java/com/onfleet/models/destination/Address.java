@@ -1,4 +1,4 @@
-package com.onfleet.models;
+package com.onfleet.models.destination;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

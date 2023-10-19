@@ -1,6 +1,6 @@
 package com.onfleet.models.worker;
 
-import com.onfleet.models.Address;
+import com.onfleet.models.destination.Address;
 
 import java.util.List;
 

@@ -1,6 +1,5 @@
 package com.onfleet.models.destination;
 
-import com.onfleet.models.Address;
 import com.onfleet.models.Metadata;
 
 import java.util.List;
