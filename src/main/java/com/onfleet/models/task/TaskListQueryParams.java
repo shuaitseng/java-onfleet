@@ -1,7 +1,5 @@
 package com.onfleet.models.task;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.List;
 
 public class TaskListQueryParams {
