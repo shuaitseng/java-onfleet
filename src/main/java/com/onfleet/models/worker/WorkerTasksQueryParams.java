@@ -5,4 +5,20 @@ public class WorkerTasksQueryParams {
 	private Long to;
 	private String lastId;
 	private Boolean isPickUpTask;
+
+	public Long getFrom() {
+		return from;
+	}
+
+	public Long getTo() {
+		return to;
+	}
+
+	public String getLastId() {
+		return lastId;
+	}
+
+	public Boolean getPickUpTask() {
+		return isPickUpTask;
+	}
 }
