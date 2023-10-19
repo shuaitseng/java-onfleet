@@ -1,15 +1,19 @@
 package com.onfleet.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.onfleet.models.worker.Worker;
+
 import java.util.List;
 
 public class Workers {
-	private List<Worker> workers;
+	@JsonProperty("workers")
+	private List<Worker> workerList;
 
 	public List<Worker> getWorkers() {
-		return workers;
+		return workerList;
 	}
 
 	public void setWorkers(List<Worker> workers) {
-		this.workers = workers;
+		this.workerList = workers;
 	}
 }
