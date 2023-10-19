@@ -2,9 +2,19 @@ package com.onfleet.api;
 
 import com.google.gson.reflect.TypeToken;
 import com.onfleet.exceptions.ApiException;
-import com.onfleet.models.BatchJobStatus;
+import com.onfleet.models.task.BatchJobStatus;
 import com.onfleet.models.Metadata;
-import com.onfleet.models.task.*;
+import com.onfleet.models.task.AutomaticallyAssignTaskResult;
+import com.onfleet.models.task.Task;
+import com.onfleet.models.task.TaskAutoAssignMultiParams;
+import com.onfleet.models.task.TaskBatchCreateResponse;
+import com.onfleet.models.task.TaskCloneParams;
+import com.onfleet.models.task.TaskForceCompletionParams;
+import com.onfleet.models.task.TaskListQueryParams;
+import com.onfleet.models.task.TaskParams;
+import com.onfleet.models.task.TaskState;
+import com.onfleet.models.task.Tasks;
+import com.onfleet.models.task.TasksPaginated;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import com.onfleet.utils.MediaTypes;
@@ -51,9 +61,12 @@ public class TaskApi extends BaseApi {
 		return handleResponse(response, BatchJobStatus.class);
 	}
 
-	// TODO: check this one later
-	public void RecipientOverrides() {
-
+	public AutomaticallyAssignTaskResult autoAssign(TaskAutoAssignMultiParams params) throws ApiException {
+		String url = String.format("%s/autoAssign", baseUrl);
+		String jsonPayload = GsonSingleton.getInstance().toJson(params);
+		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
+		Response response = sendRequest(HttpMethodType.POST, body, url);
+		return handleResponse(response, AutomaticallyAssignTaskResult.class);
 	}
 
 	/**
@@ -71,7 +84,7 @@ public class TaskApi extends BaseApi {
 	 * </ul>
 	 *
 	 * @param queryParams The query parameters for filtering tasks.
-	 * @return A paginated list of tasks.
+	 * @return A list of tasks.
 	 * @throws ApiException             if an error occurs during the API request.
 	 * @throws IllegalArgumentException if the 'from' parameter is missing or invalid.
 	 */
@@ -110,7 +123,7 @@ public class TaskApi extends BaseApi {
 		return handleResponse(sendRequest(HttpMethodType.GET, urlBuilder.build().toString()), TasksPaginated.class);
 	}
 
-	public List<Task> listWithMetadataQuery(List<Metadata> metadata) throws ApiException {
+	public List<Task> queryWithMedatada(List<Metadata> metadata) throws ApiException {
 		String url = String.format("%s/metadata", baseUrl);
 		String jsonPayload = GsonSingleton.getInstance().toJson(metadata);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
@@ -157,14 +170,6 @@ public class TaskApi extends BaseApi {
 	public void deleteTask(String taskId) throws ApiException {
 		String url = String.format("%s/%s", baseUrl, taskId);
 		sendRequest(HttpMethodType.DELETE, url);
-	}
-
-	public AutomaticallyAssignTaskResult autoAssign(TaskAutoAssignMultiParams params) throws ApiException {
-		String url = String.format("%s/autoAssign", baseUrl);
-		String jsonPayload = GsonSingleton.getInstance().toJson(params);
-		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
-		Response response = sendRequest(HttpMethodType.POST, body, url);
-		return handleResponse(response, AutomaticallyAssignTaskResult.class);
 	}
 
 }
