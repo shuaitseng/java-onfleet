@@ -9,6 +9,14 @@ public class TeamParams {
 	private String name;
 	private List<String> workers;
 
+	private TeamParams(Builder builder) {
+		this.enableSelfAssignment = builder.enableSelfAssignment;
+		this.hub = builder.hub;
+		this.managers = builder.managers;
+		this.name = builder.name;
+		this.workers = builder.workers;
+	}
+
 	public Boolean getEnableSelfAssignment() {
 		return enableSelfAssignment;
 	}
@@ -47,5 +55,33 @@ public class TeamParams {
 
 	public void setWorkers(List<String> workers) {
 		this.workers = workers;
+	}
+
+	public static class Builder {
+		private Boolean enableSelfAssignment;
+		private String hub;
+		private final List<String> managers;
+		private final String name;
+		private final List<String> workers;
+
+		public Builder(String name, List<String> managers, List<String> workers) {
+			this.name = name;
+			this.managers = managers;
+			this.workers = workers;
+		}
+
+		public Builder enableSelfAssignment(Boolean enableSelfAssignment) {
+			this.enableSelfAssignment = enableSelfAssignment;
+			return this;
+		}
+
+		public Builder hub(String hub) {
+			this.hub = hub;
+			return this;
+		}
+
+		public TeamParams build() {
+			return new TeamParams(this);
+		}
 	}
 }
