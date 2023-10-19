@@ -1,18 +1,18 @@
-package com.onfleet.models;
+package com.onfleet.models.worker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ScheduleEntry {
+public class WorkerScheduleEntry {
 	private String date;
 	private List<List<Long>> shifts;
 	private String timezone;
 
-	public ScheduleEntry() {
+	public WorkerScheduleEntry() {
 	}
 
-	public ScheduleEntry(String date, String timezone) {
+	public WorkerScheduleEntry(String date, String timezone) {
 		this.date = date;
 		this.timezone = timezone;
 		this.shifts = new ArrayList<>();
