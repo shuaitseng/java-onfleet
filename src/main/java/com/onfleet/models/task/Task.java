@@ -1,9 +1,9 @@
 package com.onfleet.models.task;
 
 
-import com.onfleet.models.Destination;
+import com.onfleet.models.destination.Destination;
 import com.onfleet.models.Metadata;
-import com.onfleet.models.Recipient;
+import com.onfleet.models.recipient.Recipient;
 
 import java.util.List;
 

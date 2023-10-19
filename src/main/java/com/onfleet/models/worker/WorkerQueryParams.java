@@ -1,7 +1,5 @@
 package com.onfleet.models.worker;
 
-import com.onfleet.models.WorkerFilterFields;
-
 import java.util.List;
 
 public class WorkerQueryParams {

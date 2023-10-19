@@ -1,6 +1,6 @@
 package com.onfleet.models.task;
 
-import com.onfleet.models.ContainerType;
+import com.onfleet.models.container.ContainerType;
 
 public class TaskContainer {
 	private String organization;
