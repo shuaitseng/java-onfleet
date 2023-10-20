@@ -61,11 +61,45 @@ public class AdminCreateParams {
 		this.phone = phone;
 	}
 
-	public String getType() {
+	public AdministratorType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(AdministratorType type) {
 		this.type = type;
+	}
+
+	public static class Builder {
+		private final String email;
+		private final String name;
+		private final AdministratorType type;
+		private Boolean isReadOnly;
+		private List<Metadata> metadata;
+		private String phone;
+
+		public Builder(String name, String email, AdministratorType type) {
+			this.name = name;
+			this.email = email;
+			this.type = type;
+		}
+
+		public Builder setIsReadOnly(Boolean isReadOnly) {
+			this.isReadOnly = isReadOnly;
+			return this;
+		}
+
+		public Builder setMetadata(List<Metadata> metadata) {
+			this.metadata = metadata;
+			return this;
+		}
+
+		public Builder setPhone(String phone) {
+			this.phone = phone;
+			return this;
+		}
+
+		public AdminCreateParams build() {
+			return new AdminCreateParams(this);
+		}
 	}
 }

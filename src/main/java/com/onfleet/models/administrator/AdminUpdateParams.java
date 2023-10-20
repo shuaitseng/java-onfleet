@@ -10,6 +10,13 @@ public class AdminUpdateParams {
 	private String name;
 	private String phone;
 
+	private AdminUpdateParams(Builder builder) {
+		this.email = builder.email;
+		this.metadata = builder.metadata;
+		this.name = builder.name;
+		this.phone = builder.phone;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -41,4 +48,36 @@ public class AdminUpdateParams {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+	public static class Builder {
+		private String email;
+		private List<Metadata> metadata;
+		private String name;
+		private String phone;
+
+		public Builder email(String email) {
+			this.email = email;
+			return this;
+		}
+
+		public Builder metadata(List<Metadata> metadata) {
+			this.metadata = metadata;
+			return this;
+		}
+
+		public Builder name(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public Builder phone(String phone) {
+			this.phone = phone;
+			return this;
+		}
+
+		public AdminUpdateParams build() {
+			return new AdminUpdateParams(this);
+		}
+	}
+
 }
