@@ -2,14 +2,14 @@ package com.onfleet.models.team;
 
 import java.util.List;
 
-public class TeamParams {
+public class TeamCreateParams {
 	private Boolean enableSelfAssignment;
 	private String hub;
 	private List<String> managers;
 	private String name;
 	private List<String> workers;
 
-	private TeamParams(Builder builder) {
+	private TeamCreateParams(Builder builder) {
 		this.enableSelfAssignment = builder.enableSelfAssignment;
 		this.hub = builder.hub;
 		this.managers = builder.managers;
@@ -80,8 +80,8 @@ public class TeamParams {
 			return this;
 		}
 
-		public TeamParams build() {
-			return new TeamParams(this);
+		public TeamCreateParams build() {
+			return new TeamCreateParams(this);
 		}
 	}
 }
