@@ -56,7 +56,7 @@ class HubApiTest extends BaseApiTest {
 				.setTeams(Arrays.asList("team1", "team2", "team3"))
 				.build();
 
-		Hub hubResponse = hubApi.updateHub("hubId", params);
+		Hub hubResponse = hubApi.updateHub("i4FoP*dTVrdnGqvIVvvA69aB", params);
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
 		assertEquals(HttpMethodType.PUT.name(), recordedRequest.getMethod());

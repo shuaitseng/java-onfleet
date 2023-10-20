@@ -2,6 +2,7 @@ package com.onfleet.api;
 
 import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.ErrorResponse;
+import com.onfleet.models.organization.Delegatee;
 import com.onfleet.models.organization.Organization;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
@@ -48,14 +49,14 @@ class OrganizationApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"id\":\"cBrUjKvQQgdRp~s1qvQNLpK*\",\"name\":\"Onfleet Engineering\",\"email\":\"dev@onfleet.com\",\"timezone\":\"America/Los_Angeles\",\"country\":\"US\"}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
 
-		Organization organization = organizationApi.getDelegateeDetails("cBrUjKvQQgdRp~s1qvQNLpK*");
+		Delegatee delegatee = organizationApi.getDelegateeDetails("cBrUjKvQQgdRp~s1qvQNLpK*");
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
 		assertEquals(HttpMethodType.GET.name(), recordedRequest.getMethod());
 		assertEquals("/organizations/cBrUjKvQQgdRp~s1qvQNLpK*", recordedRequest.getPath());
-		assertEquals("cBrUjKvQQgdRp~s1qvQNLpK*", organization.getId());
-		Assertions.assertThat(organization).usingRecursiveComparison()
-				.isEqualTo(GsonSingleton.getInstance().fromJson(mockResponseJson, Organization.class));
+		assertEquals("cBrUjKvQQgdRp~s1qvQNLpK*", delegatee.getId());
+		Assertions.assertThat(delegatee).usingRecursiveComparison()
+				.isEqualTo(GsonSingleton.getInstance().fromJson(mockResponseJson, Delegatee.class));
 	}
 
 	@Test
