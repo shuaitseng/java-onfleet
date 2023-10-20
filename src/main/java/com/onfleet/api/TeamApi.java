@@ -12,7 +12,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,12 +62,12 @@ public class TeamApi extends BaseApi {
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
 		if (params.getDropoffLocation() != null && !params.getDropoffLocation().isEmpty())
 			urlBuilder.addQueryParameter("dropoffLocation", params.getDropoffLocation());
-		if (!params.getPickupLocation().isEmpty())
+		if (params.getPickupLocation() != null && !params.getPickupLocation().isEmpty())
 			urlBuilder.addQueryParameter("pickupLocation", params.getPickupLocation());
 		if (params.getPickupTime() != null)
 			urlBuilder.addQueryParameter("pickupTime", params.getPickupTime().toString());
-		if (params.getRestrictedVehicleTypes() != null && params.getRestrictedVehicleTypes().length > 0) {
-			String restrictedTypesString = Arrays.stream(params.getRestrictedVehicleTypes())
+		if (params.getRestrictedVehicleTypes() != null && !params.getRestrictedVehicleTypes().isEmpty()) {
+			String restrictedTypesString = params.getRestrictedVehicleTypes().stream()
 					.map(VehicleType::getValue)
 					.collect(Collectors.joining(","));
 			urlBuilder.addQueryParameter("restrictedVehiclesTypes", restrictedTypesString);
