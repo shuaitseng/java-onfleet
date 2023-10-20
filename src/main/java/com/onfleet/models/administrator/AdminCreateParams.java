@@ -10,7 +10,16 @@ public class AdminCreateParams {
 	private List<Metadata> metadata;
 	private String name;
 	private String phone;
-	private String type;
+	private AdministratorType type;
+
+	private AdminCreateParams(Builder builder) {
+		this.name = builder.name;
+		this.type = builder.type;
+		this.email = builder.email;
+		this.phone = builder.phone;
+		this.isReadOnly = builder.isReadOnly;
+		this.metadata = builder.metadata;
+	}
 
 	public String getEmail() {
 		return email;

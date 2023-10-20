@@ -10,7 +10,7 @@ public class Administrator {
 	private String email;
 	private String phone;
 	private Boolean isReadOnly;
-	private Type type;
+	private AdministratorType type;
 	private String id;
 	private Long timeCreated;
 	private Long timeLastModified;
@@ -19,31 +19,6 @@ public class Administrator {
 	private Boolean isActive;
 	private List<Metadata> metadata;
 	private List<String> teams;
-
-	public Administrator() {
-	}
-
-	public Administrator(String name, String email, String phone, Boolean isReadOnly, Type type) {
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
-		this.isReadOnly = isReadOnly;
-		this.type = type;
-	}
-
-	public enum Type {
-		SUPER("super"),
-		STANDARD("standard");
-		private final String stringValue;
-
-		Type(String stringValue) {
-			this.stringValue = stringValue;
-		}
-
-		public String getStringValue() {
-			return stringValue;
-		}
-	}
 
 	public String getName() {
 		return name;
@@ -77,11 +52,11 @@ public class Administrator {
 		isReadOnly = readOnly;
 	}
 
-	public Type getType() {
+	public AdministratorType getType() {
 		return type;
 	}
 
-	public void setType(Type type) {
+	public void setType(AdministratorType type) {
 		this.type = type;
 	}
 
