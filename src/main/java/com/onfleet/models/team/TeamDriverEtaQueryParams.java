@@ -2,11 +2,13 @@ package com.onfleet.models.team;
 
 import com.onfleet.models.VehicleType;
 
+import java.util.List;
+
 public class TeamDriverEtaQueryParams {
 	private String dropoffLocation;
 	private String pickupLocation;
 	private Long pickupTime;
-	private VehicleType[] restrictedVehicleTypes;
+	private List<VehicleType> restrictedVehicleTypes;
 	private Long serviceTime;
 
 	private TeamDriverEtaQueryParams(Builder builder) {
@@ -41,11 +43,11 @@ public class TeamDriverEtaQueryParams {
 		this.pickupTime = pickupTime;
 	}
 
-	public VehicleType[] getRestrictedVehicleTypes() {
+	public List<VehicleType> getRestrictedVehicleTypes() {
 		return restrictedVehicleTypes;
 	}
 
-	public void setRestrictedVehicleTypes(VehicleType[] restrictedVehicleTypes) {
+	public void setRestrictedVehicleTypes(List<VehicleType> restrictedVehicleTypes) {
 		this.restrictedVehicleTypes = restrictedVehicleTypes;
 	}
 
@@ -61,7 +63,7 @@ public class TeamDriverEtaQueryParams {
 		private String dropoffLocation;
 		private String pickupLocation;
 		private Long pickupTime;
-		private VehicleType[] restrictedVehicleTypes;
+		private List<VehicleType> restrictedVehicleTypes;
 		private Long serviceTime;
 
 		public Builder dropoffLocation(String dropoffLocation) {
@@ -79,7 +81,7 @@ public class TeamDriverEtaQueryParams {
 			return this;
 		}
 
-		public Builder restrictedVehicleTypes(VehicleType[] restrictedVehicleTypes) {
+		public Builder restrictedVehicleTypes(List<VehicleType> restrictedVehicleTypes) {
 			this.restrictedVehicleTypes = restrictedVehicleTypes;
 			return this;
 		}
