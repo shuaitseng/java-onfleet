@@ -1,29 +1,15 @@
 package com.onfleet.models.destination;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Address {
-	@JsonProperty("name")
 	private String name;
-	@JsonProperty("number")
 	private String number;
-	@JsonProperty("street")
 	private String street;
-	@JsonProperty("apartment")
 	private String apartment;
-	@JsonProperty("city")
 	private String city;
-	@JsonProperty("state")
 	private String state;
-	@JsonProperty("postalCode")
 	private String postalCode;
-	@JsonProperty("country")
 	private String country;
-	@JsonProperty("unparsed")
 	private String unparsed;
-
-	public Address() {
-	}
 
 	public Address(String number, String street, String city, String country) {
 		this.number = number;
@@ -40,6 +26,19 @@ public class Address {
 		this.postalCode = postalCode;
 		this.unparsed = unparsed;
 	}
+
+	private Address(Builder builder) {
+		this.name = builder.name;
+		this.number = builder.number;
+		this.street = builder.street;
+		this.apartment = builder.apartment;
+		this.city = builder.city;
+		this.state = builder.state;
+		this.postalCode = builder.postalCode;
+		this.country = builder.country;
+		this.unparsed = builder.unparsed;
+	}
+
 
 	public String getName() {
 		return name;
@@ -114,55 +113,63 @@ public class Address {
 	}
 
 	public static class Builder {
-		private final Address address = new Address();
+		private String name;
+		private String number;
+		private String street;
+		private String apartment;
+		private String city;
+		private String state;
+		private String postalCode;
+		private String country;
+		private String unparsed;
 
-		public Builder setName(String name) {
-			address.setName(name);
+		public Builder name(String name) {
+			this.name = name;
 			return this;
 		}
 
-		public Builder setNumber(String number) {
-			address.setNumber(number);
+		public Builder number(String number) {
+			this.number = number;
 			return this;
 		}
 
-		public Builder setStreet(String street) {
-			address.setStreet(street);
+		public Builder street(String street) {
+			this.street = street;
 			return this;
 		}
 
-		public Builder setApartment(String apartment) {
-			address.setApartment(apartment);
+		public Builder apartment(String apartment) {
+			this.apartment = apartment;
 			return this;
 		}
 
-		public Builder setCity(String city) {
-			address.setCity(city);
+		public Builder city(String city) {
+			this.city = city;
 			return this;
 		}
 
-		public Builder setState(String state) {
-			address.setState(state);
+		public Builder state(String state) {
+			this.state = state;
 			return this;
 		}
 
-		public Builder setPostalCode(String postalCode) {
-			address.setPostalCode(postalCode);
+		public Builder postalCode(String postalCode) {
+			this.postalCode = postalCode;
 			return this;
 		}
 
-		public Builder setCountry(String country) {
-			address.setCountry(country);
+		public Builder country(String country) {
+			this.country = country;
 			return this;
 		}
 
-		public Builder setUnparsed(String unparsed) {
-			address.setUnparsed(unparsed);
+		public Builder unparsed(String unparsed) {
+			this.unparsed = unparsed;
 			return this;
 		}
 
 		public Address build() {
-			return address;
+			return new Address(this);
 		}
 	}
 }
