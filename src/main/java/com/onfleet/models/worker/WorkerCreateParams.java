@@ -14,6 +14,17 @@ public class WorkerCreateParams {
 	private List<String> teams;
 	private WorkerVehicle workerVehicle;
 
+	private WorkerCreateParams(Builder builder) {
+		this.addresses = builder.addresses;
+		this.capacity = builder.capacity;
+		this.displayName = builder.displayName;
+		this.metadata = builder.metadata;
+		this.name = builder.name;
+		this.phone = builder.phone;
+		this.teams = builder.teams;
+		this.workerVehicle = builder.workerVehicle;
+	}
+
 	public WorkerAddresses getAddresses() {
 		return addresses;
 	}
@@ -76,5 +87,51 @@ public class WorkerCreateParams {
 
 	public void setWorkerVehicle(WorkerVehicle workerVehicle) {
 		this.workerVehicle = workerVehicle;
+	}
+
+	public static class Builder {
+		private final String name;
+		private final String phone;
+		private final List<String> teams;
+		private WorkerAddresses addresses;
+		private Double capacity;
+		private String displayName;
+		private List<Metadata> metadata;
+		private WorkerVehicle workerVehicle;
+
+		public Builder(String name, String phone, List<String> teams) {
+			this.name = name;
+			this.phone = phone;
+			this.teams = teams;
+		}
+
+		public Builder addresses(WorkerAddresses addresses) {
+			this.addresses = addresses;
+			return this;
+		}
+
+		public Builder capacity(Double capacity) {
+			this.capacity = capacity;
+			return this;
+		}
+
+		public Builder displayName(String displayName) {
+			this.displayName = displayName;
+			return this;
+		}
+
+		public Builder metadata(List<Metadata> metadata) {
+			this.metadata = metadata;
+			return this;
+		}
+
+		public Builder workerVehicle(WorkerVehicle workerVehicle) {
+			this.workerVehicle = workerVehicle;
+			return this;
+		}
+
+		public WorkerCreateParams build() {
+			return new WorkerCreateParams(this);
+		}
 	}
 }
