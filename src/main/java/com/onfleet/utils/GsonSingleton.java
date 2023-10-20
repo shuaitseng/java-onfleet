@@ -2,11 +2,11 @@ package com.onfleet.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.onfleet.models.administrator.Administrator;
+import com.onfleet.models.administrator.AdministratorType;
 
 public class GsonSingleton {
 	private static final Gson gson = new GsonBuilder()
-			.registerTypeAdapter(Administrator.Type.class, new AdminTypeAdapter())
+			.registerTypeAdapter(AdministratorType.class, new AdminTypeAdapter())
 			.create();
 
 	private GsonSingleton() {}
