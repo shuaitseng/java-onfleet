@@ -2,9 +2,11 @@ package com.onfleet.api;
 
 import com.google.gson.reflect.TypeToken;
 import com.onfleet.exceptions.ApiException;
-import com.onfleet.models.Administrator;
-import com.onfleet.models.AdministratorBuilder;
 import com.onfleet.models.ErrorResponse;
+import com.onfleet.models.administrator.AdminCreateParams;
+import com.onfleet.models.administrator.AdminUpdateParams;
+import com.onfleet.models.administrator.Administrator;
+import com.onfleet.models.administrator.AdministratorType;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import okhttp3.HttpUrl;
@@ -34,9 +36,9 @@ class AdministratorApiTest extends BaseApiTest {
 	void testCreateAdminSuccessfully() throws Exception {
 		String mockResponseJson = "{\"id\": \"8AxaiKwMd~np7I*YP2NfukBE\", \"timeCreated\": 1455156651000, \"timeLastModified\": 1455156651779, \"organization\": \"yAM*fDkztrT3gUcz9mNDgNOL\", \"email\": \"cm@onf.lt\", \"type\": \"standard\", \"name\": \"Chelsea M\", \"isActive\": false, \"metadata\": [],\"isAccountOwner\": false, \"teams\": []}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
-		Administrator administrator = new AdministratorBuilder().setName("name").setEmail("cm@onf.lt").setPhone("8885551234").setIsReadOnly(true).setType(Administrator.Type.SUPER).build();
 
-		Administrator admin = administratorApi.createAdministrator(administrator);
+		AdminCreateParams params = new AdminCreateParams.Builder("name", "cm@onf.lt", AdministratorType.SUPER).build();
+		Administrator admin = administratorApi.createAdministrator(params);
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
 		assertEquals(HttpMethodType.POST.name(), recordedRequest.getMethod());
@@ -50,8 +52,8 @@ class AdministratorApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"code\":\"InvalidContent\",\"message\":{\"error\":1004,\"message\":\"The values of one or more parameters break a uniqueness constraint.\",\"cause\":{\"type\":\"duplicateKey\",\"key\":\"unknown\",\"value\":\"unknown\"},\"request\":\"fbf5580f-d4bd-458b-950d-f7dd057afcc8\"}}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_BAD_REQUEST);
 
-		Administrator administrator = new AdministratorBuilder().setName("name").setEmail("cm@onf.lt").setPhone("8885551234").setIsReadOnly(true).setType(Administrator.Type.SUPER).build();
-		ApiException apiException = assertThrows(ApiException.class, () -> administratorApi.createAdministrator(administrator));
+		AdminCreateParams params = new AdminCreateParams.Builder("name", "cm@onf.lt", AdministratorType.SUPER).build();
+		ApiException apiException = assertThrows(ApiException.class, () -> administratorApi.createAdministrator(params));
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
 		assertEquals(HttpMethodType.POST.name(), recordedRequest.getMethod());
@@ -82,8 +84,8 @@ class AdministratorApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"id\":\"8AxaiKwMd~np7I*YP2NfukBE\",\"timeCreated\":1455156651000,\"timeLastModified\":1455156652494,\"organization\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"email\":\"cm@onf.lt\",\"type\":\"standard\",\"name\":\"C Manning\",\"isActive\":false,\"metadata\":[]}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
 
-		Administrator admin = new AdministratorBuilder().setName("New Admin super").setType(Administrator.Type.STANDARD).build();
-		admin = administratorApi.updateAdministrator("8AxaiKwMd~np7I*YP2NfukBE", admin);
+		AdminUpdateParams params = new AdminUpdateParams.Builder().name("New Admin super").build();
+		Administrator admin = administratorApi.updateAdministrator("8AxaiKwMd~np7I*YP2NfukBE", params);
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
 		assertEquals(HttpMethodType.PUT.name(), recordedRequest.getMethod());
@@ -98,8 +100,9 @@ class AdministratorApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"code\":\"InvalidContent\",\"message\":{\"error\":1005,\"message\":\"The data types of one or more parameters are invalid.\",\"cause\":\"PuLjIsI8nF1xGU3vRWn2XA~Ta must be of type ObjectId\",\"request\":\"aa7d0676-5f2d-4baa-aa38-4285c2bdb438\"}}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_BAD_REQUEST);
 
-		Administrator admin = new AdministratorBuilder().setName("New Admin super").setType(Administrator.Type.STANDARD).build();
-		ApiException exception = assertThrows(ApiException.class, () -> administratorApi.updateAdministrator("8AxaiKwMd~np7I*YP2NfukBE", admin));
+		AdminUpdateParams params = new AdminUpdateParams.Builder().name("New Admin super").build();
+		ApiException exception = assertThrows(ApiException.class, () ->
+				administratorApi.updateAdministrator("8AxaiKwMd~np7I*YP2NfukBE", params));
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
 		assertEquals(HttpMethodType.PUT.name(), recordedRequest.getMethod());
@@ -114,8 +117,9 @@ class AdministratorApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"code\":\"ResourceNotFound\",\"message\":{\"error\":1402,\"message\":\"The requested resource does not exist.\",\"request\":\"a9212a19-73f9-461a-ae76-cfa1da474d4e\"}}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_BAD_REQUEST);
 
-		Administrator admin = new AdministratorBuilder().setName("New Admin super").setType(Administrator.Type.STANDARD).build();
-		ApiException exception = assertThrows(ApiException.class, () -> administratorApi.updateAdministrator("8AxaiKwMd~np7I*YP2NfukBE", admin));
+		AdminUpdateParams params = new AdminUpdateParams.Builder().name("New Admin super").build();
+		ApiException exception = assertThrows(ApiException.class, () ->
+				administratorApi.updateAdministrator("8AxaiKwMd~np7I*YP2NfukBE", params));
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
 		assertEquals(HttpMethodType.PUT.name(), recordedRequest.getMethod());

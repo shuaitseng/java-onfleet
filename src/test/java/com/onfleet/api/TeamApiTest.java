@@ -4,9 +4,8 @@ import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.ErrorResponse;
 import com.onfleet.models.task.Task;
 import com.onfleet.models.task.Tasks;
-import com.onfleet.models.Team;
+import com.onfleet.models.team.*;
 import com.onfleet.models.VehicleType;
-import com.onfleet.models.WorkerRoute;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import okhttp3.HttpUrl;
@@ -41,12 +40,10 @@ class TeamApiTest extends BaseApiTest {
 		String mockResponse = "{\"id\":\"FFqPs1KHayxorfA~~xIj0us4\",\"timeCreated\":1455156655000,\"timeLastModified\":1455156655647,\"name\":\"Sunset\",\"workers\":[\"1LjhGUWdxFbvdsTAAXs0TFos\",\"F8WPCqGmQYWpCkQ2c8zJTCpW\"],\"managers\":[\"Mrq7aKqzPFKX22pmjdLx*ohM\"],\"hub\":\"tKxSfU7psqDQEBVn5e2VQ~*O\",\"enableSelfAssignment\":false}";
 		enqueueMockResponse(mockResponse, HttpURLConnection.HTTP_OK);
 
-		Team team = new Team();
-		team.setName("Sunset");
-		team.setWorkers(Arrays.asList("1LjhGUWdxFbvdsTAAXs0TFos", "F8WPCqGmQYWpCkQ2c8zJTCpW"));
-		team.setManagers(Collections.singletonList("Mrq7aKqzPFKX22pmjdLx*ohM"));
-		team.setHubId("tKxSfU7psqDQEBVn5e2VQ~*O");
-		Team createdTeam = teamApi.createTeam(team);
+		TeamCreateParams params = new TeamCreateParams.Builder("team1",
+				Arrays.asList("manager1", "manager2", "manager3"),
+				Arrays.asList("worker1", "worker2")).build();
+		Team createdTeam = teamApi.createTeam(params);
 		RecordedRequest request = mockWebServer.takeRequest();
 
 		assertEquals("/teams", request.getPath());
@@ -63,7 +60,10 @@ class TeamApiTest extends BaseApiTest {
 		String mockResponse = "{\"code\":\"InvalidArgument\",\"message\":{\"error\":1901,\"message\":\"One or more parameters required for this request must be unique but are not unique.\",\"cause\":\"Name is not unique within org\",\"request\":\"1adcce4a-e172-4868-a53f-2741a9157caf\"}}";
 		enqueueMockResponse(mockResponse, HttpURLConnection.HTTP_BAD_REQUEST);
 
-		ApiException exception = assertThrows(ApiException.class, () -> teamApi.createTeam(new Team()));
+		TeamCreateParams params = new TeamCreateParams.Builder("team",
+				Collections.singletonList("manager1"),
+				Collections.singletonList("worker1")).build();
+		ApiException exception = assertThrows(ApiException.class, () -> teamApi.createTeam(params));
 		Assertions.assertThat(exception.getErrorResponse())
 				.usingRecursiveComparison()
 				.isEqualTo(GsonSingleton.getInstance().fromJson(mockResponse, ErrorResponse.class));
@@ -74,7 +74,10 @@ class TeamApiTest extends BaseApiTest {
 		String mockResponse = "{\"code\":\"InvalidContent\",\"message\":{\"error\":1000,\"message\":\"The values of one or more parameters are invalid.\",\"request\":\"0283a417-e7c0-47f7-90c7-86036e47afa6\"}}";
 		enqueueMockResponse(mockResponse, HttpURLConnection.HTTP_BAD_REQUEST);
 
-		ApiException exception = assertThrows(ApiException.class, () -> teamApi.createTeam(new Team()));
+		TeamCreateParams params = new TeamCreateParams.Builder("team",
+				Collections.singletonList("manager1"),
+				Collections.singletonList("worker1")).build();
+		ApiException exception = assertThrows(ApiException.class, () -> teamApi.createTeam(params));
 		Assertions.assertThat(exception.getErrorResponse())
 				.usingRecursiveComparison()
 				.isEqualTo(GsonSingleton.getInstance().fromJson(mockResponse, ErrorResponse.class));
@@ -85,11 +88,9 @@ class TeamApiTest extends BaseApiTest {
 		String mockResponse = "{\"id\":\"FFqPs1KHayxorfA~~xIj0us4\",\"timeCreated\":1455156655000,\"timeLastModified\":1455156656399,\"name\":\"Sunset\",\"workers\":[\"1LjhGUWdxFbvdsTAAXs0TFos\",\"F8WPCqGmQYWpCkQ2c8zJTCpW\",\"3joS0Jh19VpJZgSTxFOK9fTf\"],\"managers\":[\"Mrq7aKqzPFKX22pmjdLx*ohM\"],\"hub\":\"tKxSfU7psqDQEBVn5e2VQ~*O\"}";
 		enqueueMockResponse(mockResponse, HttpURLConnection.HTTP_OK);
 
-		Team team = new Team();
-		team.setId("FFqPs1KHayxorfA~~xIj0us4");
-		team.setWorkers(Arrays.asList("1LjhGUWdxFbvdsTAAXs0TFos", "F8WPCqGmQYWpCkQ2c8zJTCpW", "3joS0Jh19VpJZgSTxFOK9fTf"));
-
-		Team updatedTeam = teamApi.updateTeam(team);
+		TeamUpdateParams params = new TeamUpdateParams.Builder()
+				.addWorker("worker1").addWorker("worker2").addWorker("worker3").build();
+		Team updatedTeam = teamApi.updateTeam("teamId", params);
 		RecordedRequest request = mockWebServer.takeRequest();
 
 		assertEquals("/teams/FFqPs1KHayxorfA~~xIj0us4", request.getPath());
@@ -102,7 +103,8 @@ class TeamApiTest extends BaseApiTest {
 		String mockResponse = "{\"code\":\"ResourceNotFound\",\"message\":{\"error\":1402,\"message\":\"The requested resource does not exist.\",\"request\":\"517e4611-44f0-40de-a0f9-c306884de7e0\"}}";
 		enqueueMockResponse(mockResponse, HttpURLConnection.HTTP_BAD_REQUEST);
 
-		ApiException exception = assertThrows(ApiException.class, () -> teamApi.createTeam(new Team()));
+		TeamUpdateParams params = new TeamUpdateParams.Builder().build();
+		ApiException exception = assertThrows(ApiException.class, () -> teamApi.updateTeam("team1", params));
 		Assertions.assertThat(exception.getErrorResponse())
 				.usingRecursiveComparison()
 				.isEqualTo(GsonSingleton.getInstance().fromJson(mockResponse, ErrorResponse.class));
@@ -113,7 +115,8 @@ class TeamApiTest extends BaseApiTest {
 		String mockResponse = "{\"code\":\"InvalidContent\",\"message\":{\"error\":1000,\"message\":\"The values of one or more parameters are invalid.\",\"cause\":\"Invalid managers or workers for team\",\"request\":\"9e2a8dd7-9513-4a5c-b7f7-994796b3615b\"}}";
 		enqueueMockResponse(mockResponse, HttpURLConnection.HTTP_BAD_REQUEST);
 
-		ApiException exception = assertThrows(ApiException.class, () -> teamApi.createTeam(new Team()));
+		TeamUpdateParams params = new TeamUpdateParams.Builder().build();
+		ApiException exception = assertThrows(ApiException.class, () -> teamApi.updateTeam("team1", params));
 		Assertions.assertThat(exception.getErrorResponse())
 				.usingRecursiveComparison()
 				.isEqualTo(GsonSingleton.getInstance().fromJson(mockResponse, ErrorResponse.class));
@@ -174,9 +177,9 @@ class TeamApiTest extends BaseApiTest {
 		String mockResponse = "{\"workerId\":\"TNTOVPKcxDjX02MOCScKl2M5\",\"vehicle\":\"CAR\",\"steps\":[{\"location\":[-122.2514556,37.7577242],\"travelTime\":682,\"distance\":11117,\"serviceTime\":300,\"arrivalTime\":1614896529,\"completionTime\":1614896829},{\"location\":[-122.2442512,37.8097414],\"travelTime\":1144,\"distance\":7079,\"serviceTime\":300,\"arrivalTime\":1614897972,\"completionTime\":1614898272}]}";
 		enqueueMockResponse(mockResponse, HttpURLConnection.HTTP_OK);
 
-		WorkerRoute driverTimeEstimate = teamApi.getDriverTimeEstimate("123",
-				"dropoff", "122.2514556,37.7577242", 1600000000L,
-				new VehicleType[]{VehicleType.CAR}, 600L);
+		TeamDriverEtaQueryParams queryParams = new TeamDriverEtaQueryParams.Builder()
+				.dropoffLocation("dropofflocation").build();
+		WorkerRoute driverTimeEstimate = teamApi.getDriverTimeEstimate("123", queryParams);
 		RecordedRequest request = mockWebServer.takeRequest();
 
 		assertEquals(HttpMethodType.GET.name(), request.getMethod());
@@ -189,9 +192,9 @@ class TeamApiTest extends BaseApiTest {
 	@Test
 	void testGetDriverTimeEstimateErrorMissingArgument() {
 		assertThrows(IllegalArgumentException.class,
-				() -> teamApi.getDriverTimeEstimate("123", "", "", null, null, null));
+				() -> teamApi.getDriverTimeEstimate("123", new TeamDriverEtaQueryParams.Builder().build()));
 		assertThrows(IllegalArgumentException.class,
-				() -> teamApi.getDriverTimeEstimate("123", null, null, null, null, null));
+				() -> teamApi.getDriverTimeEstimate("123", new TeamDriverEtaQueryParams.Builder().build()));
 	}
 
 	@Test
@@ -199,8 +202,9 @@ class TeamApiTest extends BaseApiTest {
 		String mockResponse = "{\"tasks\":[{\"id\":\"3VtEMGudjwjjM60j7deSIY3j\",\"timeCreated\":1643317843000,\"timeLastModified\":1643413337768,\"organization\":\"nYrkNP6jZMSKgBwG9qG7ci3J\",\"shortId\":\"c77ff497\",\"trackingURL\":\"https://onf.lt/c77ff497\",\"worker\":null,\"merchant\":\"nYrkNP6jZMSKgBwG9qG7ci3J\",\"executor\":\"nYrkNP6jZMSKgBwG9qG7ci3J\",\"creator\":\"vjw*RDMKDljKVDve1Vtcplgu\",\"dependencies\":[],\"state\":0,\"completeAfter\":null,\"completeBefore\":null,\"pickupTask\":false,\"notes\":\"\",\"completionDetails\":{\"failureNotes\":\"\",\"failureReason\":\"NONE\",\"events\":[],\"actions\":[],\"time\":null,\"firstLocation\":[],\"lastLocation\":[],\"unavailableAttachments\":[]},\"feedback\":[],\"metadata\":[],\"overrides\":{},\"quantity\":0,\"additionalQuantities\":{\"quantityA\":0,\"quantityB\":0,\"quantityC\":0},\"serviceTime\":0,\"identity\":{\"failedScanCount\":0,\"checksum\":null},\"appearance\":{\"triangleColor\":null},\"scanOnlyRequiredBarcodes\":false,\"container\":{\"type\":\"TEAM\",\"team\":\"K3FXFtJj2FtaO2~H60evRrDc\"},\"trackingViewed\":false,\"recipients\":[],\"delayTime\":null,\"estimatedCompletionTime\":null,\"estimatedArrivalTime\":null,\"eta\":null,\"destination\":{\"id\":\"nk5xGuf1eQguYXg1*mIVl0Ut\",\"timeCreated\":1643317843000,\"timeLastModified\":1643317843121,\"location\":[-117.8764687,33.8078476],\"address\":{\"apartment\":\"\",\"state\":\"California\",\"postalCode\":\"92806\",\"number\":\"2695\",\"street\":\"East Katella Avenue\",\"city\":\"Anaheim\",\"country\":\"United States\",\"name\":\"Honda Center\"},\"notes\":\"\",\"metadata\":[],\"googlePlaceId\":\"ChIJXyczhHXX3IARFVUqyhMqiqg\",\"warnings\":[]}}]}";
 		enqueueMockResponse(mockResponse, HttpURLConnection.HTTP_OK);
 
-		Tasks tasks = teamApi.getUnassignedTasks("teamId",
-				true, 1600000000L, 1700000000L, "lastTask");
+		TeamTasksQueryParams queryParams = new TeamTasksQueryParams.Builder()
+				.build();
+		TeamTasks tasks = teamApi.getUnassignedTasks("teamId", queryParams);
 		List<Task> taskList = tasks.getTasks();
 
 		assertEquals(1, taskList.size());

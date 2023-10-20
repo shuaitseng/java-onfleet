@@ -1,7 +1,8 @@
 package com.onfleet.api;
 
-import com.onfleet.models.Address;
-import com.onfleet.models.Destination;
+import com.onfleet.models.destination.Address;
+import com.onfleet.models.destination.Destination;
+import com.onfleet.models.destination.DestinationCreateParams;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import okhttp3.HttpUrl;
@@ -29,11 +30,11 @@ class DestinationApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"id\":\"JLn6ZoYGZWn2wB2HaR9glsqB\",\"timeCreated\":1455156663000,\"timeLastModified\":1455156663896,\"location\":[-122.3965731,37.7875728],\"address\":{\"apartment\":\"5th Floor\",\"state\":\"California\",\"postalCode\":\"94105\",\"country\":\"United States\",\"city\":\"San Francisco\",\"street\":\"Howard Street\",\"number\":\"543\"},\"notes\":\"Don't forget to check out the epic rooftop.\",\"metadata\":[]}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
 
-		Destination destination = new Destination.Builder()
-				.setAddress(new Address.Builder()
-						.setCity("city")
-						.setCountry("country").build())
+		Address address = new Address.Builder()
+				.country("Argentina")
+				.number("123")
 				.build();
+		DestinationCreateParams destination = new DestinationCreateParams.Builder(address).build();
 		Destination createdDestination = destinationApi.createDestination(destination);
 
 		RecordedRequest request = mockWebServer.takeRequest();

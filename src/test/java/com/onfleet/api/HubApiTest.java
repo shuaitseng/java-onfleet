@@ -1,8 +1,9 @@
 package com.onfleet.api;
 
 import com.google.gson.reflect.TypeToken;
-import com.onfleet.models.Address;
-import com.onfleet.models.Hub;
+import com.onfleet.models.destination.Address;
+import com.onfleet.models.hub.Hub;
+import com.onfleet.models.hub.HubParams;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import okhttp3.HttpUrl;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.net.HttpURLConnection;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,8 +34,10 @@ class HubApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"id\":\"i4FoP*dTVrdnGqvIVvvA69aB\",\"name\":\"VIP customer\",\"location\":[-117.8767457,33.8079071],\"address\":{\"number\":\"2695\",\"street\":\"East Katella Avenue\",\"city\":\"Anaheim\",\"county\":\"Orange County\",\"state\":\"California\",\"country\":\"United States\",\"postalCode\":\"92806\",\"apartment\":\"\",\"name\":\"VIP customer\"},\"teams\":[\"kq5MFBzYNWhp1rumJEfGUTqS\"]}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
 
-		Hub hub = getHub();
-		Hub hubResponse = hubApi.createHub(hub);
+		HubParams hubParams = new HubParams.Builder(getAddress(), "name")
+				.setTeams(Arrays.asList("team1", "team2", "team3"))
+				.build();
+		Hub hubResponse = hubApi.createHub(hubParams);
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
 		assertEquals(HttpMethodType.POST.name(), recordedRequest.getMethod());
@@ -48,7 +52,11 @@ class HubApiTest extends BaseApiTest {
 
 		Hub hub = getHub();
 		hub.setId("i4FoP*dTVrdnGqvIVvvA69aB");
-		Hub hubResponse = hubApi.updateHub(hub);
+		HubParams params = new HubParams.Builder(getAddress(), "name")
+				.setTeams(Arrays.asList("team1", "team2", "team3"))
+				.build();
+
+		Hub hubResponse = hubApi.updateHub("hubId", params);
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
 		assertEquals(HttpMethodType.PUT.name(), recordedRequest.getMethod());
@@ -73,10 +81,10 @@ class HubApiTest extends BaseApiTest {
 
 	private Address getAddress() {
 		return new Address.Builder()
-				.setNumber("1315")
-				.setStreet("Obispo Trejo")
-				.setCity("Cordoba")
-				.setCountry("Argentina")
+				.number("1315")
+				.street("Obispo Trejo")
+				.city("Cordoba")
+				.country("Argentina")
 				.build();
 	}
 

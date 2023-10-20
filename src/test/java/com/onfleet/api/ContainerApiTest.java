@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import java.net.HttpURLConnection;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,7 +47,8 @@ class ContainerApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"code\":\"ResourceNotFound\",\"message\":{\"error\":1402,\"message\":\"The requested resource does not exist.\",\"cause\":\"Container does not exist.\",\"request\":\"baa7d4b6-fac5-424c-bb19-3a8216ed018e\",\"remoteAddress\":\"190.122.54.70\"}}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_NOT_FOUND);
 
-		ApiException apiException = assertThrows(ApiException.class, () -> containerApi.getContainer("NonExistentId", ContainerType.WORKER));
+		ApiException apiException = assertThrows(ApiException.class, () ->
+				containerApi.getContainer("NonExistentId", ContainerType.WORKER));
 		assertEquals(HttpURLConnection.HTTP_NOT_FOUND, apiException.getStatusCode());
 		ErrorResponse expectedError = GsonSingleton.getInstance().fromJson(mockResponseJson, ErrorResponse.class);
 		assertThat(apiException.getErrorResponse()).usingRecursiveComparison().isEqualTo(expectedError);
@@ -59,7 +59,8 @@ class ContainerApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"code\":\"InvalidContent\",\"message\":{\"error\":1000,\"message\":\"The values of one or more parameters are invalid.\",\"cause\":\"Invalid container identifier.\",\"request\":\"c2042f90-80b0-4404-81ea-9de20296846a\"}}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_BAD_REQUEST);
 
-		ApiException apiException = assertThrows(ApiException.class, () -> containerApi.getContainer("InvalidId", ContainerType.WORKER));
+		ApiException apiException = assertThrows(ApiException.class, () ->
+				containerApi.getContainer("InvalidId", ContainerType.WORKER));
 		assertEquals(HttpURLConnection.HTTP_BAD_REQUEST, apiException.getStatusCode());
 		ErrorResponse expectedError = GsonSingleton.getInstance().fromJson(mockResponseJson, ErrorResponse.class);
 		assertThat(apiException.getErrorResponse()).usingRecursiveComparison().isEqualTo(expectedError);

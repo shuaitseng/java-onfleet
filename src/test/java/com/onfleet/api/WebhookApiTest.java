@@ -1,8 +1,8 @@
 package com.onfleet.api;
 
 import com.google.gson.reflect.TypeToken;
-import com.onfleet.models.Webhook;
-import com.onfleet.models.WebhookCreateParams;
+import com.onfleet.models.webhook.Webhook;
+import com.onfleet.models.webhook.WebhookCreateParams;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import okhttp3.HttpUrl;

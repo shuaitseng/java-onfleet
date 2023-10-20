@@ -2,7 +2,7 @@ package com.onfleet.api;
 
 import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.ErrorResponse;
-import com.onfleet.models.Organization;
+import com.onfleet.models.organization.Organization;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import okhttp3.HttpUrl;
