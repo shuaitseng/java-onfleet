@@ -3,12 +3,7 @@ package com.onfleet.api;
 import com.google.gson.reflect.TypeToken;
 import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.VehicleType;
-import com.onfleet.models.team.Team;
-import com.onfleet.models.team.TeamDriverEtaQueryParams;
-import com.onfleet.models.team.TeamParams;
-import com.onfleet.models.team.TeamTasks;
-import com.onfleet.models.team.TeamTasksQueryParams;
-import com.onfleet.models.team.WorkerRoute;
+import com.onfleet.models.team.*;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import com.onfleet.utils.MediaTypes;
@@ -39,14 +34,14 @@ public class TeamApi extends BaseApi {
 		}.getType());
 	}
 
-	public Team createTeam(TeamParams team) throws ApiException {
+	public Team createTeam(TeamCreateParams team) throws ApiException {
 		String jsonPayload = GsonSingleton.getInstance().toJson(team);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.POST, body, baseUrl);
 		return handleResponse(response, Team.class);
 	}
 
-	public Team updateTeam(String teamId, TeamParams params) throws ApiException {
+	public Team updateTeam(String teamId, TeamUpdateParams params) throws ApiException {
 		String url = String.format("%s/%s", baseUrl, teamId);
 		String jsonPayload = GsonSingleton.getInstance().toJson(params);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
