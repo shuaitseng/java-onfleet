@@ -100,10 +100,6 @@ public class Administrator {
 		this.isActive = active;
 	}
 
-	public Boolean getActive() {
-		return isActive;
-	}
-
 	public void setActive(Boolean active) {
 		isActive = active;
 	}
@@ -122,10 +118,6 @@ public class Administrator {
 
 	public void setAccountOwner(Boolean accountOwner) {
 		isAccountOwner = accountOwner;
-	}
-
-	public Boolean isAccountOwner() {
-		return isAccountOwner;
 	}
 
 	public void setAccountOwner(boolean accountOwner) {
