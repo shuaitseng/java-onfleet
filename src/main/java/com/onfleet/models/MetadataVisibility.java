@@ -1,5 +1,5 @@
 package com.onfleet.models;
 
-public enum Visibility {
+public enum MetadataVisibility {
 	API, DASHBOARD, WORKER
 }

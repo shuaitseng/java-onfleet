@@ -6,7 +6,7 @@ public class Metadata {
 	private String name;
 	private String type;
 	private String subType;
-	private List<Visibility> visibility;
+	private List<MetadataVisibility> metadataVisibility;
 	private Object value;
 
 	public String getName() {
@@ -33,12 +33,12 @@ public class Metadata {
 		this.subType = subType;
 	}
 
-	public List<Visibility> getVisibility() {
-		return visibility;
+	public List<MetadataVisibility> getVisibility() {
+		return metadataVisibility;
 	}
 
-	public void setVisibility(List<Visibility> visibility) {
-		this.visibility = visibility;
+	public void setVisibility(List<MetadataVisibility> metadataVisibility) {
+		this.metadataVisibility = metadataVisibility;
 	}
 
 	public Object getValue() {
