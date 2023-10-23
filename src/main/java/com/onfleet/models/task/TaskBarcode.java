@@ -1,8 +1,13 @@
 package com.onfleet.models.task;
 
 public class TaskBarcode {
-	private Boolean blockCompletion;
 	private String data;
+	private Boolean blockCompletion;
+
+	public TaskBarcode(String data, Boolean blockCompletion) {
+		this.data = data;
+		this.blockCompletion = blockCompletion;
+	}
 
 	public Boolean getBlockCompletion() {
 		return blockCompletion;
