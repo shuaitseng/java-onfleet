@@ -2,12 +2,12 @@ package com.onfleet.api;
 
 import com.google.gson.reflect.TypeToken;
 import com.onfleet.exceptions.ApiException;
-import com.onfleet.models.task.BatchJobStatus;
 import com.onfleet.models.Metadata;
 import com.onfleet.models.task.AutomaticallyAssignTaskResult;
+import com.onfleet.models.task.BatchJobStatus;
 import com.onfleet.models.task.Task;
 import com.onfleet.models.task.TaskAutoAssignMultiParams;
-import com.onfleet.models.task.TaskBatchCreateResponse;
+import com.onfleet.models.task.TaskBatchCreateResponseAsync;
 import com.onfleet.models.task.TaskCloneParams;
 import com.onfleet.models.task.TaskForceCompletionParams;
 import com.onfleet.models.task.TaskListQueryParams;
@@ -47,12 +47,12 @@ public class TaskApi extends BaseApi {
 		return handleResponse(response, Tasks.class);
 	}
 
-	public TaskBatchCreateResponse createTasksBatchAsync(List<TaskParams> tasks) throws ApiException {
+	public TaskBatchCreateResponseAsync createTasksBatchAsync(List<TaskParams> tasks) throws ApiException {
 		String url = String.format("%s/batch-async", baseUrl);
 		String jsonPayload = GsonSingleton.getInstance().toJson(tasks);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.POST, body, url);
-		return handleResponse(response, TaskBatchCreateResponse.class);
+		return handleResponse(response, TaskBatchCreateResponseAsync.class);
 	}
 
 	public BatchJobStatus getBatchJobStatus(String jobId) throws ApiException {
