@@ -9,9 +9,6 @@ public class WorkerScheduleEntry {
 	private List<List<Long>> shifts;
 	private String timezone;
 
-	public WorkerScheduleEntry() {
-	}
-
 	public WorkerScheduleEntry(String date, String timezone) {
 		this.date = date;
 		this.timezone = timezone;
