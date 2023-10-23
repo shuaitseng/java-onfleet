@@ -90,7 +90,7 @@ public class TeamApi extends BaseApi {
 		if (params.getTo() != null) {
 			urlBuilder.addQueryParameter("to", params.getTo().toString());
 		}
-		if (!params.getLastId().isEmpty()) {
+		if (params.getLastId() != null && !params.getLastId().isEmpty()) {
 			urlBuilder.addQueryParameter("lastId", params.getLastId());
 		}
 		return handleResponse(sendRequest(HttpMethodType.GET, urlBuilder.build().toString()), TeamTasks.class);
