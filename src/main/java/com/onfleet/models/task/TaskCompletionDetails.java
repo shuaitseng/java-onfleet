@@ -5,7 +5,7 @@ import java.util.List;
 public class TaskCompletionDetails {
 	private List<Object> actions;
 	private Double distance;
-	private TaskCompletionEvent events;
+	private List<TaskCompletionEvent> events;
 	private String failureNotes;
 	private String failureReason;
 	private List<Double> firstLocation;
@@ -34,11 +34,11 @@ public class TaskCompletionDetails {
 		this.distance = distance;
 	}
 
-	public TaskCompletionEvent getEvents() {
+	public List<TaskCompletionEvent> getEvents() {
 		return events;
 	}
 
-	public void setEvents(TaskCompletionEvent events) {
+	public void setEvents(List<TaskCompletionEvent> events) {
 		this.events = events;
 	}
 
