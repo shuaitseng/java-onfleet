@@ -2,10 +2,15 @@ package com.onfleet.api;
 
 import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.ErrorResponse;
-import com.onfleet.models.task.Task;
-import com.onfleet.models.task.Tasks;
-import com.onfleet.models.team.*;
 import com.onfleet.models.VehicleType;
+import com.onfleet.models.task.Task;
+import com.onfleet.models.team.Team;
+import com.onfleet.models.team.TeamCreateParams;
+import com.onfleet.models.team.TeamDriverEtaQueryParams;
+import com.onfleet.models.team.TeamTasks;
+import com.onfleet.models.team.TeamTasksQueryParams;
+import com.onfleet.models.team.TeamUpdateParams;
+import com.onfleet.models.team.WorkerRoute;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import okhttp3.HttpUrl;
@@ -90,7 +95,7 @@ class TeamApiTest extends BaseApiTest {
 
 		TeamUpdateParams params = new TeamUpdateParams.Builder()
 				.addWorker("worker1").addWorker("worker2").addWorker("worker3").build();
-		Team updatedTeam = teamApi.updateTeam("teamId", params);
+		Team updatedTeam = teamApi.updateTeam("FFqPs1KHayxorfA~~xIj0us4", params);
 		RecordedRequest request = mockWebServer.takeRequest();
 
 		assertEquals("/teams/FFqPs1KHayxorfA~~xIj0us4", request.getPath());
@@ -178,7 +183,12 @@ class TeamApiTest extends BaseApiTest {
 		enqueueMockResponse(mockResponse, HttpURLConnection.HTTP_OK);
 
 		TeamDriverEtaQueryParams queryParams = new TeamDriverEtaQueryParams.Builder()
-				.dropoffLocation("dropofflocation").build();
+				.dropoffLocation("dropoff")
+				.pickupLocation("122.2514556,37.7577242")
+				.pickupTime(1600000000L)
+				.restrictedVehicleTypes(Arrays.asList(VehicleType.CAR))
+				.serviceTime(600L)
+				.build();
 		WorkerRoute driverTimeEstimate = teamApi.getDriverTimeEstimate("123", queryParams);
 		RecordedRequest request = mockWebServer.takeRequest();
 
@@ -203,6 +213,10 @@ class TeamApiTest extends BaseApiTest {
 		enqueueMockResponse(mockResponse, HttpURLConnection.HTTP_OK);
 
 		TeamTasksQueryParams queryParams = new TeamTasksQueryParams.Builder()
+				.isPickupTask(true)
+				.from(1600000000L)
+				.to(1700000000L)
+				.lastId("lastTask")
 				.build();
 		TeamTasks tasks = teamApi.getUnassignedTasks("teamId", queryParams);
 		List<Task> taskList = tasks.getTasks();
@@ -210,6 +224,6 @@ class TeamApiTest extends BaseApiTest {
 		assertEquals(1, taskList.size());
 		RecordedRequest request = mockWebServer.takeRequest();
 		assertEquals("/teams/teamId/tasks?isPickupTask=true&from=1600000000&to=1700000000&lastId=lastTask", request.getPath());
-		Assertions.assertThat(tasks).usingRecursiveComparison().isEqualTo(GsonSingleton.getInstance().fromJson(mockResponse, Tasks.class));
+		Assertions.assertThat(tasks).usingRecursiveComparison().isEqualTo(GsonSingleton.getInstance().fromJson(mockResponse, TeamTasks.class));
 	}
 }
