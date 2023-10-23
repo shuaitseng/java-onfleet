@@ -55,22 +55,22 @@ public class AdminUpdateParams {
 		private String name;
 		private String phone;
 
-		public Builder email(String email) {
+		public Builder setEmail(String email) {
 			this.email = email;
 			return this;
 		}
 
-		public Builder metadata(List<Metadata> metadata) {
+		public Builder setMetadata(List<Metadata> metadata) {
 			this.metadata = metadata;
 			return this;
 		}
 
-		public Builder name(String name) {
+		public Builder setName(String name) {
 			this.name = name;
 			return this;
 		}
 
-		public Builder phone(String phone) {
+		public Builder setPhone(String phone) {
 			this.phone = phone;
 			return this;
 		}

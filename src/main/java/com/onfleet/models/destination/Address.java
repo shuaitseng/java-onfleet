@@ -123,47 +123,47 @@ public class Address {
 		private String country;
 		private String unparsed;
 
-		public Builder name(String name) {
+		public Builder setName(String name) {
 			this.name = name;
 			return this;
 		}
 
-		public Builder number(String number) {
+		public Builder setNumber(String number) {
 			this.number = number;
 			return this;
 		}
 
-		public Builder street(String street) {
+		public Builder setStreet(String street) {
 			this.street = street;
 			return this;
 		}
 
-		public Builder apartment(String apartment) {
+		public Builder setApartment(String apartment) {
 			this.apartment = apartment;
 			return this;
 		}
 
-		public Builder city(String city) {
+		public Builder setCity(String city) {
 			this.city = city;
 			return this;
 		}
 
-		public Builder state(String state) {
+		public Builder setState(String state) {
 			this.state = state;
 			return this;
 		}
 
-		public Builder postalCode(String postalCode) {
+		public Builder setPostalCode(String postalCode) {
 			this.postalCode = postalCode;
 			return this;
 		}
 
-		public Builder country(String country) {
+		public Builder setCountry(String country) {
 			this.country = country;
 			return this;
 		}
 
-		public Builder unparsed(String unparsed) {
+		public Builder setUnparsed(String unparsed) {
 			this.unparsed = unparsed;
 			return this;
 		}

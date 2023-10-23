@@ -50,22 +50,22 @@ public class DestinationCreateParams {
 			this.address = address;
 		}
 
-		public Builder location(List<Double> location) {
+		public Builder setLocation(List<Double> location) {
 			this.location = location;
 			return this;
 		}
 
-		public Builder metadata(List<Metadata> metadata) {
+		public Builder setMetadata(List<Metadata> metadata) {
 			this.metadata = metadata;
 			return this;
 		}
 
-		public Builder notes(String notes) {
+		public Builder setNotes(String notes) {
 			this.notes = notes;
 			return this;
 		}
 
-		public Builder options(DestinationOptions options) {
+		public Builder setOptions(DestinationOptions options) {
 			this.options = options;
 			return this;
 		}
