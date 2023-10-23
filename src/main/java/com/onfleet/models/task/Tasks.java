@@ -1,14 +1,16 @@
 package com.onfleet.models.task;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class Tasks {
-	private List<Task> tasks;
-	public Tasks() {}
+	@JsonProperty("tasks")
+	private List<Task> tasksList;
 	public List<Task> getTasks() {
-		return tasks;
+		return tasksList;
 	}
-	public void setTasks(List<Task> tasks) {
-		this.tasks = tasks;
+	public void setTasks(List<Task> tasksList) {
+		this.tasksList = tasksList;
 	}
 }
