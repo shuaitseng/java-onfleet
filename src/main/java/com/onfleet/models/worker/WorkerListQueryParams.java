@@ -3,11 +3,11 @@ package com.onfleet.models.worker;
 import java.util.List;
 
 public class WorkerListQueryParams {
-	private List<String> fields;
-	private List<String> teamIds;
-	private List<Integer> workerStates;
-	private List<String> phoneNumbers;
-	private Boolean includePasswordDetails;
+	private final List<WorkerFilterFields> fields;
+	private final List<String> teamIds;
+	private final List<WorkerStates> workerStates;
+	private final List<String> phoneNumbers;
+	private final Boolean includePasswordDetails;
 
 	private WorkerListQueryParams(Builder builder) {
 		this.fields = builder.fields;
@@ -17,7 +17,7 @@ public class WorkerListQueryParams {
 		this.includePasswordDetails = builder.includePasswordDetails;
 	}
 
-	public List<String> getFields() {
+	public List<WorkerFilterFields> getFields() {
 		return fields;
 	}
 
@@ -25,7 +25,7 @@ public class WorkerListQueryParams {
 		return teamIds;
 	}
 
-	public List<Integer> getWorkerStates() {
+	public List<WorkerStates> getWorkerStates() {
 		return workerStates;
 	}
 
@@ -38,13 +38,13 @@ public class WorkerListQueryParams {
 	}
 
 	public static class Builder {
-		private List<String> fields;
+		private List<WorkerFilterFields> fields;
 		private List<String> teamIds;
-		private List<Integer> workerStates;
+		private List<WorkerStates> workerStates;
 		private List<String> phoneNumbers;
 		private Boolean includePasswordDetails;
 
-		public Builder fields(List<String> fields) {
+		public Builder fields(List<WorkerFilterFields> fields) {
 			this.fields = fields;
 			return this;
 		}
@@ -54,7 +54,7 @@ public class WorkerListQueryParams {
 			return this;
 		}
 
-		public Builder workerStates(List<Integer> workerStates) {
+		public Builder workerStates(List<WorkerStates> workerStates) {
 			this.workerStates = workerStates;
 			return this;
 		}

@@ -5,17 +5,18 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.Metadata;
-import com.onfleet.models.worker.WorkerFilterFields;
-import com.onfleet.models.worker.Workers;
 import com.onfleet.models.worker.Worker;
 import com.onfleet.models.worker.WorkerCreateParams;
+import com.onfleet.models.worker.WorkerFilterFields;
 import com.onfleet.models.worker.WorkerListQueryParams;
 import com.onfleet.models.worker.WorkerQueryParams;
 import com.onfleet.models.worker.WorkerScheduleEntries;
 import com.onfleet.models.worker.WorkerScheduleEntry;
+import com.onfleet.models.worker.WorkerStates;
 import com.onfleet.models.worker.WorkerTasks;
 import com.onfleet.models.worker.WorkerTasksQueryParams;
 import com.onfleet.models.worker.WorkerUpdateParams;
+import com.onfleet.models.worker.Workers;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import com.onfleet.utils.MediaTypes;
@@ -43,7 +44,11 @@ public class WorkerApi extends BaseApi {
 	public List<Worker> listWorkers(WorkerListQueryParams params) throws ApiException {
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(baseUrl).newBuilder();
 		if (params.getFields() != null && !params.getFields().isEmpty()) {
-			urlBuilder.addQueryParameter("fields", String.join(",", params.getFields()));
+			urlBuilder.addQueryParameter("fields", params
+					.getFields()
+					.stream()
+					.map(WorkerFilterFields::getValue)
+					.collect(Collectors.joining(",")));
 		}
 		if (params.getTeamIds() != null && !params.getTeamIds().isEmpty()) {
 			urlBuilder.addQueryParameter("teamsIds", String.join(",", params.getTeamIds()));
@@ -51,6 +56,7 @@ public class WorkerApi extends BaseApi {
 		if (params.getWorkerStates() != null && !params.getWorkerStates().isEmpty()) {
 			urlBuilder.addQueryParameter("states", params.getWorkerStates()
 					.stream()
+					.map(WorkerStates::getValue)
 					.map(Object::toString)
 					.collect(Collectors.joining(",")));
 		}
@@ -81,7 +87,7 @@ public class WorkerApi extends BaseApi {
 	}
 
 	public WorkerTasks getWorkersTasks(String workerId) throws ApiException {
-		return this.getWorkersTasks(workerId, null);
+		return this.getWorkersTasks(workerId, new WorkerTasksQueryParams.Builder().build());
 	}
 
 	public Workers getWorkersByLocation(Double longitude, Double latitude, Integer radius) throws ApiException {
