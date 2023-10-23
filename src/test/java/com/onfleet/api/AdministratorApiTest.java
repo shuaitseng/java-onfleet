@@ -84,7 +84,7 @@ class AdministratorApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"id\":\"8AxaiKwMd~np7I*YP2NfukBE\",\"timeCreated\":1455156651000,\"timeLastModified\":1455156652494,\"organization\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"email\":\"cm@onf.lt\",\"type\":\"standard\",\"name\":\"C Manning\",\"isActive\":false,\"metadata\":[]}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
 
-		AdminUpdateParams params = new AdminUpdateParams.Builder().name("New Admin super").build();
+		AdminUpdateParams params = new AdminUpdateParams.Builder().setName("New Admin super").build();
 		Administrator admin = administratorApi.updateAdministrator("8AxaiKwMd~np7I*YP2NfukBE", params);
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
@@ -100,7 +100,7 @@ class AdministratorApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"code\":\"InvalidContent\",\"message\":{\"error\":1005,\"message\":\"The data types of one or more parameters are invalid.\",\"cause\":\"PuLjIsI8nF1xGU3vRWn2XA~Ta must be of type ObjectId\",\"request\":\"aa7d0676-5f2d-4baa-aa38-4285c2bdb438\"}}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_BAD_REQUEST);
 
-		AdminUpdateParams params = new AdminUpdateParams.Builder().name("New Admin super").build();
+		AdminUpdateParams params = new AdminUpdateParams.Builder().setName("New Admin super").build();
 		ApiException exception = assertThrows(ApiException.class, () ->
 				administratorApi.updateAdministrator("8AxaiKwMd~np7I*YP2NfukBE", params));
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
@@ -117,7 +117,7 @@ class AdministratorApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"code\":\"ResourceNotFound\",\"message\":{\"error\":1402,\"message\":\"The requested resource does not exist.\",\"request\":\"a9212a19-73f9-461a-ae76-cfa1da474d4e\"}}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_BAD_REQUEST);
 
-		AdminUpdateParams params = new AdminUpdateParams.Builder().name("New Admin super").build();
+		AdminUpdateParams params = new AdminUpdateParams.Builder().setName("New Admin super").build();
 		ApiException exception = assertThrows(ApiException.class, () ->
 				administratorApi.updateAdministrator("8AxaiKwMd~np7I*YP2NfukBE", params));
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();

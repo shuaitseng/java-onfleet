@@ -31,8 +31,8 @@ class DestinationApiTest extends BaseApiTest {
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
 
 		Address address = new Address.Builder()
-				.country("Argentina")
-				.number("123")
+				.setCountry("Argentina")
+				.setNumber("123")
 				.build();
 		DestinationCreateParams destination = new DestinationCreateParams.Builder(address).build();
 		Destination createdDestination = destinationApi.createDestination(destination);

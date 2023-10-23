@@ -81,10 +81,10 @@ class HubApiTest extends BaseApiTest {
 
 	private Address getAddress() {
 		return new Address.Builder()
-				.number("1315")
-				.street("Obispo Trejo")
-				.city("Cordoba")
-				.country("Argentina")
+				.setNumber("1315")
+				.setStreet("Obispo Trejo")
+				.setCity("Cordoba")
+				.setCountry("Argentina")
 				.build();
 	}
 
