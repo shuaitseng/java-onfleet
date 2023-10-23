@@ -183,11 +183,11 @@ class TeamApiTest extends BaseApiTest {
 		enqueueMockResponse(mockResponse, HttpURLConnection.HTTP_OK);
 
 		TeamDriverEtaQueryParams queryParams = new TeamDriverEtaQueryParams.Builder()
-				.dropoffLocation("dropoff")
-				.pickupLocation("122.2514556,37.7577242")
-				.pickupTime(1600000000L)
-				.restrictedVehicleTypes(Arrays.asList(VehicleType.CAR))
-				.serviceTime(600L)
+				.setDropoffLocation("dropoff")
+				.setPickupLocation("122.2514556,37.7577242")
+				.setPickupTime(1600000000L)
+				.setRestrictedVehicleTypes(Collections.singletonList(VehicleType.CAR))
+				.setServiceTime(600L)
 				.build();
 		WorkerRoute driverTimeEstimate = teamApi.getDriverTimeEstimate("123", queryParams);
 		RecordedRequest request = mockWebServer.takeRequest();

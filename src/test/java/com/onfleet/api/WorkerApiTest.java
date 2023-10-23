@@ -159,10 +159,10 @@ class WorkerApiTest extends BaseApiTest {
 		enqueueMockResponse(mockResponse, HttpURLConnection.HTTP_OK);
 
 		WorkerTasksQueryParams queryParams = new WorkerTasksQueryParams.Builder()
-				.from(1000L)
-				.to(1000L)
-				.lastId("123")
-				.isPickUpTask(true)
+				.setFrom(1000L)
+				.setTo(1000L)
+				.setLastId("123")
+				.setIsPickUpTask(true)
 				.build();
 		workerApi.getWorkersTasks("3VtEMGudjwjjM60j7deSIY3j", queryParams);
 		RecordedRequest request = mockWebServer.takeRequest();
@@ -191,11 +191,11 @@ class WorkerApiTest extends BaseApiTest {
 		enqueueMockResponse(mockResponse, HttpURLConnection.HTTP_OK);
 
 		WorkerQueryParams queryParams = new WorkerQueryParams.Builder()
-				.filterFields(Arrays.asList(WorkerFilterFields.NAME, WorkerFilterFields.PHONE))
-				.phones(Arrays.asList("123-456-7890", "987-654-3210"))
-				.states(Arrays.asList(1, 2, 3))
-				.teams(Arrays.asList("Team1", "Team2"))
-				.enableAnalytics(true)
+				.setFilterFields(Arrays.asList(WorkerFilterFields.NAME, WorkerFilterFields.PHONE))
+				.setPhones(Arrays.asList("123-456-7890", "987-654-3210"))
+				.setStates(Arrays.asList(1, 2, 3))
+				.setTeams(Arrays.asList("Team1", "Team2"))
+				.setEnableAnalytics(true)
 				.build();
 		Worker worker = workerApi.getSingleWorker("1LjhGUWdxFbvdsTAAXs0TFos", queryParams);
 		RecordedRequest request = mockWebServer.takeRequest();
@@ -213,8 +213,8 @@ class WorkerApiTest extends BaseApiTest {
 		enqueueMockResponse(mockResponse, HttpURLConnection.HTTP_OK);
 
 		WorkerUpdateParams workerUpdateParams = new WorkerUpdateParams.Builder("John Doe", Arrays.asList("Team1", "Team2"))
-				.capacity(100.0)
-				.displayName("Worker Display Name")
+				.setCapacity(100.0)
+				.setDisplayName("Worker Display Name")
 				.build();
 		Worker workerResponse = workerApi.updateWorker("sFtvhYK2l26zS0imptJJdC2q", workerUpdateParams);
 		RecordedRequest request = mockWebServer.takeRequest();
