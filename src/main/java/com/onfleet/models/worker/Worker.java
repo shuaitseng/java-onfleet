@@ -220,7 +220,7 @@ public class Worker {
 	}
 
 	public void setTimezone(String timezone) {
-		timezone = timezone;
+		this.timezone = timezone;
 	}
 
 	public WorkerVehicle getVehicle() {
