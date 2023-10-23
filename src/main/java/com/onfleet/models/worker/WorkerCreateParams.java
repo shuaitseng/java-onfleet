@@ -105,27 +105,27 @@ public class WorkerCreateParams {
 			this.teams = teams;
 		}
 
-		public Builder addresses(WorkerAddresses addresses) {
+		public Builder setAddresses(WorkerAddresses addresses) {
 			this.addresses = addresses;
 			return this;
 		}
 
-		public Builder capacity(Double capacity) {
+		public Builder setCapacity(Double capacity) {
 			this.capacity = capacity;
 			return this;
 		}
 
-		public Builder displayName(String displayName) {
+		public Builder setDisplayName(String displayName) {
 			this.displayName = displayName;
 			return this;
 		}
 
-		public Builder metadata(List<Metadata> metadata) {
+		public Builder setMetadata(List<Metadata> metadata) {
 			this.metadata = metadata;
 			return this;
 		}
 
-		public Builder workerVehicle(WorkerVehicle workerVehicle) {
+		public Builder setWorkerVehicle(WorkerVehicle workerVehicle) {
 			this.workerVehicle = workerVehicle;
 			return this;
 		}

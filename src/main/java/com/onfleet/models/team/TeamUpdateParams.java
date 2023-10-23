@@ -71,12 +71,12 @@ public class TeamUpdateParams {
 			return this;
 		}
 
-		public Builder enableSelfAssignment(Boolean enableSelfAssignment) {
+		public Builder setEnableSelfAssignment(Boolean enableSelfAssignment) {
 			this.enableSelfAssignment = enableSelfAssignment;
 			return this;
 		}
 
-		public Builder hub(String hub) {
+		public Builder setHub(String hub) {
 			this.hub = hub;
 			return this;
 		}

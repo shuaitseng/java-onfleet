@@ -3,11 +3,11 @@ package com.onfleet.models.worker;
 import java.util.List;
 
 public class WorkerQueryParams {
-	private List<WorkerFilterFields> filterFields;
-	private List<String> phones;
-	private List<Integer> states;
-	private List<String> teams;
-	private Boolean enableAnalytics;
+	private final List<WorkerFilterFields> filterFields;
+	private final List<String> phones;
+	private final List<Integer> states;
+	private final List<String> teams;
+	private final Boolean enableAnalytics;
 
 	private WorkerQueryParams(Builder builder) {
 		this.filterFields = builder.filterFields;
@@ -44,27 +44,27 @@ public class WorkerQueryParams {
 		private List<String> teams;
 		private Boolean enableAnalytics;
 
-		public Builder filterFields(List<WorkerFilterFields> filterFields) {
+		public Builder setFilterFields(List<WorkerFilterFields> filterFields) {
 			this.filterFields = filterFields;
 			return this;
 		}
 
-		public Builder phones(List<String> phones) {
+		public Builder setPhones(List<String> phones) {
 			this.phones = phones;
 			return this;
 		}
 
-		public Builder states(List<Integer> states) {
+		public Builder setStates(List<Integer> states) {
 			this.states = states;
 			return this;
 		}
 
-		public Builder teams(List<String> teams) {
+		public Builder setTeams(List<String> teams) {
 			this.teams = teams;
 			return this;
 		}
 
-		public Builder enableAnalytics(Boolean enableAnalytics) {
+		public Builder setEnableAnalytics(Boolean enableAnalytics) {
 			this.enableAnalytics = enableAnalytics;
 			return this;
 		}

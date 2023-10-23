@@ -1,10 +1,10 @@
 package com.onfleet.models.worker;
 
 public class WorkerTasksQueryParams {
-	private Long from;
-	private Long to;
-	private String lastId;
-	private Boolean isPickUpTask;
+	private final Long from;
+	private final Long to;
+	private final String lastId;
+	private final Boolean isPickUpTask;
 
 	private WorkerTasksQueryParams(Builder builder) {
 		this.from = builder.from;
@@ -35,22 +35,22 @@ public class WorkerTasksQueryParams {
 		private String lastId;
 		private Boolean isPickUpTask;
 
-		public Builder from(Long from) {
+		public Builder setFrom(Long from) {
 			this.from = from;
 			return this;
 		}
 
-		public Builder to(Long to) {
+		public Builder setTo(Long to) {
 			this.to = to;
 			return this;
 		}
 
-		public Builder lastId(String lastId) {
+		public Builder setLastId(String lastId) {
 			this.lastId = lastId;
 			return this;
 		}
 
-		public Builder isPickUpTask(Boolean isPickUpTask) {
+		public Builder setIsPickUpTask(Boolean isPickUpTask) {
 			this.isPickUpTask = isPickUpTask;
 			return this;
 		}

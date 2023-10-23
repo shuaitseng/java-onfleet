@@ -66,27 +66,27 @@ public class TeamDriverEtaQueryParams {
 		private List<VehicleType> restrictedVehicleTypes;
 		private Long serviceTime;
 
-		public Builder dropoffLocation(String dropoffLocation) {
+		public Builder setDropoffLocation(String dropoffLocation) {
 			this.dropoffLocation = dropoffLocation;
 			return this;
 		}
 
-		public Builder pickupLocation(String pickupLocation) {
+		public Builder setPickupLocation(String pickupLocation) {
 			this.pickupLocation = pickupLocation;
 			return this;
 		}
 
-		public Builder pickupTime(Long pickupTime) {
+		public Builder setPickupTime(Long pickupTime) {
 			this.pickupTime = pickupTime;
 			return this;
 		}
 
-		public Builder restrictedVehicleTypes(List<VehicleType> restrictedVehicleTypes) {
+		public Builder setRestrictedVehicleTypes(List<VehicleType> restrictedVehicleTypes) {
 			this.restrictedVehicleTypes = restrictedVehicleTypes;
 			return this;
 		}
 
-		public Builder serviceTime(Long serviceTime) {
+		public Builder setServiceTime(Long serviceTime) {
 			this.serviceTime = serviceTime;
 			return this;
 		}
