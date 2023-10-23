@@ -1,11 +1,18 @@
 package com.onfleet.models.task;
 
-public class TaskState {
-	public static final int UNASSIGNED = 0;
-	public static final int ASSIGNED = 1;
-	public static final int ACTIVE = 2;
-	public static final int COMPLETED = 3;
+public enum TaskState {
+	UNASSIGNED(0),
+	ASSIGNED(1),
+	ACTIVE(2),
+	COMPLETED(3);
 
-	private TaskState() {
+	private final int value;
+
+	TaskState(int value) {
+		this.value = value;
+	}
+
+	public int getValue() {
+		return value;
 	}
 }
