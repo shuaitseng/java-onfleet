@@ -1,9 +1,5 @@
 package com.onfleet.models.task;
 
-import com.onfleet.models.task.Task;
-import com.onfleet.models.task.TaskBatchCreateError;
-import com.onfleet.models.task.TaskParams;
-
 import java.util.List;
 
 public class BatchJobStatus {
