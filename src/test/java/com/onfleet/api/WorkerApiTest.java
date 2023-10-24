@@ -4,6 +4,8 @@ package com.onfleet.api;
 import com.google.gson.reflect.TypeToken;
 import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.ErrorResponse;
+import com.onfleet.models.Metadata;
+import com.onfleet.models.MetadataVisibility;
 import com.onfleet.models.worker.Worker;
 import com.onfleet.models.worker.WorkerCreateParams;
 import com.onfleet.models.worker.WorkerFilterFields;
@@ -33,6 +35,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -287,6 +290,24 @@ class WorkerApiTest extends BaseApiTest {
 		entry.addShift(1500323100000L, 1500336000000L);
 		scheduleEntries.add(entry);
 		return scheduleEntries;
+	}
+
+	@Test
+	void testQueryWithMetadata() throws Exception {
+		String json = "[{\"id\":\"aCbtgPsM*w7lAf61t4YqQODO\",\"metadata\":[{\"name\":\"hasDog\",\"type\":\"boolean\",\"value\":true,\"visibility\":[\"api\"]}]},{\"id\":\"YI**76lT7nu053HRWHPVLhKW\",\"tasks\":[],\"metadata\":[{\"name\":\"hasDog\",\"type\":\"boolean\",\"value\":true,\"visibility\":[\"api\"]}]}]";
+		enqueueMockResponse(json, HttpURLConnection.HTTP_OK);
+
+		List<Metadata> metadataList = Collections.singletonList(new Metadata.Builder().setName("isHighNetWorth")
+				.setType("boolean")
+				.setValue("false")
+				.setMetadataVisibility(Collections.singletonList(MetadataVisibility.DASHBOARD))
+				.build());
+
+		List<Worker> workers = workerApi.queryWithMetadata(metadataList);
+
+		assertThat(workers).usingRecursiveComparison()
+				.isEqualTo(GsonSingleton.getInstance().fromJson(json, new TypeToken<List<Worker>>() {
+				}.getType()));
 	}
 
 }

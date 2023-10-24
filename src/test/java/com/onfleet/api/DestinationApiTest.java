@@ -1,5 +1,8 @@
 package com.onfleet.api;
 
+import com.google.gson.reflect.TypeToken;
+import com.onfleet.models.Metadata;
+import com.onfleet.models.MetadataVisibility;
 import com.onfleet.models.destination.Address;
 import com.onfleet.models.destination.Destination;
 import com.onfleet.models.destination.DestinationCreateParams;
@@ -12,7 +15,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.net.HttpURLConnection;
+import java.util.Collections;
+import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DestinationApiTest extends BaseApiTest {
@@ -57,5 +63,23 @@ class DestinationApiTest extends BaseApiTest {
 		Assertions.assertThat(destination)
 				.usingRecursiveComparison()
 				.isEqualTo(GsonSingleton.getInstance().fromJson(mockResponseJson, Destination.class));
+	}
+
+	@Test
+	void testQueryWithMetadata() throws Exception {
+		String json = "[{\"id\":\"aCbtgPsM*w7lAf61t4YqQODO\",\"metadata\":[{\"name\":\"hasDog\",\"type\":\"boolean\",\"value\":true,\"visibility\":[\"api\"]}]},{\"id\":\"YI**76lT7nu053HRWHPVLhKW\",\"tasks\":[],\"metadata\":[{\"name\":\"hasDog\",\"type\":\"boolean\",\"value\":true,\"visibility\":[\"api\"]}]}]";
+		enqueueMockResponse(json, HttpURLConnection.HTTP_OK);
+
+		List<Metadata> metadataList = Collections.singletonList(new Metadata.Builder().setName("isHighNetWorth")
+				.setType("boolean")
+				.setValue("false")
+				.setMetadataVisibility(Collections.singletonList(MetadataVisibility.DASHBOARD))
+				.build());
+
+		List<Destination> destinations = destinationApi.queryWithMetadata(metadataList);
+
+		assertThat(destinations).usingRecursiveComparison()
+				.isEqualTo(GsonSingleton.getInstance().fromJson(json, new TypeToken<List<Destination>>() {
+				}.getType()));
 	}
 }

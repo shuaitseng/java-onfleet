@@ -1,5 +1,8 @@
 package com.onfleet.api;
 
+import com.google.gson.reflect.TypeToken;
+import com.onfleet.models.Metadata;
+import com.onfleet.models.MetadataVisibility;
 import com.onfleet.models.task.AutomaticallyAssignTaskResult;
 import com.onfleet.models.task.BatchJobStatus;
 import com.onfleet.models.task.Task;
@@ -12,6 +15,7 @@ import com.onfleet.models.task.TaskContainer;
 import com.onfleet.models.task.TaskForceCompletionParams;
 import com.onfleet.models.task.TaskListQueryParams;
 import com.onfleet.models.task.TaskParams;
+import com.onfleet.models.task.TaskState;
 import com.onfleet.models.task.Tasks;
 import com.onfleet.models.task.TasksPaginated;
 import com.onfleet.utils.GsonSingleton;
@@ -21,7 +25,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.net.HttpURLConnection;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class TaskApiTest extends BaseApiTest {
 	private TaskApi taskApi;
@@ -83,7 +91,15 @@ class TaskApiTest extends BaseApiTest {
 		String json = "{\"lastId\":\"tPMO~h03sOIqFbnhqaOXgUsd\",\"tasks\":[{\"id\":\"11z1BbsQUZFHD1XAd~emDDeK\",\"timeCreated\":1455072025000,\"timeLastModified\":1455072025278,\"organization\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"shortId\":\"31aac0a5\",\"trackingURL\":\"https://onf.lt/31aac0a5c\",\"worker\":\"h*wSb*apKlDkUFnuLTtjPke7\",\"merchant\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"executor\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"creator\":\"EJmsbJgHiRLPjNVE7GEIPs7*\",\"dependencies\":[],\"state\":1,\"completeAfter\":null,\"completeBefore\":null,\"pickupTask\":false,\"notes\":\"\",\"completionDetails\":{\"events\":[],\"time\":null},\"feedback\":[],\"metadata\":[],\"overrides\":{},\"container\":{\"type\":\"WORKER\",\"worker\":\"h*wSb*apKlDkUFnuLTtjPke7\"},\"recipients\":[{\"id\":\"xX87G1gSkeLvGXlHn2tn0~iB\",\"organization\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"timeCreated\":1455072004000,\"timeLastModified\":1455072025272,\"name\":\"Blake Turing\",\"phone\":\"+16505552811\",\"notes\":\"\",\"skipSMSNotifications\":false,\"metadata\":[]}],\"destination\":{\"id\":\"pfT5L1JclTdhvRnP9GQzMFuL\",\"timeCreated\":1455072025000,\"timeLastModified\":1455072025264,\"location\":[-122.41289010000003,37.787933],\"address\":{\"apartment\":\"\",\"state\":\"California\",\"postalCode\":\"94109\",\"country\":\"United States\",\"city\":\"San Francisco\",\"street\":\"Post Street\",\"number\":\"666\"},\"notes\":\"\",\"metadata\":[]}},{\"id\":\"kc8SS1tzuZ~jqjlebKGrUmpe\",\"timeCreated\":1455156667000,\"timeLastModified\":1455156667234,\"organization\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"shortId\":\"8f983639\",\"trackingURL\":\"https://onf.lt/8f98363993\",\"worker\":\"1LjhGUWdxFbvdsTAAXs0TFos\",\"merchant\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"executor\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"creator\":\"EJmsbJgHiRLPjNVE7GEIPs7*\",\"dependencies\":[],\"state\":1,\"completeAfter\":1455151071727,\"completeBefore\":null,\"pickupTask\":false,\"notes\":\"Order 332: 24oz Stumptown Finca El Puente, 10 x Aji de Gallina Empanadas, 13-inch Lelenitas Tres Leches\",\"completionDetails\":{\"events\":[],\"time\":null},\"feedback\":[],\"metadata\":[],\"overrides\":{\"recipientSkipSMSNotifications\":null,\"recipientNotes\":null,\"recipientName\":null},\"container\":{\"type\":\"WORKER\",\"worker\":\"1LjhGUWdxFbvdsTAAXs0TFos\"},\"recipients\":[{\"id\":\"G7rcM2nqblmh8vj2do1FpaOQ\",\"organization\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"timeCreated\":1455156667000,\"timeLastModified\":1455156667229,\"name\":\"Blas Silkovich\",\"phone\":\"+16505554481\",\"notes\":\"Knows Neiman, VIP status.\",\"skipSMSNotifications\":false,\"metadata\":[]}],\"destination\":{\"id\":\"zrVXZi5aDzOZlAghZaLfGAfA\",\"timeCreated\":1455156667000,\"timeLastModified\":1455156667220,\"location\":[-122.4438337,37.7940329],\"address\":{\"apartment\":\"\",\"state\":\"California\",\"postalCode\":\"94123\",\"country\":\"United States\",\"city\":\"San Francisco\",\"street\":\"Vallejo Street\",\"number\":\"2829\"},\"notes\":\"Small green door by garage door has pin pad, enter *4821*\",\"metadata\":[]}}]}";
 		enqueueMockResponse(json, HttpURLConnection.HTTP_OK);
 
-		TaskListQueryParams params = new TaskListQueryParams(15000);
+		TaskListQueryParams params = new TaskListQueryParams.Builder(10000)
+				.setTo(1100L)
+				.setLastId("lastId")
+				.setStates(Arrays.asList(TaskState.ACTIVE,TaskState.ASSIGNED, TaskState.UNASSIGNED))
+				.setWorker("workerId")
+				.setCompleteAfterAfter(10000L)
+				.setCompleteBeforeBefore(20000L)
+				.setTaskDependencies(Arrays.asList("task1", "task2"))
+				.build();
 		TasksPaginated tasks = taskApi.listTasks(params);
 
 		Assertions.assertThat(tasks).usingRecursiveComparison().isEqualTo(GsonSingleton.getInstance().fromJson(json, TasksPaginated.class));
@@ -163,6 +179,24 @@ class TaskApiTest extends BaseApiTest {
 				.setContainer(new TaskContainer.Builder().build())
 				.setBarcodes(Collections.singletonList(new TaskBarcode("asdasdasd", false)))
 				.build();
+	}
+
+	@Test
+	void testQueryWithMetadata() throws Exception {
+		String json = "[{\"id\":\"aCbtgPsM*w7lAf61t4YqQODO\",\"metadata\":[{\"name\":\"hasDog\",\"type\":\"boolean\",\"value\":true,\"visibility\":[\"api\"]}]},{\"id\":\"YI**76lT7nu053HRWHPVLhKW\",\"tasks\":[],\"metadata\":[{\"name\":\"hasDog\",\"type\":\"boolean\",\"value\":true,\"visibility\":[\"api\"]}]}]";
+		enqueueMockResponse(json, HttpURLConnection.HTTP_OK);
+
+		List<Metadata> metadataList = Collections.singletonList(new Metadata.Builder().setName("isHighNetWorth")
+				.setType("boolean")
+				.setValue("false")
+				.setMetadataVisibility(Collections.singletonList(MetadataVisibility.DASHBOARD))
+				.build());
+
+		List<Task> tasks = taskApi.queryWithMetadata(metadataList);
+
+		assertThat(tasks).usingRecursiveComparison()
+				.isEqualTo(GsonSingleton.getInstance().fromJson(json, new TypeToken<List<Task>>() {
+				}.getType()));
 	}
 
 }
