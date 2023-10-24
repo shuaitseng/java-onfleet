@@ -32,13 +32,29 @@ public class TaskApi extends BaseApi {
 		super(client, "/tasks");
 	}
 
-	public Task createTask(TaskParams task) throws ApiException {
-		String jsonPayload = GsonSingleton.getInstance().toJson(task);
+	/**
+	 * Creates a new Task
+	 * <a href="https://docs.onfleet.com/reference/create-task">Api Docs</a>
+	 *
+	 * @param taskParams The TaskParams object containing the data for the new task.
+	 * @return A Task object representing the newly created task.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
+	public Task createTask(TaskParams taskParams) throws ApiException {
+		String jsonPayload = GsonSingleton.getInstance().toJson(taskParams);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.POST, body, baseUrl);
 		return handleResponse(response, Task.class);
 	}
 
+	/**
+	 * Creates multiple tasks in batch
+	 * <a href="https://docs.onfleet.com/reference/create-tasks-in-batch">Api Docs</a>
+	 *
+	 * @param tasks A list of TaskParams objects containing the data for the new tasks.
+	 * @return A Tasks object representing the result of the batch task creation.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public Tasks createTasksBatch(List<TaskParams> tasks) throws ApiException {
 		String url = String.format("%s/batch", baseUrl);
 		String jsonPayload = GsonSingleton.getInstance().toJson(tasks);
@@ -47,6 +63,14 @@ public class TaskApi extends BaseApi {
 		return handleResponse(response, Tasks.class);
 	}
 
+	/**
+	 * Creates multiple tasks asynchronously in batch
+	 * <a href="https://docs.onfleet.com/reference/create-tasks-in-batch-async">Api Docs</a>
+	 *
+	 * @param tasks A list of TaskParams objects containing the data for the new tasks.
+	 * @return A TaskBatchCreateResponseAsync object representing the asynchronous result of the batch task creation.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public TaskBatchCreateResponseAsync createTasksBatchAsync(List<TaskParams> tasks) throws ApiException {
 		String url = String.format("%s/batch-async", baseUrl);
 		String jsonPayload = GsonSingleton.getInstance().toJson(tasks);
@@ -55,12 +79,26 @@ public class TaskApi extends BaseApi {
 		return handleResponse(response, TaskBatchCreateResponseAsync.class);
 	}
 
+	/**
+	 * Retrieves the status of a batch job
+	 * <a href="https://docs.onfleet.com/reference/batch-job-status">Api Docs</a>
+	 * @param jobId The ID of the batch job for which to retrieve the status.
+	 * @return A BatchJobStatus object representing the status of the batch job.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public BatchJobStatus getBatchJobStatus(String jobId) throws ApiException {
 		String url = String.format("%s/batch/%s", baseUrl, jobId);
 		Response response = sendRequest(HttpMethodType.GET, url);
 		return handleResponse(response, BatchJobStatus.class);
 	}
 
+	/**
+	 * Automatically assigns tasks to on-duty drivers
+	 * <a href="https://docs.onfleet.com/reference/automatic-assignment">Api Docs</a>
+	 * @param params A TaskAutoAssignMultiParams object containing the parameters for task auto-assignment.
+	 * @return An AutomaticallyAssignTaskResult object representing the result of the auto-assignment process.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public AutomaticallyAssignTaskResult autoAssign(TaskAutoAssignMultiParams params) throws ApiException {
 		String url = String.format("%s/autoAssign", baseUrl);
 		String jsonPayload = GsonSingleton.getInstance().toJson(params);
@@ -70,23 +108,12 @@ public class TaskApi extends BaseApi {
 	}
 
 	/**
-	 * Retrieves a list of tasks based on the provided query parameters.
-	 *
-	 * <ul>
-	 * <li><code>from</code>: The starting time in Unix time of the search range. Tasks created or completed at or after this time will be included.</li>
-	 * <li><code>to</code>: The ending time in Unix time of the range. Tasks created or completed before this time will be included.</li>
-	 * <li><code>lastId</code>: The last ID used to walk paginated responses. Tasks created after this ID will be returned.</li>
-	 * <li><code>worker</code>: The ID of a worker who is currently assigned to the tasks or has previously completed the tasks.</li>
-	 * <li><code>completeBeforeBefore</code>: The timestamp in Unix time before which the task <code>completeBefore</code> value must be.</li>
-	 * <li><code>completeAfterAfter</code>: The timestamp in Unix time after which the task <code>completeAfter</code> value must be.</li>
-	 * <li><code>states</code>: A list of task states, represented as a comma-separated string.</li>
-	 * <li><code>taskDependencies</code>: A comma-separated list of dependency task IDs. A task gets returned in the response if it has at least one of the dependencies provided.</li>
-	 * </ul>
-	 *
-	 * @param queryParams The query parameters for filtering tasks.
-	 * @return A list of tasks.
-	 * @throws ApiException             if an error occurs during the API request.
-	 * @throws IllegalArgumentException if the 'from' parameter is missing or invalid.
+	 * Retrieve a list of tasks based on specified query parameters. This method allows you to filter and
+	 * retrieve tasks that match various criteria, such as their states, worker, completion dates, and task dependencies.
+	 * <a href="https://docs.onfleet.com/reference/list-tasks">Api Docs</a>
+	 * @param queryParams A TaskListQueryParams object containing the query parameters for filtering tasks.
+	 * @return A TasksPaginated object representing a paginated list of tasks matching the specified criteria.
+	 * @throws ApiException If an error occurs during the API request or response handling, or if required parameters are missing.
 	 */
 	public TasksPaginated listTasks(TaskListQueryParams queryParams) throws ApiException {
 		HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(baseUrl)).newBuilder();
@@ -123,6 +150,13 @@ public class TaskApi extends BaseApi {
 		return handleResponse(sendRequest(HttpMethodType.GET, urlBuilder.build().toString()), TasksPaginated.class);
 	}
 
+	/**
+	 * Query tasks with associated metadata.
+	 * <a href="https://docs.onfleet.com/reference/metadata">Api Docs</a>
+	 * @param metadata A list of Metadata objects containing personalized data to be used as query criteria.
+	 * @return A list of Task objects matching the specified metadata query criteria.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public List<Task> queryWithMedatada(List<Metadata> metadata) throws ApiException {
 		String url = String.format("%s/metadata", baseUrl);
 		String jsonPayload = GsonSingleton.getInstance().toJson(metadata);
@@ -132,18 +166,40 @@ public class TaskApi extends BaseApi {
 		}.getType());
 	}
 
+	/**
+	 * Retrieves a single task by its ID
+	 * <a href="https://docs.onfleet.com/reference/get-single-task">Api Docs</a>
+	 * @param taskId The ID of the task to retrieve.
+	 * @return A Task object representing the retrieved task.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public Task getSingleTask(String taskId) throws ApiException {
 		String url = String.format("%s/%s", baseUrl, taskId);
 		Response response = sendRequest(HttpMethodType.POST, url);
 		return handleResponse(response, Task.class);
 	}
 
+	/**
+	 * Retrieves a task by its short ID
+	 * <a href="https://docs.onfleet.com/reference/get-single-task-by-shortid">Api Docs</a>
+	 * @param taskShortId The short ID of the task to retrieve.
+	 * @return A Task object representing the retrieved task.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public Task getTaskByShortId(String taskShortId) throws ApiException {
 		String url = String.format("%s/shortId/%s", baseUrl, taskShortId);
 		Response response = sendRequest(HttpMethodType.POST, url);
 		return handleResponse(response, Task.class);
 	}
 
+	/**
+	 * Updates a task by its ID with the provided TaskParams object
+	 * <a href="https://docs.onfleet.com/reference/update-task">Api Docs</a>
+	 * @param taskId The ID of the task to update.
+	 * @param task The TaskParams object containing the updated task data.
+	 * @return A Task object representing the updated task.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public Task updateTask(String taskId, TaskParams task) throws ApiException {
 		String url = String.format("%s/%s", baseUrl, taskId);
 		String jsonPayload = GsonSingleton.getInstance().toJson(task);
@@ -152,6 +208,13 @@ public class TaskApi extends BaseApi {
 		return handleResponse(response, Task.class);
 	}
 
+	/**
+	 * Marks a task as completed, providing completion details
+	 * <a href="https://docs.onfleet.com/reference/complete-task">Api Docs</a>
+	 * @param taskId The ID of the task to mark as completed.
+	 * @param completionDetails The TaskForceCompletionParams object containing completion details.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public void completeTask(String taskId, TaskForceCompletionParams completionDetails) throws ApiException {
 		String url = String.format("%s/%s/complete", baseUrl, taskId);
 		String jsonPayload = GsonSingleton.getInstance().toJson(completionDetails);
@@ -167,6 +230,12 @@ public class TaskApi extends BaseApi {
 		return handleResponse(response, Task.class);
 	}
 
+	/**
+	 * Deletes a task by its ID
+	 * <a href="https://docs.onfleet.com/reference/delete-task">Api Docs</a>
+	 * @param taskId The ID of the task to delete.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public void deleteTask(String taskId) throws ApiException {
 		String url = String.format("%s/%s", baseUrl, taskId);
 		sendRequest(HttpMethodType.DELETE, url);
