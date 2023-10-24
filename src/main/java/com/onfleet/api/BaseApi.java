@@ -53,7 +53,8 @@ public class BaseApi {
 	}
 
 	protected Response sendRequest(HttpMethodType method, String url) throws ApiException {
-		return sendRequest(method, null, url);
+		RequestBody body = RequestBody.create("", null);
+		return sendRequest(method, body, url);
 	}
 
 	protected <T> T handleResponse(Response response, Type type) throws ApiException {
