@@ -48,9 +48,10 @@ public class RecipientApi extends BaseApi {
 	}
 
 	public Recipient updateRecipient(String recipientId, RecipientUpdateParams updateParams) throws ApiException {
+		String url = String.format("%s/%s", baseUrl, recipientId);
 		String jsonPayload = GsonSingleton.getInstance().toJson(updateParams);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
-		Response response = sendRequest(HttpMethodType.PUT, body, baseUrl);
+		Response response = sendRequest(HttpMethodType.PUT, body, url);
 		return handleResponse(response, Recipient.class);
 	}
 
