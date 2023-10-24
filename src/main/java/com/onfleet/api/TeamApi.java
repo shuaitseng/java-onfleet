@@ -21,6 +21,13 @@ public class TeamApi extends BaseApi {
 		super(client, "/teams");
 	}
 
+	/**
+	 * Retrieve details about a specific team by its ID. This method allows you to obtain information about a team within your organization.
+	 * <a href="https://docs.onfleet.com/reference/get-single-team">Api Docs</a>
+	 * @param teamId The ID of the team to retrieve.
+	 * @return Team object representing the details of the retrieved team.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public Team getTeam(String teamId) throws ApiException {
 		return handleResponse(
 				sendRequest(HttpMethodType.GET,
@@ -28,11 +35,24 @@ public class TeamApi extends BaseApi {
 				Team.class);
 	}
 
+	/**
+	 * Retrieve a list of teams. This method allows you to obtain a list of all teams in your organization.
+	 * <a href="https://docs.onfleet.com/reference/list-teams">Api Docs</a>
+	 * @return A list of Team objects representing the teams in your organization.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public List<Team> listTeams() throws ApiException {
 		return handleResponse(sendRequest(HttpMethodType.GET, baseUrl), new TypeToken<List<Team>>() {
 		}.getType());
 	}
 
+	/**
+	 * Create a new team based on the provided TeamCreateParams
+	 * <a href="https://docs.onfleet.com/reference/create-team">Api Docs</a>
+	 * @param team A TeamCreateParams object containing the parameters for creating the team.
+	 * @return A Team object representing the newly created team.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public Team createTeam(TeamCreateParams team) throws ApiException {
 		String jsonPayload = GsonSingleton.getInstance().toJson(team);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
@@ -40,6 +60,14 @@ public class TeamApi extends BaseApi {
 		return handleResponse(response, Team.class);
 	}
 
+	/**
+	 * Update an existing team based on the provided parameters.
+	 * <a href="https://docs.onfleet.com/reference/update-team">Api Docs</a>
+	 * @param teamId The ID of the team to update.
+	 * @param params A TeamUpdateParams object containing the parameters for updating the team.
+	 * @return A Team object representing the updated team.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public Team updateTeam(String teamId, TeamUpdateParams params) throws ApiException {
 		String url = String.format("%s/%s", baseUrl, teamId);
 		String jsonPayload = GsonSingleton.getInstance().toJson(params);
@@ -48,11 +76,25 @@ public class TeamApi extends BaseApi {
 		return handleResponse(response, Team.class);
 	}
 
+	/**
+	 * Delete a team based on its ID.
+	 * <a href="https://docs.onfleet.com/reference/delete-team">Api Docs</a>
+	 * @param teamId The ID of the team to delete.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public void deleteTeam(String teamId) throws ApiException {
 		sendRequest(HttpMethodType.DELETE,
 				String.format("%s/%s", baseUrl, teamId));
 	}
 
+	/**
+	 * Get a driver time estimate for a specific team and location.
+	 * <a href="https://docs.onfleet.com/reference/delivery-estimate">Api Docs</a>
+	 * @param teamId The ID of the team for which you want to estimate the driver's time.
+	 * @param params A TeamDriverEtaQueryParams object containing location and other parameters for the estimate.
+	 * @return A WorkerRoute object representing the estimated driver route and time.
+	 * @throws ApiException If an error occurs during the API request or response handling, or if required parameters are missing.
+	 */
 	public WorkerRoute getDriverTimeEstimate(String teamId,
 	                                         TeamDriverEtaQueryParams params) throws ApiException {
 		if ((params.getDropoffLocation() == null || params.getDropoffLocation().isEmpty()) && (params.getPickupLocation() == null || params.getPickupLocation().isEmpty())) {
@@ -78,6 +120,14 @@ public class TeamApi extends BaseApi {
 		return handleResponse(response, WorkerRoute.class);
 	}
 
+	/**
+	 * Retrieve unassigned tasks for a specific team.
+	 * <a href="https://docs.onfleet.com/reference/list-tasks-in-team">Api Docs</a>
+	 * @param teamId The ID of the team for which you want to retrieve unassigned tasks.
+	 * @param params A TeamTasksQueryParams object containing optional parameters for filtering the unassigned tasks.
+	 * @return A TeamTasks object representing the unassigned tasks for the team.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public TeamTasks getUnassignedTasks(String teamId, TeamTasksQueryParams params) throws ApiException {
 		String url = String.format("%s/%s/tasks", baseUrl, teamId);
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();

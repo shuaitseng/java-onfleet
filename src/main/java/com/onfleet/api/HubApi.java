@@ -20,6 +20,13 @@ public class HubApi extends BaseApi {
 		super(client, "/hubs");
 	}
 
+	/**
+	 * Create a new hub based on the provided HubParams
+	 * <a href="https://docs.onfleet.com/reference/create-hub">Api Docs</a>
+	 * @param hub A HubParams object containing the parameters for creating the hub.
+	 * @return A Hub object representing the newly created hub.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public Hub createHub(HubParams hub) throws ApiException {
 		String jsonPayload = GsonSingleton.getInstance().toJson(hub);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
@@ -27,6 +34,14 @@ public class HubApi extends BaseApi {
 		return handleResponse(response, Hub.class);
 	}
 
+	/**
+	 * Update an existing hub based on the provided parameters.
+	 * <a href="https://docs.onfleet.com/reference/update-hub">Api Docs</a>
+	 * @param hubId The ID of the hub to update.
+	 * @param hub A HubParams object containing the parameters for updating the hub.
+	 * @return A Hub object representing the updated hub.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public Hub updateHub(String hubId, HubParams hub) throws ApiException {
 		String url = String.format("%s/%s", baseUrl, hubId);
 		String jsonPayload = GsonSingleton.getInstance().toJson(hub);
@@ -35,6 +50,12 @@ public class HubApi extends BaseApi {
 		return handleResponse(response, Hub.class);
 	}
 
+	/**
+	 * Retrieve a list of hubs.
+	 * <a href="https://docs.onfleet.com/reference/list-hubs">Api Docs</a>
+	 * @return A list of Hub objects representing the hubs in the system.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public List<Hub> listHubs() throws ApiException {
 		Response response = sendRequest(HttpMethodType.GET, baseUrl);
 		return handleResponse(response, new TypeToken<ArrayList<Hub>>(){}.getType());

@@ -19,6 +19,13 @@ public class WebhookApi extends BaseApi {
 		super(client, "/webhooks");
 	}
 
+	/**
+	 * Create a new webhook based on the provided WebhookCreateParams.
+	 * <a href="https://docs.onfleet.com/reference/create-webhook">Api Docs</a>
+	 * @param params A WebhookCreateParams object containing the parameters for creating the webhook.
+	 * @return A Webhook object representing the newly created webhook.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public Webhook create(WebhookCreateParams params) throws ApiException {
 		String jsonPayload = GsonSingleton.getInstance().toJson(params);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
@@ -26,12 +33,24 @@ public class WebhookApi extends BaseApi {
 		return handleResponse(response, Webhook.class);
 	}
 
+	/**
+	 * Retrieve a list of webhooks.
+	 * <a href="https://docs.onfleet.com/reference/list-webhooks">Api Docs</a>
+	 * @return A list of Webhook objects representing the webhooks in your application.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public List<Webhook> list() throws ApiException {
 		Response response = sendRequest(HttpMethodType.GET, baseUrl);
 		return handleResponse(response, new TypeToken<List<Webhook>>() {
 		}.getType());
 	}
 
+	/**
+	 * Delete a webhook based on its ID.
+	 * <a href="https://docs.onfleet.com/reference/delete-webhook">Api Docs</a>
+	 * @param webhookId The ID of the webhook to delete.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
 	public void delete(String webhookId) throws ApiException {
 		sendRequest(HttpMethodType.DELETE, String.format("%s/%s", baseUrl, webhookId));
 	}
