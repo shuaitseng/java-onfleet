@@ -8,6 +8,7 @@ import com.onfleet.models.task.BatchJobStatus;
 import com.onfleet.models.task.Task;
 import com.onfleet.models.task.TaskAutoAssignMultiParams;
 import com.onfleet.models.task.TaskBatchCreateResponseAsync;
+import com.onfleet.models.task.TaskCloneOptions;
 import com.onfleet.models.task.TaskCloneParams;
 import com.onfleet.models.task.TaskForceCompletionParams;
 import com.onfleet.models.task.TaskListQueryParams;
@@ -222,7 +223,16 @@ public class TaskApi extends BaseApi {
 		sendRequest(HttpMethodType.POST, body, url);
 	}
 
-	public Task cloneTask(String taskId, TaskCloneParams options) throws ApiException {
+	/**
+	 * Clones a task by its ID with the provided TaskCloneParams options
+	 * <a href="https://docs.onfleet.com/reference/clone-task">Api Docs</a>
+	 * @param taskId The ID of the task to clone.
+	 * @param cloneParams The TaskCloneParams object containing cloning options.
+	 * @return A Task object representing the cloned task.
+	 * @throws ApiException If an error occurs during the API request or response handling.
+	 */
+	public Task cloneTask(String taskId, TaskCloneParams cloneParams) throws ApiException {
+		TaskCloneOptions options = new TaskCloneOptions(cloneParams);
 		String url = String.format("%s/%s/clone", baseUrl, taskId);
 		String jsonPayload = GsonSingleton.getInstance().toJson(options);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
