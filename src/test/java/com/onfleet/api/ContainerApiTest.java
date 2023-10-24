@@ -87,7 +87,7 @@ class ContainerApiTest extends BaseApiTest {
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
 
 		List<String> taskIds = Arrays.asList("b3F~z2sU7H*auNKkM6LoiXzP", "1ry863mrjoQaqMNxnrD5YvxH", "l33lg5WLrja3Tft*MO383Gub");
-		Container container = containerApi.updateTasks("123", taskIds);
+		Container container = containerApi.updateTasks("123", taskIds, true);
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
 		assertEquals(HttpMethodType.PUT.name(), recordedRequest.getMethod());
