@@ -94,5 +94,4 @@ public class OnFleet {
 					return chain.proceed(newRequest);
 				}).build();
 	}
-
 }
