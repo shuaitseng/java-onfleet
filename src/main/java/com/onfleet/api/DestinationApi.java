@@ -56,11 +56,11 @@ public class DestinationApi extends BaseApi {
 	 * @return A list of Metadata objects representing destinations that match the specified metadata query criteria.
 	 * @throws ApiException If an error occurs during the API request or response handling.
 	 */
-	public List<Metadata> queryByMetadata(List<Metadata> metadata) throws ApiException {
+	public List<Destination> queryWithMetadata(List<Metadata> metadata) throws ApiException {
 		String jsonPayload = GsonSingleton.getInstance().toJson(metadata);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.POST, body, baseUrl);
-		return handleResponse(response, new TypeToken<List<Administrator>>() {
+		return handleResponse(response, new TypeToken<List<Destination>>() {
 		}.getType());
 	}
 }

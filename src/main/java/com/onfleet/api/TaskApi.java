@@ -158,7 +158,7 @@ public class TaskApi extends BaseApi {
 	 * @return A list of Task objects matching the specified metadata query criteria.
 	 * @throws ApiException If an error occurs during the API request or response handling.
 	 */
-	public List<Task> queryWithMedatada(List<Metadata> metadata) throws ApiException {
+	public List<Task> queryWithMetadata(List<Metadata> metadata) throws ApiException {
 		String url = String.format("%s/metadata", baseUrl);
 		String jsonPayload = GsonSingleton.getInstance().toJson(metadata);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
