@@ -33,7 +33,7 @@ class OrganizationApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"id\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"timeCreated\":1454634415000,\"timeLastModified\":1455048510514,\"name\":\"Onfleet Fine Eateries\",\"email\":\"fe@onfleet.com\",\"image\":\"5cc28fc91d7bc5846c6ce9c1\",\"timezone\":\"America/Los_Angeles\",\"country\":\"US\",\"delegatees\":[\"cBrUjKvQQgdRp~s1qvQNLpK*\"]}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
 
-		Organization organization = organizationApi.getDetails();
+		Organization organization = organizationApi.getOrgDetails();
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
 		assertEquals(HttpMethodType.GET.name(), recordedRequest.getMethod());
