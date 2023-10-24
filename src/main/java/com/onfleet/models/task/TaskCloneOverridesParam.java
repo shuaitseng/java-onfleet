@@ -7,11 +7,11 @@ import java.util.List;
 public class TaskCloneOverridesParam {
 	private Long completeAfter;
 	private Long completeBefore;
-	private Object destination;
+	private Object destination; // Destination can be a string destination id or a Destination object
 	private List<Metadata> metadata;
 	private String notes;
 	private Boolean pickupTask;
-	private Object recipients;
+	private Object recipients; // Recipients can be a String array of recipient ids or an array of recipient objects
 	private Double serviceTime;
 
 	public Long getCompleteAfter() {
