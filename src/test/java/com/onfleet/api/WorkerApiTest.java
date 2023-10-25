@@ -215,7 +215,9 @@ class WorkerApiTest extends BaseApiTest {
 		String mockResponse = "{\"id\":\"sFtvhYK2l26zS0imptJJdC2q\",\"timeCreated\":1455156653000,\"timeLastModified\":1455156654558,\"organization\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"name\":\"new name\",\"phone\":\"+16173428853\",\"activeTask\":null,\"tasks\":[],\"onDuty\":false,\"timeLastSeen\":null,\"delayTime\":null,\"teams\":[\"lHCUJFvh6v0YDURKjokZbvau\"],\"metadata\":[],\"vehicle\":{\"id\":\"tN1HjcvygQWvz5FRR1JAxwL8\",\"type\":\"CAR\",\"description\":\"Tesla Model 3\",\"licensePlate\":\"FKNS9A\",\"color\":\"purple\"}}";
 		enqueueMockResponse(mockResponse, HttpURLConnection.HTTP_OK);
 
-		WorkerUpdateParams workerUpdateParams = new WorkerUpdateParams.Builder("John Doe", Arrays.asList("Team1", "Team2"))
+		WorkerUpdateParams workerUpdateParams = new WorkerUpdateParams.Builder()
+				.setName("John Doe")
+				.setTeams(Arrays.asList("Team1", "Team2"))
 				.setCapacity(100.0)
 				.setDisplayName("Worker Display Name")
 				.build();
