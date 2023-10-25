@@ -80,6 +80,7 @@ class WorkerApiTest extends BaseApiTest {
 		assertEquals(HttpURLConnection.HTTP_BAD_REQUEST, exception.getStatusCode());
 		assertEquals("InvalidArgument", exception.getErrorResponse().getCode());
 		assertEquals(1900, exception.getErrorResponse().getMessage().getError());
+		assertEquals("One or more parameters required for this request are either missing or have an invalid format.", exception.getErrorResponse().getMessage().getMessage());
 		assertEquals("Team IDs array missing", exception.getErrorResponse().getMessage().getCause());
 		assertEquals("bc41a8eb-a604-4a1c-aa5a-e86a975c141b", exception.getErrorResponse().getMessage().getRequest());
 
@@ -128,7 +129,7 @@ class WorkerApiTest extends BaseApiTest {
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
 
 		WorkerListQueryParams queryParams = new WorkerListQueryParams.Builder()
-				.fields(Arrays.asList(WorkerFilterFields.NAME,WorkerFilterFields.PHONE))
+				.fields(Arrays.asList(WorkerFilterFields.NAME, WorkerFilterFields.PHONE))
 				.teamIds(Arrays.asList("team1", "team2"))
 				.workerStates(Collections.singletonList(WorkerStates.ACTIVE))
 				.phoneNumbers(Arrays.asList("123-456-7890", "987-654-3210"))
