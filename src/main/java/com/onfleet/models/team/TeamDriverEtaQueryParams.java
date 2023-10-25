@@ -23,40 +23,20 @@ public class TeamDriverEtaQueryParams {
 		return dropoffLocation;
 	}
 
-	public void setDropoffLocation(String dropoffLocation) {
-		this.dropoffLocation = dropoffLocation;
-	}
-
 	public String getPickupLocation() {
 		return pickupLocation;
-	}
-
-	public void setPickupLocation(String pickupLocation) {
-		this.pickupLocation = pickupLocation;
 	}
 
 	public Long getPickupTime() {
 		return pickupTime;
 	}
 
-	public void setPickupTime(Long pickupTime) {
-		this.pickupTime = pickupTime;
-	}
-
 	public List<VehicleType> getRestrictedVehicleTypes() {
 		return restrictedVehicleTypes;
 	}
 
-	public void setRestrictedVehicleTypes(List<VehicleType> restrictedVehicleTypes) {
-		this.restrictedVehicleTypes = restrictedVehicleTypes;
-	}
-
 	public Long getServiceTime() {
 		return serviceTime;
-	}
-
-	public void setServiceTime(Long serviceTime) {
-		this.serviceTime = serviceTime;
 	}
 
 	public static class Builder {

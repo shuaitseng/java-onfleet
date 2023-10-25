@@ -21,7 +21,7 @@ public class AdminCreateParams {
 		this.metadata = builder.metadata;
 	}
 
-	public String getEmail() {
+	/*public String getEmail() {
 		return email;
 	}
 
@@ -67,7 +67,7 @@ public class AdminCreateParams {
 
 	public void setType(AdministratorType type) {
 		this.type = type;
-	}
+	}*/
 
 	public static class Builder {
 		private final String email;

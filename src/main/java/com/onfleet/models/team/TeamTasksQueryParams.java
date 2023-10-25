@@ -6,36 +6,27 @@ public class TeamTasksQueryParams {
 	private Long to;
 	private String lastId;
 
-	public Boolean getIsPickupTask() {
-		return isPickupTask;
+	private TeamTasksQueryParams(Builder builder) {
+		isPickupTask = builder.isPickupTask;
+		from = builder.from;
+		to = builder.to;
+		lastId = builder.lastId;
 	}
 
-	public void setIsPickupTask(Boolean pickupTask) {
-		isPickupTask = pickupTask;
+	public Boolean getIsPickupTask() {
+		return isPickupTask;
 	}
 
 	public Long getFrom() {
 		return from;
 	}
 
-	public void setFrom(Long from) {
-		this.from = from;
-	}
-
 	public Long getTo() {
 		return to;
 	}
 
-	public void setTo(Long to) {
-		this.to = to;
-	}
-
 	public String getLastId() {
 		return lastId;
-	}
-
-	public void setLastId(String lastId) {
-		this.lastId = lastId;
 	}
 
 	public static class Builder {
@@ -44,33 +35,28 @@ public class TeamTasksQueryParams {
 		private Long to;
 		private String lastId;
 
-		public Builder isPickupTask(Boolean isPickupTask) {
+		public Builder setIsPickupTask(Boolean isPickupTask) {
 			this.isPickupTask = isPickupTask;
 			return this;
 		}
 
-		public Builder from(Long from) {
+		public Builder setFrom(Long from) {
 			this.from = from;
 			return this;
 		}
 
-		public Builder to(Long to) {
+		public Builder setTo(Long to) {
 			this.to = to;
 			return this;
 		}
 
-		public Builder lastId(String lastId) {
+		public Builder setLastId(String lastId) {
 			this.lastId = lastId;
 			return this;
 		}
 
 		public TeamTasksQueryParams build() {
-			TeamTasksQueryParams queryParams = new TeamTasksQueryParams();
-			queryParams.setIsPickupTask(this.isPickupTask);
-			queryParams.setFrom(this.from);
-			queryParams.setTo(this.to);
-			queryParams.setLastId(this.lastId);
-			return queryParams;
+			return new TeamTasksQueryParams(this);
 		}
 	}
 }

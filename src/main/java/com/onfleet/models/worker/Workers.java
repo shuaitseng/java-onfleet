@@ -12,7 +12,4 @@ public class Workers {
 		return workerList;
 	}
 
-	public void setWorkers(List<Worker> workers) {
-		this.workerList = workers;
-	}
 }

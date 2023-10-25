@@ -13,16 +13,8 @@ public class TaskForceCompletionParams {
 		this.success = success;
 	}
 
-	public Boolean getSuccess() {
-		return success;
-	}
-
 	public void setSuccess(Boolean success) {
 		this.success = success;
-	}
-
-	public String getNotes() {
-		return notes;
 	}
 
 	public void setNotes(String notes) {

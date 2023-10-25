@@ -13,10 +13,6 @@ public class WorkerUpdateParams {
 	private List<String> teams;
 	private WorkerVehicle workerVehicle;
 
-	public WorkerAddresses getAddresses() {
-		return addresses;
-	}
-
 	private WorkerUpdateParams(Builder builder) {
 		this.addresses = builder.addresses;
 		this.capacity = builder.capacity;
@@ -25,58 +21,6 @@ public class WorkerUpdateParams {
 		this.name = builder.name;
 		this.teams = builder.teams;
 		this.workerVehicle = builder.workerVehicle;
-	}
-
-	public void setAddresses(WorkerAddresses addresses) {
-		this.addresses = addresses;
-	}
-
-	public Double getCapacity() {
-		return capacity;
-	}
-
-	public void setCapacity(Double capacity) {
-		this.capacity = capacity;
-	}
-
-	public String getDisplayName() {
-		return displayName;
-	}
-
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
-	}
-
-	public List<Metadata> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(List<Metadata> metadata) {
-		this.metadata = metadata;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<String> getTeams() {
-		return teams;
-	}
-
-	public void setTeams(List<String> teams) {
-		this.teams = teams;
-	}
-
-	public WorkerVehicle getWorkerVehicle() {
-		return workerVehicle;
-	}
-
-	public void setWorkerVehicle(WorkerVehicle workerVehicle) {
-		this.workerVehicle = workerVehicle;
 	}
 
 	public static class Builder {

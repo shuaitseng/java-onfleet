@@ -10,16 +10,8 @@ public class AutomaticallyAssignTaskResult {
 		return assignedTasksCount;
 	}
 
-	public void setAssignedTasksCount(Integer assignedTasksCount) {
-		this.assignedTasksCount = assignedTasksCount;
-	}
-
 	public TaskMap getAssignedTasks() {
 		return assignedTasks;
-	}
-
-	public void setAssignedTasks(TaskMap assignedTasks) {
-		this.assignedTasks = assignedTasks;
 	}
 
 	public static class TaskMap {
@@ -27,10 +19,6 @@ public class AutomaticallyAssignTaskResult {
 
 		public Map<String, String> getTaskMap() {
 			return taskMap;
-		}
-
-		public void setTaskMap(Map<String, String> taskMap) {
-			this.taskMap = taskMap;
 		}
 	}
 

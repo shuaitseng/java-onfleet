@@ -11,13 +11,6 @@ public class Address {
 	private String country;
 	private String unparsed;
 
-	public Address(String number, String street, String city, String country) {
-		this.number = number;
-		this.street = street;
-		this.city = city;
-		this.country = country;
-	}
-
 	private Address(Builder builder) {
 		this.name = builder.name;
 		this.number = builder.number;
@@ -35,72 +28,36 @@ public class Address {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getNumber() {
 		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
 	}
 
 	public String getStreet() {
 		return street;
 	}
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
 	public String getApartment() {
 		return apartment;
-	}
-
-	public void setApartment(String apartment) {
-		this.apartment = apartment;
 	}
 
 	public String getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
-	}
-
 	public String getState() {
 		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
 	}
 
 	public String getPostalCode() {
 		return postalCode;
 	}
 
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
-	}
-
 	public String getCountry() {
 		return country;
 	}
 
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
 	public String getUnparsed() {
 		return unparsed;
-	}
-
-	public void setUnparsed(String unparsed) {
-		this.unparsed = unparsed;
 	}
 
 	public static class Builder {

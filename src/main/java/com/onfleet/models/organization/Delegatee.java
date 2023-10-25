@@ -8,7 +8,4 @@ public class Delegatee extends Organization {
 		return isFulfillment;
 	}
 
-	public void setFulfillment(Boolean fulfillment) {
-		isFulfillment = fulfillment;
-	}
 }

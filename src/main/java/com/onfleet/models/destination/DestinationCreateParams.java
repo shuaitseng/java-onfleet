@@ -19,26 +19,6 @@ public class DestinationCreateParams {
 		this.options = builder.options;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
-	public List<Double> getLocation() {
-		return location;
-	}
-
-	public List<Metadata> getMetadata() {
-		return metadata;
-	}
-
-	public String getNotes() {
-		return notes;
-	}
-
-	public DestinationOptions getOptions() {
-		return options;
-	}
-
 	public static class Builder {
 		private final Address address;
 		private List<Double> location;

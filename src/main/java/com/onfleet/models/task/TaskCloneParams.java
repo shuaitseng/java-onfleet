@@ -6,35 +6,41 @@ public class TaskCloneParams {
 	private Boolean includeMetadata;
 	private TaskCloneOverridesParam overrides;
 
-	public Boolean getIncludeBarcodes() {
-		return includeBarcodes;
+	private TaskCloneParams(Builder builder) {
+		includeBarcodes = builder.includeBarcodes;
+		includeDependencies = builder.includeDependencies;
+		includeMetadata = builder.includeMetadata;
+		overrides = builder.overrides;
 	}
 
-	public void setIncludeBarcodes(Boolean includeBarcodes) {
-		this.includeBarcodes = includeBarcodes;
-	}
+	public static class Builder {
+		private Boolean includeBarcodes;
+		private Boolean includeDependencies;
+		private Boolean includeMetadata;
+		private TaskCloneOverridesParam overrides;
 
-	public Boolean getIncludeDependencies() {
-		return includeDependencies;
-	}
+		public Builder setIncludeBarcodes(Boolean includeBarcodes) {
+			this.includeBarcodes = includeBarcodes;
+			return this;
+		}
 
-	public void setIncludeDependencies(Boolean includeDependencies) {
-		this.includeDependencies = includeDependencies;
-	}
+		public Builder setIncludeDependencies(Boolean includeDependencies) {
+			this.includeDependencies = includeDependencies;
+			return this;
+		}
 
-	public Boolean getIncludeMetadata() {
-		return includeMetadata;
-	}
+		public Builder setIncludeMetadata(Boolean includeMetadata) {
+			this.includeMetadata = includeMetadata;
+			return this;
+		}
 
-	public void setIncludeMetadata(Boolean includeMetadata) {
-		this.includeMetadata = includeMetadata;
-	}
+		public Builder setOverrides(TaskCloneOverridesParam overrides) {
+			this.overrides = overrides;
+			return this;
+		}
 
-	public TaskCloneOverridesParam getOverrides() {
-		return overrides;
-	}
-
-	public void setOverrides(TaskCloneOverridesParam overrides) {
-		this.overrides = overrides;
+		public TaskCloneParams build() {
+			return new TaskCloneParams(this);
+		}
 	}
 }

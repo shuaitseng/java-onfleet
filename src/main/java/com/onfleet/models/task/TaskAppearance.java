@@ -10,8 +10,4 @@ public class TaskAppearance {
 	public String getTriangleColor() {
 		return triangleColor;
 	}
-
-	public void setTriangleColor(String triangleColor) {
-		this.triangleColor = triangleColor;
-	}
 }

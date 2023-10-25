@@ -7,16 +7,7 @@ public class TaskBatchCreateResponseAsync {
 	public String getStatus() {
 		return status;
 	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
 	public String getJobId() {
 		return jobId;
-	}
-
-	public void setJobId(String jobId) {
-		this.jobId = jobId;
 	}
 }

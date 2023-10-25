@@ -15,30 +15,6 @@ public class HubParams {
 		this.teams = builder.teams;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<String> getTeams() {
-		return teams;
-	}
-
-	public void setTeams(List<String> teams) {
-		this.teams = teams;
-	}
-
 	public static class Builder {
 		private final Address address;
 		private final String name;

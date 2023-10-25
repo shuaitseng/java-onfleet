@@ -13,15 +13,7 @@ public class TaskBarcode {
 		return blockCompletion;
 	}
 
-	public void setBlockCompletion(Boolean blockCompletion) {
-		this.blockCompletion = blockCompletion;
-	}
-
 	public String getData() {
 		return data;
-	}
-
-	public void setData(String data) {
-		this.data = data;
 	}
 }
