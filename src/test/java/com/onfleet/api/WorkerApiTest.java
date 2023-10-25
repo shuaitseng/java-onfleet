@@ -6,6 +6,7 @@ import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.ErrorResponse;
 import com.onfleet.models.Metadata;
 import com.onfleet.models.MetadataVisibility;
+import com.onfleet.models.VehicleType;
 import com.onfleet.models.worker.Worker;
 import com.onfleet.models.worker.WorkerCreateParams;
 import com.onfleet.models.worker.WorkerFilterFields;
@@ -17,6 +18,7 @@ import com.onfleet.models.worker.WorkerStates;
 import com.onfleet.models.worker.WorkerTasks;
 import com.onfleet.models.worker.WorkerTasksQueryParams;
 import com.onfleet.models.worker.WorkerUpdateParams;
+import com.onfleet.models.worker.WorkerVehicle;
 import com.onfleet.models.worker.Workers;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
@@ -54,9 +56,11 @@ class WorkerApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"id\":\"sFtvhYK2l26zS0imptJJdC2q\",\"timeCreated\":1455156653000,\"timeLastModified\":1455156653214,\"organization\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"name\":\"A Swartz\",\"displayName\":\"AS\",\"phone\":\"+16173428853\",\"activeTask\":null,\"tasks\":[],\"onDuty\":false,\"timeLastSeen\":null,\"capacity\":0,\"userData\":{\"appVersion\":\"1.2.0\",\"batteryLevel\":0.99,\"deviceDescription\":\"iPhone XS\",\"platform\":\"IOS\"},\"accountStatus\":\"ACCEPTED\",\"metadata\":[],\"imageUrl\":null,\"teams\":[\"nz1nG1Hpx9EHjQCJsT2VAs~o\"],\"delayTime\":null,\"vehicle\":{\"id\":\"tN1HjcvygQWvz5FRR1JAxwL8\",\"type\":\"CAR\",\"description\":\"Tesla Model 3\",\"licensePlate\":\"FKNS9A\",\"color\":\"purple\",\"timeLastModified\":154086815176}}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
 
-		WorkerCreateParams workerParams = new WorkerCreateParams.Builder("John Doe", "123-456-7890", null)
+		WorkerVehicle vehicle = new WorkerVehicle.Builder(VehicleType.CAR).build();
+		WorkerCreateParams params = new WorkerCreateParams.Builder("A Swartz", "617-342-8853", Collections.singletonList("nz1nG1Hpx9EHjQCJsT2VAs~o"))
+				.setWorkerVehicle(vehicle)
 				.build();
-		Worker createdWorker = workerApi.createWorker(workerParams);
+		Worker createdWorker = workerApi.createWorker(params);
 		RecordedRequest request = mockWebServer.takeRequest();
 
 		assertEquals(HttpMethodType.POST.name(), request.getMethod());

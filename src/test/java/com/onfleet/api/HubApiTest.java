@@ -50,8 +50,6 @@ class HubApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"id\":\"i4FoP*dTVrdnGqvIVvvA69aB\",\"name\":\"VIP customer Hub\",\"location\":[-118.2673597,34.0430058],\"address\":{\"number\":\"1111\",\"street\":\"South Figueroa Street\",\"city\":\"Los Angeles\",\"county\":\"Los Angeles County\",\"state\":\"California\",\"country\":\"United States\",\"postalCode\":\"90015\",\"name\":\"VIP customer\",\"apartment\":\"\"},\"teams\":[\"kq5MFBzYNWhp1rumJEfGUTqS\"]}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
 
-		Hub hub = getHub();
-		hub.setId("i4FoP*dTVrdnGqvIVvvA69aB");
 		HubParams params = new HubParams.Builder(getAddress(), "name")
 				.setTeams(Arrays.asList("team1", "team2", "team3"))
 				.build();
@@ -61,6 +59,10 @@ class HubApiTest extends BaseApiTest {
 
 		assertEquals(HttpMethodType.PUT.name(), recordedRequest.getMethod());
 		assertEquals("/hubs/i4FoP*dTVrdnGqvIVvvA69aB", recordedRequest.getPath());
+		assertEquals("i4FoP*dTVrdnGqvIVvvA69aB", hubResponse.getId());
+		assertEquals("VIP customer Hub", hubResponse.getName());
+		assertEquals(Arrays.asList(-118.2673597,34.0430058), hubResponse.getLocation());
+		assertEquals(Collections.singletonList("kq5MFBzYNWhp1rumJEfGUTqS"), hubResponse.getTeams());
 		Assertions.assertThat(hubResponse).usingRecursiveComparison().isEqualTo(GsonSingleton.getInstance().fromJson(mockResponseJson, Hub.class));
 	}
 

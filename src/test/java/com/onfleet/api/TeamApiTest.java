@@ -205,10 +205,10 @@ class TeamApiTest extends BaseApiTest {
 		enqueueMockResponse(mockResponse, HttpURLConnection.HTTP_OK);
 
 		TeamTasksQueryParams queryParams = new TeamTasksQueryParams.Builder()
-				.isPickupTask(true)
-				.from(1600000000L)
-				.to(1700000000L)
-				.lastId("lastTask")
+				.setIsPickupTask(true)
+				.setFrom(1600000000L)
+				.setTo(1700000000L)
+				.setLastId("lastTask")
 				.build();
 		TeamTasks tasks = teamApi.getUnassignedTasks("teamId", queryParams);
 		List<Task> taskList = tasks.getTasks();

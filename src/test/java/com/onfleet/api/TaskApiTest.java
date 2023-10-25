@@ -3,11 +3,17 @@ package com.onfleet.api;
 import com.google.gson.reflect.TypeToken;
 import com.onfleet.models.Metadata;
 import com.onfleet.models.MetadataVisibility;
+import com.onfleet.models.destination.Address;
+import com.onfleet.models.destination.Destination;
+import com.onfleet.models.recipient.Recipient;
 import com.onfleet.models.task.AutomaticallyAssignTaskResult;
 import com.onfleet.models.task.BatchJobStatus;
 import com.onfleet.models.task.Task;
 import com.onfleet.models.task.TaskAppearance;
+import com.onfleet.models.task.TaskAutoAssignMode;
 import com.onfleet.models.task.TaskAutoAssignMultiParams;
+import com.onfleet.models.task.TaskAutoAssignOptions;
+import com.onfleet.models.task.TaskAutoAssignParam;
 import com.onfleet.models.task.TaskBarcode;
 import com.onfleet.models.task.TaskBatchCreateResponseAsync;
 import com.onfleet.models.task.TaskCloneParams;
@@ -46,7 +52,28 @@ class TaskApiTest extends BaseApiTest {
 		String json = "{\"id\":\"kc8SS1tzuZ~jqjlebKGrUmpe\",\"timeCreated\":1455156667000,\"timeLastModified\":1455156667234,\"organization\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"shortId\":\"8f983639\",\"trackingURL\":\"https://onf.lt/8f98363993\",\"worker\":\"1LjhGUWdxFbvdsTAAXs0TFos\",\"merchant\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"executor\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"creator\":\"EJmsbJgHiRLPjNVE7GEIPs7*\",\"dependencies\":[],\"state\":0,\"completeAfter\":1455151071727,\"completeBefore\":null,\"pickupTask\":false,\"notes\":\"Order 332: 24oz Stumptown Finca El Puente, 10 x Aji de Gallina Empanadas, 13-inch Lelenitas Tres Leches\",\"completionDetails\":{\"events\":[],\"time\":null},\"feedback\":[],\"metadata\":[],\"overrides\":{\"recipientSkipSMSNotifications\":null,\"recipientNotes\":null,\"recipientName\":null},\"container\":{\"type\":\"WORKER\",\"worker\":\"1LjhGUWdxFbvdsTAAXs0TFos\"},\"recipients\":[{\"id\":\"G7rcM2nqblmh8vj2do1FpaOQ\",\"organization\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"timeCreated\":1455156667000,\"timeLastModified\":1455156667229,\"name\":\"Blas Silkovich\",\"phone\":\"+16505554481\",\"notes\":\"Knows Neiman, VIP status.\",\"skipSMSNotifications\":false,\"metadata\":[]}],\"destination\":{\"id\":\"zrVXZi5aDzOZlAghZaLfGAfA\",\"timeCreated\":1455156667000,\"timeLastModified\":1455156667220,\"location\":[-122.4438337,37.7940329],\"address\":{\"apartment\":\"\",\"state\":\"California\",\"postalCode\":\"94123\",\"country\":\"United States\",\"city\":\"San Francisco\",\"street\":\"Vallejo Street\",\"number\":\"2829\"},\"notes\":\"Small green door by garage door has pin pad, enter *4821*\",\"metadata\":[]},\"didAutoAssign\":true}";
 		enqueueMockResponse(json, HttpURLConnection.HTTP_OK);
 
-		TaskParams params = getTaskParams();
+		Recipient recipient = new Recipient.Builder()
+				.setName("Blas Silkovich")
+				.setPhone("650-555-4481")
+				.setNotes("Knows Neiman, VIP status.")
+				.build();
+
+		Address address = new Address.Builder()
+				.setUnparsed("2829 Vallejo St, SF, CA, USA")
+				.build();
+
+
+		Destination destination = new Destination.Builder()
+				.setAddress(address)
+				.setNotes("Small green door by garage door has pin pad, enter *4821*")
+				.build();
+
+		TaskParams params = new TaskParams.Builder()
+				.setDestination(destination)
+				.setRecipients(Collections.singletonList(recipient))
+				.setCompleteAfter(1455151071727L)
+				.setAutoAssign(new TaskAutoAssignParam.Builder().setMode(TaskAutoAssignMode.DISTANCE).build())
+				.build();
 		Task response = taskApi.createTask(params);
 
 		Assertions.assertThat(response).usingRecursiveComparison().isEqualTo(GsonSingleton.getInstance().fromJson(json, Task.class));
@@ -94,7 +121,7 @@ class TaskApiTest extends BaseApiTest {
 		TaskListQueryParams params = new TaskListQueryParams.Builder(10000)
 				.setTo(1100L)
 				.setLastId("lastId")
-				.setStates(Arrays.asList(TaskState.ACTIVE,TaskState.ASSIGNED, TaskState.UNASSIGNED))
+				.setStates(Arrays.asList(TaskState.ACTIVE, TaskState.ASSIGNED, TaskState.UNASSIGNED, TaskState.COMPLETED))
 				.setWorker("workerId")
 				.setCompleteAfterAfter(10000L)
 				.setCompleteBeforeBefore(20000L)
@@ -146,7 +173,7 @@ class TaskApiTest extends BaseApiTest {
 		String json = "{\"id\":\"fesYPEu2FWvubaq~2nof*lCA\",\"timeCreated\":1489010058000,\"timeLastModified\":1489010058477,\"organization\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"shortId\":\"9b4zd53d\",\"trackingURL\":\"https://onf.lt/9b4zd53d\",\"worker\":null,\"merchant\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"executor\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"creator\":\"EJmsbJgHiRLPjNVE7GEIPs7*\",\"dependencies\":[],\"state\":0,\"completeAfter\":null,\"completeBefore\":null,\"pickupTask\":false,\"notes\":\"\",\"completionDetails\":{\"events\":[],\"failureReason\":\"NONE\",\"time\":null},\"feedback\":[],\"metadata\":[],\"overrides\":{},\"quantity\":0,\"serviceTime\":0,\"delayTime\":null,\"sourceTaskId\":\"uO2vKr07h6zg7Fzf~2NC3KLg\",\"container\":{\"type\":\"ORGANIZATION\",\"organization\":\"yAM*fDkztrT3gUcz9mNDgNOL\"},\"recipients\":[],\"destination\":{\"id\":\"Fa0Oxd21cL3T36qw5mGOvZw6\",\"timeCreated\":1485469374000,\"timeLastModified\":1485469374734,\"location\":[-122.43232727050781,37.79811961477822],\"address\":{\"apartment\":\"\",\"state\":\"California\",\"postalCode\":\"94123\",\"country\":\"United States\",\"city\":\"San Francisco\",\"street\":\"Buchanan Street\",\"number\":\"3020\"},\"notes\":\"\",\"metadata\":[]}}";
 		enqueueMockResponse(json, HttpURLConnection.HTTP_OK);
 
-		TaskCloneParams params = new TaskCloneParams();
+		TaskCloneParams params = new TaskCloneParams.Builder().build();
 		Task task = taskApi.cloneTask("taskId", params);
 
 		Assertions.assertThat(task).usingRecursiveComparison().isEqualTo(GsonSingleton.getInstance().fromJson(json, Task.class));
@@ -163,7 +190,14 @@ class TaskApiTest extends BaseApiTest {
 		String json = "{\"assignedTasksCount\":3,\"assignedTasks\":{\"7z784Upb0cdm8GqPzKLVAHSI\":\"GPOQQjU84QPN~fP*pbunT2CW\",\"PDQyZQvaudBN7pEhLcIndjPh\":\"GPOQQjU84QPN~fP*pbunT2CW\",\"3flkKAFPUiQuLl5ZZ*04v41i\":\"GPOQQjU84QPN~fP*pbunT2CW\"}}";
 		enqueueMockResponse(json, HttpURLConnection.HTTP_OK);
 
-		TaskAutoAssignMultiParams params = new TaskAutoAssignMultiParams();
+		TaskAutoAssignMultiParams params = new TaskAutoAssignMultiParams.Builder()
+				.setTasks(Arrays.asList("11z1BbsQUZFHD1XAd~emDDeK", "kc8SS1tzuZ~jqjlebKGrUmpe"))
+				.setOptions(new TaskAutoAssignOptions.Builder()
+						.setMode(TaskAutoAssignMode.DISTANCE)
+						.setTeams(Collections.singletonList("fwflFNVvrK~4t0m5hKFIxBUl"))
+						.setConsiderDependencies(true)
+						.build())
+				.build();
 		AutomaticallyAssignTaskResult result = taskApi.autoAssign(params);
 
 		Assertions.assertThat(result).usingRecursiveComparison().isEqualTo(GsonSingleton.getInstance().fromJson(json, AutomaticallyAssignTaskResult.class));
