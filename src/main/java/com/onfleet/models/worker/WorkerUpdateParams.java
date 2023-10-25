@@ -84,14 +84,9 @@ public class WorkerUpdateParams {
 		private Double capacity;
 		private String displayName;
 		private List<Metadata> metadata;
-		private final String name;
-		private final List<String> teams;
+		private String name;
+		private List<String> teams;
 		private WorkerVehicle workerVehicle;
-
-		public Builder(String name, List<String> teams) {
-			this.name = name;
-			this.teams = teams;
-		}
 
 		public Builder setAddresses(WorkerAddresses addresses) {
 			this.addresses = addresses;
@@ -110,6 +105,16 @@ public class WorkerUpdateParams {
 
 		public Builder setMetadata(List<Metadata> metadata) {
 			this.metadata = metadata;
+			return this;
+		}
+
+		public Builder setName(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public Builder setTeams(List<String> teams) {
+			this.teams = teams;
 			return this;
 		}
 
