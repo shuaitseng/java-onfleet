@@ -3,7 +3,6 @@ package com.onfleet.api;
 import com.google.gson.reflect.TypeToken;
 import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.Metadata;
-import com.onfleet.models.administrator.Administrator;
 import com.onfleet.models.destination.Destination;
 import com.onfleet.models.destination.DestinationCreateParams;
 import com.onfleet.utils.GsonSingleton;
