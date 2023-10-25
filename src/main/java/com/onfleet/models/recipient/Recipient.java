@@ -17,6 +17,20 @@ public class Recipient {
 	private String organization;
 	private List<Metadata> metadata;
 
+	public Recipient() {}
+
+	private Recipient(Builder builder) {
+		id = builder.id;
+		name = builder.name;
+		phone = builder.phone;
+		notes = builder.notes;
+		skipSMSNotifications = builder.skipSMSNotifications;
+		timeCreated = builder.timeCreated;
+		timeLastModified = builder.timeLastModified;
+		organization = builder.organization;
+		metadata = builder.metadata;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -88,4 +102,66 @@ public class Recipient {
 	public void setMetadata(List<Metadata> metadata) {
 		this.metadata = metadata;
 	}
+
+	public static class Builder {
+		private String id;
+		private String name;
+		private String phone;
+		private String notes;
+		private Boolean skipSMSNotifications;
+		private Long timeCreated;
+		private Long timeLastModified;
+		private String organization;
+		private List<Metadata> metadata;
+
+		public Builder setId(String id) {
+			this.id = id;
+			return this;
+		}
+
+		public Builder setName(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public Builder setPhone(String phone) {
+			this.phone = phone;
+			return this;
+		}
+
+		public Builder setNotes(String notes) {
+			this.notes = notes;
+			return this;
+		}
+
+		public Builder setSkipSMSNotifications(Boolean skipSMSNotifications) {
+			this.skipSMSNotifications = skipSMSNotifications;
+			return this;
+		}
+
+		public Builder setTimeCreated(long timeCreated) {
+			this.timeCreated = timeCreated;
+			return this;
+		}
+
+		public Builder setTimeLastModified(long timeLastModified) {
+			this.timeLastModified = timeLastModified;
+			return this;
+		}
+
+		public Builder setOrganization(String organization) {
+			this.organization = organization;
+			return this;
+		}
+
+		public Builder setMetadata(List<Metadata> metadata) {
+			this.metadata = metadata;
+			return this;
+		}
+
+		public Recipient build() {
+			return new Recipient(this);
+		}
+	}
+
 }
