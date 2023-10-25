@@ -83,6 +83,7 @@ public class TaskApi extends BaseApi {
 	/**
 	 * Retrieves the status of a batch job
 	 * <a href="https://docs.onfleet.com/reference/batch-job-status">Api Docs</a>
+	 *
 	 * @param jobId The ID of the batch job for which to retrieve the status.
 	 * @return A BatchJobStatus object representing the status of the batch job.
 	 * @throws ApiException If an error occurs during the API request or response handling.
@@ -96,6 +97,7 @@ public class TaskApi extends BaseApi {
 	/**
 	 * Automatically assigns tasks to on-duty drivers
 	 * <a href="https://docs.onfleet.com/reference/automatic-assignment">Api Docs</a>
+	 *
 	 * @param params A TaskAutoAssignMultiParams object containing the parameters for task auto-assignment.
 	 * @return An AutomaticallyAssignTaskResult object representing the result of the auto-assignment process.
 	 * @throws ApiException If an error occurs during the API request or response handling.
@@ -112,6 +114,7 @@ public class TaskApi extends BaseApi {
 	 * Retrieve a list of tasks based on specified query parameters. This method allows you to filter and
 	 * retrieve tasks that match various criteria, such as their states, worker, completion dates, and task dependencies.
 	 * <a href="https://docs.onfleet.com/reference/list-tasks">Api Docs</a>
+	 *
 	 * @param queryParams A TaskListQueryParams object containing the query parameters for filtering tasks.
 	 * @return A TasksPaginated object representing a paginated list of tasks matching the specified criteria.
 	 * @throws ApiException If an error occurs during the API request or response handling, or if required parameters are missing.
@@ -154,6 +157,7 @@ public class TaskApi extends BaseApi {
 	/**
 	 * Query tasks with associated metadata.
 	 * <a href="https://docs.onfleet.com/reference/metadata">Api Docs</a>
+	 *
 	 * @param metadata A list of Metadata objects containing personalized data to be used as query criteria.
 	 * @return A list of Task objects matching the specified metadata query criteria.
 	 * @throws ApiException If an error occurs during the API request or response handling.
@@ -170,6 +174,7 @@ public class TaskApi extends BaseApi {
 	/**
 	 * Retrieves a single task by its ID
 	 * <a href="https://docs.onfleet.com/reference/get-single-task">Api Docs</a>
+	 *
 	 * @param taskId The ID of the task to retrieve.
 	 * @return A Task object representing the retrieved task.
 	 * @throws ApiException If an error occurs during the API request or response handling.
@@ -183,6 +188,7 @@ public class TaskApi extends BaseApi {
 	/**
 	 * Retrieves a task by its short ID
 	 * <a href="https://docs.onfleet.com/reference/get-single-task-by-shortid">Api Docs</a>
+	 *
 	 * @param taskShortId The short ID of the task to retrieve.
 	 * @return A Task object representing the retrieved task.
 	 * @throws ApiException If an error occurs during the API request or response handling.
@@ -196,8 +202,9 @@ public class TaskApi extends BaseApi {
 	/**
 	 * Updates a task by its ID with the provided TaskParams object
 	 * <a href="https://docs.onfleet.com/reference/update-task">Api Docs</a>
+	 *
 	 * @param taskId The ID of the task to update.
-	 * @param task The TaskParams object containing the updated task data.
+	 * @param task   The TaskParams object containing the updated task data.
 	 * @return A Task object representing the updated task.
 	 * @throws ApiException If an error occurs during the API request or response handling.
 	 */
@@ -212,7 +219,8 @@ public class TaskApi extends BaseApi {
 	/**
 	 * Marks a task as completed, providing completion details
 	 * <a href="https://docs.onfleet.com/reference/complete-task">Api Docs</a>
-	 * @param taskId The ID of the task to mark as completed.
+	 *
+	 * @param taskId            The ID of the task to mark as completed.
 	 * @param completionDetails The TaskForceCompletionParams object containing completion details.
 	 * @throws ApiException If an error occurs during the API request or response handling.
 	 */
@@ -226,7 +234,8 @@ public class TaskApi extends BaseApi {
 	/**
 	 * Clones a task by its ID with the provided TaskCloneParams options
 	 * <a href="https://docs.onfleet.com/reference/clone-task">Api Docs</a>
-	 * @param taskId The ID of the task to clone.
+	 *
+	 * @param taskId      The ID of the task to clone.
 	 * @param cloneParams The TaskCloneParams object containing cloning options.
 	 * @return A Task object representing the cloned task.
 	 * @throws ApiException If an error occurs during the API request or response handling.
@@ -251,6 +260,7 @@ public class TaskApi extends BaseApi {
 	/**
 	 * Deletes a task by its ID
 	 * <a href="https://docs.onfleet.com/reference/delete-task">Api Docs</a>
+	 *
 	 * @param taskId The ID of the task to delete.
 	 * @throws ApiException If an error occurs during the API request or response handling.
 	 */
