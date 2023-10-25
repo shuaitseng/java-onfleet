@@ -83,7 +83,7 @@ public class WorkerApi extends BaseApi {
 		if (params.getPhoneNumbers() != null && !params.getPhoneNumbers().isEmpty()) {
 			urlBuilder.addQueryParameter("phoneNumbers", String.join(",", params.getPhoneNumbers()));
 		}
-		if (params.getIncludePasswordDetails()) {
+		if (Boolean.TRUE.equals(params.getIncludePasswordDetails())) {
 			urlBuilder.addQueryParameter("includePasswordDetails", "true");
 		}
 		Response response = sendRequest(HttpMethodType.GET, urlBuilder.toString());
