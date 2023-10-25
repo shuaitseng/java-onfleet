@@ -77,6 +77,12 @@ class WorkerApiTest extends BaseApiTest {
 
 		assertEquals(HttpMethodType.POST.name(), request.getMethod());
 		assertEquals("/workers", request.getPath());
+		assertEquals(HttpURLConnection.HTTP_BAD_REQUEST, exception.getStatusCode());
+		assertEquals("InvalidArgument", exception.getErrorResponse().getCode());
+		assertEquals(1900, exception.getErrorResponse().getMessage().getError());
+		assertEquals("Team IDs array missing", exception.getErrorResponse().getMessage().getCause());
+		assertEquals("bc41a8eb-a604-4a1c-aa5a-e86a975c141b", exception.getErrorResponse().getMessage().getRequest());
+
 		Assertions.assertThat(exception.getErrorResponse())
 				.usingRecursiveComparison()
 				.isEqualTo(GsonSingleton.getInstance().fromJson(mockResponse, ErrorResponse.class));
