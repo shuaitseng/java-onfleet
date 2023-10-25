@@ -70,12 +70,12 @@ public class TeamCreateParams {
 			this.workers = workers;
 		}
 
-		public Builder enableSelfAssignment(Boolean enableSelfAssignment) {
+		public Builder setEnableSelfAssignment(Boolean enableSelfAssignment) {
 			this.enableSelfAssignment = enableSelfAssignment;
 			return this;
 		}
 
-		public Builder hub(String hub) {
+		public Builder setHub(String hub) {
 			this.hub = hub;
 			return this;
 		}
