@@ -232,12 +232,20 @@ public class TaskApi extends BaseApi {
 	 * @throws ApiException If an error occurs during the API request or response handling.
 	 */
 	public Task cloneTask(String taskId, TaskCloneParams cloneParams) throws ApiException {
-		TaskCloneOptions options = new TaskCloneOptions(cloneParams);
 		String url = String.format("%s/%s/clone", baseUrl, taskId);
-		String jsonPayload = GsonSingleton.getInstance().toJson(options);
-		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
-		Response response = sendRequest(HttpMethodType.POST, body, url);
+		if (cloneParams != null) {
+			TaskCloneOptions options = new TaskCloneOptions(cloneParams);
+			String jsonPayload = GsonSingleton.getInstance().toJson(options);
+			RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
+			Response response = sendRequest(HttpMethodType.POST, body, url);
+			return handleResponse(response, Task.class);
+		}
+		Response response = sendRequest(HttpMethodType.POST, url);
 		return handleResponse(response, Task.class);
+	}
+
+	public Task cloneTask(String taskId) throws ApiException {
+		return this.cloneTask(taskId, null);
 	}
 
 	/**
