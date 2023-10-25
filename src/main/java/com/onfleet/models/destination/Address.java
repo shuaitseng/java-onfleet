@@ -18,15 +18,6 @@ public class Address {
 		this.country = country;
 	}
 
-	public Address(String name, String number, String street, String apartment, String city, String state, String postalCode, String country, String unparsed) {
-		this(number, street, city, country);
-		this.name = name;
-		this.apartment = apartment;
-		this.state = state;
-		this.postalCode = postalCode;
-		this.unparsed = unparsed;
-	}
-
 	private Address(Builder builder) {
 		this.name = builder.name;
 		this.number = builder.number;
