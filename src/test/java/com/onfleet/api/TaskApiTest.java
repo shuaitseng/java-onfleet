@@ -137,7 +137,7 @@ class TaskApiTest extends BaseApiTest {
 	@Test
 	void testCompleteTask() throws Exception {
 		enqueueMockResponse(HttpURLConnection.HTTP_OK);
-		TaskForceCompletionParams completionParams = new TaskForceCompletionParams();
+		TaskForceCompletionParams completionParams = new TaskForceCompletionParams(true);
 		taskApi.completeTask("taskId", completionParams);
 	}
 
