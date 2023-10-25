@@ -8,6 +8,13 @@ public class WorkerVehicle {
 	private String licensePlate;
 	private String color;
 
+	private WorkerVehicle(Builder builder) {
+		type = builder.type;
+		description = builder.description;
+		licensePlate = builder.licensePlate;
+		color = builder.color;
+	}
+
 	public WorkerVehicle(VehicleType type, String description, String licensePlate, String color) {
 		this.type = type;
 		this.description = description;
@@ -46,4 +53,35 @@ public class WorkerVehicle {
 	public void setColor(String color) {
 		this.color = color;
 	}
+
+	public static class Builder {
+		private VehicleType type;
+		private String description;
+		private String licensePlate;
+		private String color;
+
+		public Builder(VehicleType type) {
+			this.type = type;
+		}
+
+		public Builder setDescription(String description) {
+			this.description = description;
+			return this;
+		}
+
+		public Builder setLicensePlate(String licensePlate) {
+			this.licensePlate = licensePlate;
+			return this;
+		}
+
+		public Builder setColor(String color) {
+			this.color = color;
+			return this;
+		}
+
+		public WorkerVehicle build() {
+			return new WorkerVehicle(this);
+		}
+	}
+
 }
