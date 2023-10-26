@@ -1,6 +1,8 @@
 package com.onfleet.models.task;
 
 import com.onfleet.models.Metadata;
+import com.onfleet.models.destination.Destination;
+import com.onfleet.models.recipient.Recipient;
 
 import java.util.List;
 
@@ -14,67 +16,72 @@ public class TaskCloneOverridesParam {
 	private Object recipients; // Recipients can be a String array of recipient ids or an array of recipient objects
 	private Double serviceTime;
 
-	public Long getCompleteAfter() {
-		return completeAfter;
+	private TaskCloneOverridesParam(Builder builder) {
+		completeAfter = builder.completeAfter;
+		completeBefore = builder.completeBefore;
+		destination = builder.destination;
+		metadata = builder.metadata;
+		notes = builder.notes;
+		pickupTask = builder.pickupTask;
+		recipients = builder.recipients;
 	}
 
-	public void setCompleteAfter(Long completeAfter) {
-		this.completeAfter = completeAfter;
-	}
+	public static class Builder {
+		private Long completeAfter;
+		private Long completeBefore;
+		private Object destination;
+		private List<Metadata> metadata;
+		private String notes;
+		private Boolean pickupTask;
+		private Object recipients;
 
-	public Long getCompleteBefore() {
-		return completeBefore;
-	}
+		public Builder setCompleteAfter(Long completeAfter) {
+			this.completeAfter = completeAfter;
+			return this;
+		}
 
-	public void setCompleteBefore(Long completeBefore) {
-		this.completeBefore = completeBefore;
-	}
+		public Builder setCompleteBefore(Long completeBefore) {
+			this.completeBefore = completeBefore;
+			return this;
+		}
 
-	public Object getDestination() {
-		return destination;
-	}
+		public Builder setDestination(String destinationId) {
+			this.destination = destinationId;
+			return this;
+		}
 
-	public void setDestination(Object destination) {
-		this.destination = destination;
-	}
+		public Builder setDestination(Destination destination) {
+			this.destination = destination;
+			return this;
+		}
 
-	public List<Metadata> getMetadata() {
-		return metadata;
-	}
+		public Builder setMetadata(List<Metadata> metadata) {
+			this.metadata = metadata;
+			return this;
+		}
 
-	public void setMetadata(List<Metadata> metadata) {
-		this.metadata = metadata;
-	}
+		public Builder setNotes(String notes) {
+			this.notes = notes;
+			return this;
+		}
 
-	public String getNotes() {
-		return notes;
-	}
+		public Builder setPickupTask(Boolean pickupTask) {
+			this.pickupTask = pickupTask;
+			return this;
+		}
 
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
+		public Builder setRecipients(String[] recipientsIds) {
+			this.recipients = recipientsIds;
+			return this;
+		}
 
-	public Boolean getPickupTask() {
-		return pickupTask;
-	}
+		public Builder setRecipients(List<Recipient> recipients) {
+			this.recipients = recipients;
+			return this;
+		}
 
-	public void setPickupTask(Boolean pickupTask) {
-		this.pickupTask = pickupTask;
-	}
-
-	public Object getRecipients() {
-		return recipients;
-	}
-
-	public void setRecipients(Object recipients) {
-		this.recipients = recipients;
-	}
-
-	public Double getServiceTime() {
-		return serviceTime;
-	}
-
-	public void setServiceTime(Double serviceTime) {
-		this.serviceTime = serviceTime;
+		public TaskCloneOverridesParam build() {
+			return new TaskCloneOverridesParam(this);
+		}
 	}
 }
