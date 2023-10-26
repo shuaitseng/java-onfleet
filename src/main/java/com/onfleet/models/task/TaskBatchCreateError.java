@@ -1,24 +1,30 @@
 package com.onfleet.models.task;
 
-import com.onfleet.models.ErrorResponseMessage;
 
 public class TaskBatchCreateError {
-	private ErrorResponseMessage error;
-	private TaskParams task;
+	private Integer statusCode;
+	private Integer errorCode;
+	private String message;
+	private String cause;
+	private Task taskData;
 
-	public ErrorResponseMessage getError() {
-		return error;
+	public Integer getStatusCode() {
+		return statusCode;
 	}
 
-	public void setError(ErrorResponseMessage error) {
-		this.error = error;
+	public Integer getErrorCode() {
+		return errorCode;
 	}
 
-	public TaskParams getTask() {
-		return task;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setTask(TaskParams task) {
-		this.task = task;
+	public String getCause() {
+		return cause;
+	}
+
+	public Task getTaskData() {
+		return taskData;
 	}
 }
