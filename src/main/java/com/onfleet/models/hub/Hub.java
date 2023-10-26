@@ -12,12 +12,6 @@ public class Hub {
 	private String name;
 	private List<String> teams;
 
-	public Hub(String name, Address address, List<String> teams) {
-		this.name = name;
-		this.address = address;
-		this.teams = teams;
-	}
-
 	public String getId() {
 		return id;
 	}
