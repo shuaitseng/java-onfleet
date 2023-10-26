@@ -64,7 +64,7 @@ public class Administrator {
 		return metadata;
 	}
 
-	public Boolean getAccountOwner() {
+	public Boolean isAccountOwner() {
 		return isAccountOwner;
 	}
 
