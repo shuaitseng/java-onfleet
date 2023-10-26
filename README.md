@@ -69,3 +69,5 @@ try {
 }
 ```
 
+## Examples
+You can find usage examples in the examples directory of this repository. These examples demonstrate how to perform common operations using the API wrapper.
