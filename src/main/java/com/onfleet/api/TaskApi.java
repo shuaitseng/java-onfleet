@@ -10,9 +10,11 @@ import com.onfleet.models.task.TaskAutoAssignMultiParams;
 import com.onfleet.models.task.TaskBatchCreateResponseAsync;
 import com.onfleet.models.task.TaskCloneOptions;
 import com.onfleet.models.task.TaskCloneParams;
+import com.onfleet.models.task.TaskForceCompletion;
 import com.onfleet.models.task.TaskForceCompletionParams;
 import com.onfleet.models.task.TaskListQueryParams;
 import com.onfleet.models.task.TaskParams;
+import com.onfleet.models.task.TaskParamsList;
 import com.onfleet.models.task.TaskState;
 import com.onfleet.models.task.Tasks;
 import com.onfleet.models.task.TasksPaginated;
@@ -26,6 +28,7 @@ import okhttp3.Response;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class TaskApi extends BaseApi {
 
@@ -57,8 +60,9 @@ public class TaskApi extends BaseApi {
 	 * @throws ApiException If an error occurs during the API request or response handling.
 	 */
 	public Tasks createTasksBatch(List<TaskParams> tasks) throws ApiException {
+		TaskParamsList taskList = new TaskParamsList(tasks);
 		String url = String.format("%s/batch", baseUrl);
-		String jsonPayload = GsonSingleton.getInstance().toJson(tasks);
+		String jsonPayload = GsonSingleton.getInstance().toJson(taskList);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.POST, body, url);
 		return handleResponse(response, Tasks.class);
@@ -73,8 +77,9 @@ public class TaskApi extends BaseApi {
 	 * @throws ApiException If an error occurs during the API request or response handling.
 	 */
 	public TaskBatchCreateResponseAsync createTasksBatchAsync(List<TaskParams> tasks) throws ApiException {
+		TaskParamsList taskList = new TaskParamsList(tasks);
 		String url = String.format("%s/batch-async", baseUrl);
-		String jsonPayload = GsonSingleton.getInstance().toJson(tasks);
+		String jsonPayload = GsonSingleton.getInstance().toJson(taskList);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		Response response = sendRequest(HttpMethodType.POST, body, url);
 		return handleResponse(response, TaskBatchCreateResponseAsync.class);
@@ -120,7 +125,8 @@ public class TaskApi extends BaseApi {
 	 * @throws ApiException If an error occurs during the API request or response handling, or if required parameters are missing.
 	 */
 	public TasksPaginated listTasks(TaskListQueryParams queryParams) throws ApiException {
-		HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(baseUrl)).newBuilder();
+		String url = String.format("%s/%s",baseUrl, "all");
+		HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(url)).newBuilder();
 		if (queryParams.getFrom() > 0) {
 			urlBuilder.addQueryParameter("from", String.valueOf(queryParams.getFrom()));
 		} else {
@@ -133,9 +139,11 @@ public class TaskApi extends BaseApi {
 			urlBuilder.addQueryParameter("lastId", queryParams.getLastId());
 		}
 		if (queryParams.getStates() != null) {
-			for (TaskState state : queryParams.getStates()) {
-				urlBuilder.addQueryParameter("state", state.toString());
-			}
+			urlBuilder.addQueryParameter("state", queryParams.getStates()
+					.stream()
+					.map(TaskState::getValue)
+					.map(Object::toString)
+					.collect(Collectors.joining(",")));
 		}
 		if (queryParams.getWorker() != null) {
 			urlBuilder.addQueryParameter("worker", queryParams.getWorker());
@@ -147,9 +155,7 @@ public class TaskApi extends BaseApi {
 			urlBuilder.addQueryParameter("completeAfterAfter", String.valueOf(queryParams.getCompleteAfterAfter()));
 		}
 		if (queryParams.getTaskDependencies() != null) {
-			for (String dependency : queryParams.getTaskDependencies()) {
-				urlBuilder.addQueryParameter("dependencies", dependency);
-			}
+			urlBuilder.addQueryParameter("dependencies", String.join(",", queryParams.getTaskDependencies()));
 		}
 		return handleResponse(sendRequest(HttpMethodType.GET, urlBuilder.build().toString()), TasksPaginated.class);
 	}
@@ -225,8 +231,9 @@ public class TaskApi extends BaseApi {
 	 * @throws ApiException If an error occurs during the API request or response handling.
 	 */
 	public void completeTask(String taskId, TaskForceCompletionParams completionDetails) throws ApiException {
+		TaskForceCompletion details = new TaskForceCompletion(completionDetails);
 		String url = String.format("%s/%s/complete", baseUrl, taskId);
-		String jsonPayload = GsonSingleton.getInstance().toJson(completionDetails);
+		String jsonPayload = GsonSingleton.getInstance().toJson(details);
 		RequestBody body = RequestBody.create(jsonPayload, MediaTypes.JSON);
 		sendRequest(HttpMethodType.POST, body, url);
 	}
