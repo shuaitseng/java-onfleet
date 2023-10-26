@@ -35,6 +35,8 @@ class WebhookApiTest extends BaseApiTest {
 		List<Webhook> webhooks = webhookApi.list();
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
+		assertEquals(3, webhooks.size());
+		assertTrue(webhooks.get(2).getEnabled());
 		assertEquals(HttpMethodType.GET.name(), recordedRequest.getMethod());
 		assertEquals("/webhooks", recordedRequest.getPath());
 		Assertions.assertThat(webhooks).usingRecursiveComparison().isEqualTo(GsonSingleton.getInstance().fromJson(mockResponseJson, new TypeToken<List<Webhook>>() {
@@ -58,6 +60,25 @@ class WebhookApiTest extends BaseApiTest {
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
 
 		Webhook webhook = webhookApi.create(new WebhookCreateParams("webhook", "https://11ec4a02.ngrok.com/onfleet/taskStart", 0, 0));
+		RecordedRequest request = mockWebServer.takeRequest();
+
+		assertEquals(HttpMethodType.POST.name(), request.getMethod());
+		assertEquals("/webhooks", request.getPath());
+		Assertions.assertThat(webhook).usingRecursiveComparison().isEqualTo(GsonSingleton.getInstance().fromJson(mockResponseJson, Webhook.class));
+	}
+
+	@Test
+	void testCreateWebhookWithBuilder() throws Exception {
+		String mockResponseJson = "{\"id\":\"9zqMxI79mRcHpXE111nILiPn\",\"count\":0,\"url\":\"https://11ec4a02.ngrok.com/onfleet/taskStart\",\"trigger\":0}";
+		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
+
+		Webhook webhook = webhookApi.create(
+				new WebhookCreateParams.Builder()
+						.setUrl("https://11ec4a02.ngrok.com/onfleet/taskStart")
+						.setTrigger(3)
+						.setThreshold(0)
+						.setName("name")
+						.build());
 		RecordedRequest request = mockWebServer.takeRequest();
 
 		assertEquals(HttpMethodType.POST.name(), request.getMethod());

@@ -6,6 +6,7 @@ import com.onfleet.models.MetadataVisibility;
 import com.onfleet.models.destination.Address;
 import com.onfleet.models.destination.Destination;
 import com.onfleet.models.destination.DestinationCreateParams;
+import com.onfleet.models.destination.DestinationOptions;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
 import okhttp3.HttpUrl;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.net.HttpURLConnection;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,8 +41,18 @@ class DestinationApiTest extends BaseApiTest {
 		Address address = new Address.Builder()
 				.setCountry("Argentina")
 				.setNumber("123")
+				.setState("Cordoba")
+				.setCity("Cordoba")
+				.setName("Address 1")
+				.setStreet("Olmos")
+				.setPostalCode("5000")
 				.build();
-		DestinationCreateParams destination = new DestinationCreateParams.Builder(address).build();
+		DestinationCreateParams destination = new DestinationCreateParams.Builder(address)
+				.setNotes("notes")
+				.setLocation(Arrays.asList(1.0,2.0))
+				.setMetadata(Collections.singletonList(new Metadata.Builder().build()))
+				.setOptions(new DestinationOptions("english"))
+				.build();
 		Destination createdDestination = destinationApi.createDestination(destination);
 
 		RecordedRequest request = mockWebServer.takeRequest();

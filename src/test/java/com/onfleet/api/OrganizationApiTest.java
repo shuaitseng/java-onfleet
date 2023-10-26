@@ -14,8 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import java.net.HttpURLConnection;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class OrganizationApiTest extends BaseApiTest {
@@ -46,13 +45,14 @@ class OrganizationApiTest extends BaseApiTest {
 
 	@Test
 	void testGetDelegateeDetails() throws Exception {
-		String mockResponseJson = "{\"id\":\"cBrUjKvQQgdRp~s1qvQNLpK*\",\"name\":\"Onfleet Engineering\",\"email\":\"dev@onfleet.com\",\"timezone\":\"America/Los_Angeles\",\"country\":\"US\"}";
+		String mockResponseJson = "{\"id\":\"cBrUjKvQQgdRp~s1qvQNLpK*\",\"name\":\"Onfleet Engineering\",\"email\":\"dev@onfleet.com\",\"timezone\":\"America/Los_Angeles\",\"country\":\"US\",\"isFulfillment\": false}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
 
 		Delegatee delegatee = organizationApi.getDelegateeDetails("cBrUjKvQQgdRp~s1qvQNLpK*");
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
 		assertEquals(HttpMethodType.GET.name(), recordedRequest.getMethod());
+		assertFalse(delegatee.getFulfillment());
 		assertEquals("/organizations/cBrUjKvQQgdRp~s1qvQNLpK*", recordedRequest.getPath());
 		assertEquals("cBrUjKvQQgdRp~s1qvQNLpK*", delegatee.getId());
 		Assertions.assertThat(delegatee).usingRecursiveComparison()

@@ -3,6 +3,7 @@ package com.onfleet.api;
 import com.onfleet.exceptions.ApiException;
 import com.onfleet.models.ErrorResponse;
 import com.onfleet.models.VehicleType;
+import com.onfleet.models.hub.Hub;
 import com.onfleet.models.task.Task;
 import com.onfleet.models.team.Team;
 import com.onfleet.models.team.TeamCreateParams;
@@ -47,7 +48,10 @@ class TeamApiTest extends BaseApiTest {
 
 		TeamCreateParams params = new TeamCreateParams.Builder("team1",
 				Arrays.asList("manager1", "manager2", "manager3"),
-				Arrays.asList("worker1", "worker2")).build();
+				Arrays.asList("worker1", "worker2"))
+				.setEnableSelfAssignment(true)
+				.setHub("hubId")
+				.build();
 		Team createdTeam = teamApi.createTeam(params);
 		RecordedRequest request = mockWebServer.takeRequest();
 
@@ -108,7 +112,13 @@ class TeamApiTest extends BaseApiTest {
 		String mockResponse = "{\"code\":\"ResourceNotFound\",\"message\":{\"error\":1402,\"message\":\"The requested resource does not exist.\",\"request\":\"517e4611-44f0-40de-a0f9-c306884de7e0\"}}";
 		enqueueMockResponse(mockResponse, HttpURLConnection.HTTP_BAD_REQUEST);
 
-		TeamUpdateParams params = new TeamUpdateParams.Builder().build();
+		TeamUpdateParams params = new TeamUpdateParams.Builder()
+				.setName("team")
+				.setEnableSelfAssignment(true)
+				.setHub("hubId")
+				.setWorkers(Collections.singletonList("worker"))
+				.setManagers(Collections.singletonList("manager"))
+				.build();
 		ApiException exception = assertThrows(ApiException.class, () -> teamApi.updateTeam("team1", params));
 		Assertions.assertThat(exception.getErrorResponse())
 				.usingRecursiveComparison()

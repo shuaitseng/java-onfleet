@@ -89,8 +89,4 @@ class HubApiTest extends BaseApiTest {
 				.setCountry("Argentina")
 				.build();
 	}
-
-	private Hub getHub() {
-		return new Hub("VIP customer", getAddress(), Collections.singletonList("kq5MFBzYNWhp1rumJEfGUTqS"));
-	}
 }

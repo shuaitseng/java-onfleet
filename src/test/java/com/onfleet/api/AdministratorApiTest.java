@@ -23,6 +23,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
@@ -41,13 +42,25 @@ class AdministratorApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"id\": \"8AxaiKwMd~np7I*YP2NfukBE\", \"timeCreated\": 1455156651000, \"timeLastModified\": 1455156651779, \"organization\": \"yAM*fDkztrT3gUcz9mNDgNOL\", \"email\": \"cm@onf.lt\", \"type\": \"standard\", \"name\": \"Chelsea M\", \"isActive\": false, \"metadata\": [],\"isAccountOwner\": false, \"teams\": []}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
 
-		AdminCreateParams params = new AdminCreateParams.Builder("name", "cm@onf.lt", AdministratorType.SUPER).build();
+		AdminCreateParams params = new AdminCreateParams.Builder("name", "cm@onf.lt", AdministratorType.SUPER)
+				.setPhone("123-444-5555")
+				.setIsReadOnly(true)
+				.setMetadata(Collections.singletonList(new Metadata.Builder().build()))
+				.build();
 		Administrator admin = administratorApi.createAdministrator(params);
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
 		assertEquals(HttpMethodType.POST.name(), recordedRequest.getMethod());
 		assertEquals("/admins", recordedRequest.getPath());
 		assertEquals("8AxaiKwMd~np7I*YP2NfukBE", admin.getId());
+		assertEquals(1455156651000L, admin.getTimeCreated());
+		assertEquals(1455156651779L, admin.getTimeLastModified());
+		assertEquals("yAM*fDkztrT3gUcz9mNDgNOL", admin.getOrganization());
+		assertEquals("cm@onf.lt", admin.getEmail());
+		assertEquals(AdministratorType.STANDARD, admin.getType());
+		assertEquals("Chelsea M", admin.getName());
+		assertFalse(admin.isActive());
+		assertFalse(admin.isAccountOwner());
 		Assertions.assertThat(admin).usingRecursiveComparison().isEqualTo(GsonSingleton.getInstance().fromJson(mockResponseJson, Administrator.class));
 	}
 
@@ -88,7 +101,12 @@ class AdministratorApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"id\":\"8AxaiKwMd~np7I*YP2NfukBE\",\"timeCreated\":1455156651000,\"timeLastModified\":1455156652494,\"organization\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"email\":\"cm@onf.lt\",\"type\":\"standard\",\"name\":\"C Manning\",\"isActive\":false,\"metadata\":[]}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
 
-		AdminUpdateParams params = new AdminUpdateParams.Builder().setName("New Admin super").build();
+		AdminUpdateParams params = new AdminUpdateParams.Builder()
+				.setName("New Admin super")
+				.setEmail("email@mail.com")
+				.setPhone("123-444-5555")
+				.setMetadata(Collections.singletonList(new Metadata.Builder().build()))
+				.build();
 		Administrator admin = administratorApi.updateAdministrator("8AxaiKwMd~np7I*YP2NfukBE", params);
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
@@ -104,7 +122,11 @@ class AdministratorApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"code\":\"InvalidContent\",\"message\":{\"error\":1005,\"message\":\"The data types of one or more parameters are invalid.\",\"cause\":\"PuLjIsI8nF1xGU3vRWn2XA~Ta must be of type ObjectId\",\"request\":\"aa7d0676-5f2d-4baa-aa38-4285c2bdb438\"}}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_BAD_REQUEST);
 
-		AdminUpdateParams params = new AdminUpdateParams.Builder().setName("New Admin super").build();
+		AdminUpdateParams params = new AdminUpdateParams.Builder()
+				.setName("New Admin super")
+				.setPhone("123-444-5555")
+				.setMetadata(Collections.singletonList(new Metadata.Builder().build()))
+				.build();
 		ApiException exception = assertThrows(ApiException.class, () ->
 				administratorApi.updateAdministrator("8AxaiKwMd~np7I*YP2NfukBE", params));
 		RecordedRequest recordedRequest = mockWebServer.takeRequest();

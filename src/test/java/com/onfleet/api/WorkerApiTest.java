@@ -8,10 +8,12 @@ import com.onfleet.models.Metadata;
 import com.onfleet.models.MetadataVisibility;
 import com.onfleet.models.VehicleType;
 import com.onfleet.models.worker.Worker;
+import com.onfleet.models.worker.WorkerAddresses;
 import com.onfleet.models.worker.WorkerCreateParams;
 import com.onfleet.models.worker.WorkerFilterFields;
 import com.onfleet.models.worker.WorkerListQueryParams;
 import com.onfleet.models.worker.WorkerQueryParams;
+import com.onfleet.models.worker.WorkerRouting;
 import com.onfleet.models.worker.WorkerScheduleEntries;
 import com.onfleet.models.worker.WorkerScheduleEntry;
 import com.onfleet.models.worker.WorkerStates;
@@ -56,9 +58,27 @@ class WorkerApiTest extends BaseApiTest {
 		String mockResponseJson = "{\"id\":\"sFtvhYK2l26zS0imptJJdC2q\",\"timeCreated\":1455156653000,\"timeLastModified\":1455156653214,\"organization\":\"yAM*fDkztrT3gUcz9mNDgNOL\",\"name\":\"A Swartz\",\"displayName\":\"AS\",\"phone\":\"+16173428853\",\"activeTask\":null,\"tasks\":[],\"onDuty\":false,\"timeLastSeen\":null,\"capacity\":0,\"userData\":{\"appVersion\":\"1.2.0\",\"batteryLevel\":0.99,\"deviceDescription\":\"iPhone XS\",\"platform\":\"IOS\"},\"accountStatus\":\"ACCEPTED\",\"metadata\":[],\"imageUrl\":null,\"teams\":[\"nz1nG1Hpx9EHjQCJsT2VAs~o\"],\"delayTime\":null,\"vehicle\":{\"id\":\"tN1HjcvygQWvz5FRR1JAxwL8\",\"type\":\"CAR\",\"description\":\"Tesla Model 3\",\"licensePlate\":\"FKNS9A\",\"color\":\"purple\",\"timeLastModified\":154086815176}}";
 		enqueueMockResponse(mockResponseJson, HttpURLConnection.HTTP_OK);
 
-		WorkerVehicle vehicle = new WorkerVehicle.Builder(VehicleType.CAR).build();
-		WorkerCreateParams params = new WorkerCreateParams.Builder("A Swartz", "617-342-8853", Collections.singletonList("nz1nG1Hpx9EHjQCJsT2VAs~o"))
+		WorkerVehicle vehicle = new WorkerVehicle.Builder(VehicleType.CAR)
+				.setColor("purple")
+				.setLicensePlate("FKNS9A")
+				.setDescription("Tesla Model 3")
+				.build();
+		WorkerCreateParams params = new WorkerCreateParams
+				.Builder("A Swartz", "617-342-8853", Collections.singletonList("nz1nG1Hpx9EHjQCJsT2VAs~o"))
 				.setWorkerVehicle(vehicle)
+				.setCapacity(15.0)
+				.setDisplayName("displayName")
+				.setAddresses(new WorkerAddresses(
+						new WorkerRouting.Builder()
+								.setId("workerRoutingId")
+								.setCreatedByLocation(true)
+								.setNotes("notes")
+								.setGooglePlaceId("googlePlaceId")
+								.setWasGeocoded(false)
+								.setTimeCreated(10000L)
+								.setOrganization("orgId")
+								.build()
+				))
 				.build();
 		Worker createdWorker = workerApi.createWorker(params);
 		RecordedRequest request = mockWebServer.takeRequest();
@@ -195,6 +215,7 @@ class WorkerApiTest extends BaseApiTest {
 		assert request.getPath() != null;
 		assertEquals("/workers/location?longitude=-122.41275787353516&latitude=37.78998061344339&radius=6000",
 				URLDecoder.decode(request.getPath(), StandardCharsets.UTF_8.name()));
+		assertEquals(2, workers.getWorkers().size());
 		assertEquals(HttpMethodType.GET.name(), request.getMethod());
 		Assertions.assertThat(workers).usingRecursiveComparison().isEqualTo(GsonSingleton.getInstance().fromJson(mockResponse, Workers.class));
 	}

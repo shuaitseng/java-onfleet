@@ -91,7 +91,10 @@ class RecipientApiTest extends BaseApiTest {
 		enqueueMockResponse(json, HttpURLConnection.HTTP_OK);
 
 		RecipientUpdateParams updateParams = new RecipientUpdateParams.Builder()
-				.setName("new name").build();
+				.setName("Neiman Runtilly")
+				.setSkipSmsNotifications(false)
+				.setNotes("Always orders our GSC special")
+				.build();
 		Recipient recipient = recipientApi.updateRecipient("recipientId", updateParams);
 
 		assertThat(recipient).usingRecursiveComparison().isEqualTo(GsonSingleton.getInstance().fromJson(json, Recipient.class));
