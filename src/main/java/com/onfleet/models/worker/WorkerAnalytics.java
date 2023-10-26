@@ -12,32 +12,16 @@ public class WorkerAnalytics {
 		return events;
 	}
 
-	public void setEvents(List<AnalyticsEvent> events) {
-		this.events = events;
-	}
-
 	public Distance getDistances() {
 		return distances;
-	}
-
-	public void setDistances(Distance distances) {
-		this.distances = distances;
 	}
 
 	public Time getTimes() {
 		return times;
 	}
 
-	public void setTimes(Time times) {
-		this.times = times;
-	}
-
 	public TaskCounts getTaskCounts() {
 		return taskCounts;
-	}
-
-	public void setTaskCounts(TaskCounts taskCounts) {
-		this.taskCounts = taskCounts;
 	}
 
 	public static class AnalyticsEvent {
@@ -48,16 +32,8 @@ public class WorkerAnalytics {
 			return action;
 		}
 
-		public void setAction(String action) {
-			this.action = action;
-		}
-
 		public Long getTime() {
 			return time;
-		}
-
-		public void setTime(Long time) {
-			this.time = time;
 		}
 	}
 
@@ -69,16 +45,8 @@ public class WorkerAnalytics {
 			return enroute;
 		}
 
-		public void setEnroute(double enroute) {
-			this.enroute = enroute;
-		}
-
 		public double getIdle() {
 			return idle;
-		}
-
-		public void setIdle(double idle) {
-			this.idle = idle;
 		}
 	}
 
@@ -90,16 +58,8 @@ public class WorkerAnalytics {
 			return enroute;
 		}
 
-		public void setEnroute(Double enroute) {
-			this.enroute = enroute;
-		}
-
 		public Double getIdle() {
 			return idle;
-		}
-
-		public void setIdle(Double idle) {
-			this.idle = idle;
 		}
 	}
 
@@ -111,16 +71,8 @@ public class WorkerAnalytics {
 			return succeeded;
 		}
 
-		public void setSucceeded(Integer succeeded) {
-			this.succeeded = succeeded;
-		}
-
 		public Integer getFailed() {
 			return failed;
-		}
-
-		public void setFailed(Integer failed) {
-			this.failed = failed;
 		}
 	}
 }

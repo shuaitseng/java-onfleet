@@ -10,31 +10,15 @@ public class TaskOverrides {
 		return recipientName;
 	}
 
-	public void setRecipientName(String recipientName) {
-		this.recipientName = recipientName;
-	}
-
 	public String getRecipientNotes() {
 		return recipientNotes;
-	}
-
-	public void setRecipientNotes(String recipientNotes) {
-		this.recipientNotes = recipientNotes;
 	}
 
 	public Boolean getRecipientSkipSMSNotifications() {
 		return recipientSkipSMSNotifications;
 	}
 
-	public void setRecipientSkipSMSNotifications(Boolean recipientSkipSMSNotifications) {
-		this.recipientSkipSMSNotifications = recipientSkipSMSNotifications;
-	}
-
 	public Boolean getUseMerchantForProxy() {
 		return useMerchantForProxy;
-	}
-
-	public void setUseMerchantForProxy(Boolean useMerchantForProxy) {
-		this.useMerchantForProxy = useMerchantForProxy;
 	}
 }

@@ -12,12 +12,4 @@ public class TaskForceCompletionParams {
 	public TaskForceCompletionParams(Boolean success) {
 		this.success = success;
 	}
-
-	public void setSuccess(Boolean success) {
-		this.success = success;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
 }

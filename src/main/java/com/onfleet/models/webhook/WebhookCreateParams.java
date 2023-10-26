@@ -20,22 +20,6 @@ public class WebhookCreateParams {
 		this.threshold = threshold;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public void setTrigger(int trigger) {
-		this.trigger = trigger;
-	}
-
-	public void setThreshold(Integer threshold) {
-		this.threshold = threshold;
-	}
-
 	public static class Builder {
 		private String name;
 		private String url;

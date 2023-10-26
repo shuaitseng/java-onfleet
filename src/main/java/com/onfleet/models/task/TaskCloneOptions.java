@@ -7,11 +7,4 @@ public class TaskCloneOptions {
 		this.options = options;
 	}
 
-	public TaskCloneParams getOptions() {
-		return options;
-	}
-
-	public void setOptions(TaskCloneParams options) {
-		this.options = options;
-	}
 }

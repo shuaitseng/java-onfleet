@@ -14,47 +14,23 @@ public class RouteStep {
 		return location;
 	}
 
-	public void setLocation(List<Double> location) {
-		this.location = location;
-	}
-
 	public Double getTravelTime() {
 		return travelTime;
-	}
-
-	public void setTravelTime(Double travelTime) {
-		this.travelTime = travelTime;
 	}
 
 	public Double getDistance() {
 		return distance;
 	}
 
-	public void setDistance(Double distance) {
-		this.distance = distance;
-	}
-
 	public Double getServiceTime() {
 		return serviceTime;
-	}
-
-	public void setServiceTime(Double serviceTime) {
-		this.serviceTime = serviceTime;
 	}
 
 	public Integer getArrivalTime() {
 		return arrivalTime;
 	}
 
-	public void setArrivalTime(Integer arrivalTime) {
-		this.arrivalTime = arrivalTime;
-	}
-
 	public Integer getCompletionTime() {
 		return completionTime;
-	}
-
-	public void setCompletionTime(Integer completionTime) {
-		this.completionTime = completionTime;
 	}
 }

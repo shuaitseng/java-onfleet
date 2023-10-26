@@ -8,15 +8,7 @@ public class TaskIdentity {
 		return failedScanCount;
 	}
 
-	public void setFailedScanCount(Integer failedScanCount) {
-		this.failedScanCount = failedScanCount;
-	}
-
 	public Object getChecksum() {
 		return checksum;
-	}
-
-	public void setChecksum(Object checksum) {
-		this.checksum = checksum;
 	}
 }
