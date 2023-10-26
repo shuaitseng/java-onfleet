@@ -21,54 +21,6 @@ public class AdminCreateParams {
 		this.metadata = builder.metadata;
 	}
 
-	/*public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public boolean isReadOnly() {
-		return isReadOnly;
-	}
-
-	public void setReadOnly(boolean readOnly) {
-		isReadOnly = readOnly;
-	}
-
-	public List<Metadata> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(List<Metadata> metadata) {
-		this.metadata = metadata;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public AdministratorType getType() {
-		return type;
-	}
-
-	public void setType(AdministratorType type) {
-		this.type = type;
-	}*/
-
 	public static class Builder {
 		private final String email;
 		private final String name;
