@@ -1,21 +1,19 @@
 package com.onfleet.models.recipient;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.onfleet.models.Metadata;
 
 import java.util.List;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Recipient {
-	private String id;
-	private String name;
-	private String phone;
-	private String notes;
-	private Boolean skipSMSNotifications;
-	private Long timeCreated;
-	private Long timeLastModified;
-	private String organization;
-	private List<Metadata> metadata;
+	private final String id;
+	private final String name;
+	private final String phone;
+	private final String notes;
+	private final Boolean skipSMSNotifications;
+	private final Long timeCreated;
+	private final Long timeLastModified;
+	private final String organization;
+	private final List<Metadata> metadata;
 
 	private Recipient(Builder builder) {
 		id = builder.id;

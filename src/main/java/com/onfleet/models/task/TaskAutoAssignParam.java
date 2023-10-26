@@ -3,11 +3,11 @@ package com.onfleet.models.task;
 import java.util.List;
 
 public class TaskAutoAssignParam {
-	private Boolean considerDependencies;
-	private List<String> excludedWorkerIds;
-	private Integer maxAssignedTaskCount;
-	private TaskAutoAssignMode mode;
-	private String team;
+	private final Boolean considerDependencies;
+	private final List<String> excludedWorkerIds;
+	private final Integer maxAssignedTaskCount;
+	private final TaskAutoAssignMode mode;
+	private final String team;
 
 	private TaskAutoAssignParam(Builder builder) {
 		considerDependencies = builder.considerDependencies;

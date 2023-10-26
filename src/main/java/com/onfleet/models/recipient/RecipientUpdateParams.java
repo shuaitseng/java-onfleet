@@ -5,10 +5,10 @@ import com.onfleet.models.Metadata;
 import java.util.List;
 
 public class RecipientUpdateParams {
-	private String name;
-	private String notes;
-	private Boolean skipSmsNotifications;
-	private List<Metadata> metadata;
+	private final String name;
+	private final String notes;
+	private final Boolean skipSmsNotifications;
+	private final List<Metadata> metadata;
 
 	private RecipientUpdateParams(Builder builder) {
 		name = builder.name;
