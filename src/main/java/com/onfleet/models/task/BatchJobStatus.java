@@ -5,7 +5,7 @@ import java.util.List;
 public class BatchJobStatus {
 	private String status;
 	private String submitted;
-	private Integer taskReceived;
+	private Integer tasksReceived;
 	private Integer tasksCreated;
 	private Integer tasksErrored;
 	private List<Task> newTasksWithWarnings;
@@ -21,8 +21,8 @@ public class BatchJobStatus {
 		return submitted;
 	}
 
-	public Integer getTaskReceived() {
-		return taskReceived;
+	public Integer getTasksReceived() {
+		return tasksReceived;
 	}
 
 	public Integer getTasksCreated() {
