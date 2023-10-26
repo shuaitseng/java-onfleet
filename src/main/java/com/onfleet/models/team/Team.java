@@ -1,6 +1,6 @@
 package com.onfleet.models.team;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public class Team {
 	private String name;
 	private List<String> workers;
 	private List<String> managers;
-	@JsonProperty("hub")
+	@SerializedName("hub")
 	private String hubId;
 	private Boolean enableSelfAssignment;
 	private List<String> tasks;
