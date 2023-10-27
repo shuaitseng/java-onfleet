@@ -49,6 +49,11 @@ dependencies {
 
 To use the API wrapper, you need to obtain API credentials from [OnFleet's Dashboard](https://onfleet.com/dashboard#/manage). Once you have your credentials, you can set them as environment variables or directly in your Java code.
 
+### Throttling
+Rate limiting is enforced by the API with a threshold of 20 requests per second across all your organization's API keys. Learn more about it here.
+
+We have also implemented a limiter on this library to avoid you from unintentionally exceeding your rate limitations and eventually be banned for.
+
 ## Getting Started
 Create an instance of the `OnFleet` class and initialize it with your OnFleet API key:
 
@@ -65,7 +70,8 @@ try {
     onFleet.getOrganizationApi.getOrgDetails();
 } catch (ApiException e) {
     // Handle the error
-    System.out.println("API Error: " + e.getMessage());
+    System.out.println("API Error: " + e.getStatusCode());
+    System.out.println("Error Message: " + e.getErrorResponse());
 }
 ```
 
