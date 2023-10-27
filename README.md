@@ -7,27 +7,28 @@ If you have any questions, please reach us by submitting an issue [here](https:/
 
 ## Table of Contents
 - [Getting Started](#getting-started)
-    - [Installation](#installation)
-    - [Authentication](#authentication)
-- [Usage](#usage)
-    - [Initializing the API Client](#initializing-the-api-client)
-    - [Making API Calls](#making-api-calls)
-    - [Error Handling](#error-handling)
-- [API Reference](#api-reference)
-    - [Methods](#methods)
+  - [Supported Java Versions](#supported-java-versions)
+  - [Installation](#installation)
+    - [Maven Installation](#maven-installation)
+    - [Gradle Installation](#gradle-installation)
+- [Authentication](#authentication)
+- [Throttling](#throttling)
+- [Getting Started](#getting-started)
+  - [Start Making API Calls](#start-making-api-calls)
+  - [Error Handling](#error-handling)
 - [Examples](#examples)
 
-## Getting Started
+# Getting Started
 
-### Supported Java Versions
+## Supported Java Versions
 
 The Onfleet Java Wrapper is compatible with Java 8 and higher.
 
-### Installation
+## Installation
 
 To use this API wrapper, you need to include it in your Java project. Here's how to do it:
 
-#### Maven Installation
+### Maven Installation
 
 To include your API wrapper as a dependency in a Maven project, add the following dependency 
 to your `pom.xml` file:
@@ -42,7 +43,7 @@ to your `pom.xml` file:
 </dependencies>
 ```
 
-#### Gradle Installation
+### Gradle Installation
 
 For Gradle, you can add the following dependency to your `build.gradle` file:
 
@@ -52,12 +53,12 @@ dependencies {
 }
 ```
 
-### Authentication
+## Authentication
 
 To use the API wrapper, you need to obtain API credentials from [OnFleet's Dashboard](https://onfleet.com/dashboard#/manage).
 Once you have your credentials, you can set them as environment variables or directly in your Java code.
 
-### Throttling
+## Throttling
 
 The Onfleet API enforces rate limiting with a threshold of 20 requests per second across all your organization's API keys. Rate limiting is crucial to ensure fair usage of the API and to prevent unintentional overuse that could lead to banning.
 
