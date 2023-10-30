@@ -18,71 +18,71 @@ import java.lang.reflect.Field;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-class OnFleetTest {
-	private OnFleet onFleet;
+class OnfleetTest {
+	private Onfleet onfleet;
 
 	@BeforeEach
 	void setUp() {
-		onFleet = new OnFleet("mocked_api_key");
+		onfleet = new Onfleet("mocked_api_key");
 	}
 
 	@Test
 	void testOrganizationApi() {
-		OrganizationApi organizationApi = onFleet.getOrganizationApi();
+		OrganizationApi organizationApi = onfleet.getOrganizationApi();
 		assertBaseUrlEndsWith(organizationApi, "organization");
 	}
 
 	@Test
 	void testAdministratorApi() {
-		AdministratorApi administratorApi = onFleet.getAdministratorApi();
+		AdministratorApi administratorApi = onfleet.getAdministratorApi();
 		assertBaseUrlEndsWith(administratorApi, "admins");
 	}
 
 	@Test
 	void testWorkerApi() {
-		WorkerApi workerApi = onFleet.getWorkerApi();
+		WorkerApi workerApi = onfleet.getWorkerApi();
 		assertBaseUrlEndsWith(workerApi, "workers");
 	}
 
 	@Test
 	void testHubApi() {
-		HubApi hubApi = onFleet.getHubApi();
+		HubApi hubApi = onfleet.getHubApi();
 		assertBaseUrlEndsWith(hubApi, "hubs");
 	}
 
 	@Test
 	void testTeamApi() {
-		TeamApi teamApi = onFleet.getTeamApi();
+		TeamApi teamApi = onfleet.getTeamApi();
 		assertBaseUrlEndsWith(teamApi, "teams");
 	}
 
 	@Test
 	void testDestinationApi() {
-		DestinationApi destinationApi = onFleet.getDestinationApi();
+		DestinationApi destinationApi = onfleet.getDestinationApi();
 		assertBaseUrlEndsWith(destinationApi, "destinations");
 	}
 
 	@Test
 	void testRecipientApi() {
-		RecipientApi recipientApi = onFleet.getRecipientApi();
+		RecipientApi recipientApi = onfleet.getRecipientApi();
 		assertBaseUrlEndsWith(recipientApi, "recipients");
 	}
 
 	@Test
 	void testTaskApi() {
-		TaskApi taskApi = onFleet.getTaskApi();
+		TaskApi taskApi = onfleet.getTaskApi();
 		assertBaseUrlEndsWith(taskApi, "tasks");
 	}
 
 	@Test
 	void testContainerApi() {
-		ContainerApi containerApi = onFleet.getContainerApi();
+		ContainerApi containerApi = onfleet.getContainerApi();
 		assertBaseUrlEndsWith(containerApi, "containers");
 	}
 
 	@Test
 	void testWebhookApi() {
-		WebhookApi webhookApi = onFleet.getWebhookApi();
+		WebhookApi webhookApi = onfleet.getWebhookApi();
 		assertBaseUrlEndsWith(webhookApi, "webhooks");
 	}
 

@@ -1,5 +1,5 @@
 public class Workers {
-	private static final OnFleet onFleet = new OnFleet("ApiKey");
+	private static final Onfleet onfleet = new Onfleet("ApiKey");
 
 
 	public void createWorker() {
@@ -8,22 +8,22 @@ public class Workers {
 		WorkerCreateParams params = new WorkerCreateParams.Builder("A Swartz", "617-342-8853", Collections.singletonList("nz1nG1Hpx9EHjQCJsT2VAs~o"))
 				.setWorkerVehicle(vehicle)
 				.build();
-		onFleet.getWorkerApi().createWorker(params);
+		onfleet.getWorkerApi().createWorker(params);
 	}
 
 	public void listWorkers() {
 		// https://docs.onfleet.com/reference/list-workers
-		onFleet.getWorkerApi().listWorkers();
+		onfleet.getWorkerApi().listWorkers();
 	}
 
 	public void getWorkersTasks() {
 		// https://docs.onfleet.com/reference/list-workers-assigned-tasks
-		onFleet.getWorkerApi().getWorkersTasks("sFtvhYK2l26zS0imptJJdC2q");
+		onfleet.getWorkerApi().getWorkersTasks("sFtvhYK2l26zS0imptJJdC2q");
 	}
 
 	public void getWorkersByLocation() {
 		// https://docs.onfleet.com/reference/get-workers-by-location
-		onFleet.getWorkerApi().getWorkersByLocation(-122.41275787353516, 37.78998061344339, 6000);
+		onfleet.getWorkerApi().getWorkersByLocation(-122.41275787353516, 37.78998061344339, 6000);
 	}
 
 	public void getSingleWorker() {
@@ -31,7 +31,7 @@ public class Workers {
 		WorkerQueryParams queryParams = new WorkerQueryParams.Builder()
 				.setEnableAnalytics(true)
 				.build();
-		onFleet.getWorkerApi().getSingleWorker("1LjhGUWdxFbvdsTAAXs0TFos", queryParams);
+		onfleet.getWorkerApi().getSingleWorker("1LjhGUWdxFbvdsTAAXs0TFos", queryParams);
 	}
 
 	public void updateWorker() {
@@ -40,17 +40,17 @@ public class Workers {
 				.setName("Laura P")
 				.setTeams(Collections.singletonList("lHCUJFvh6v0YDURKjokZbvau"))
 				.build();
-		onFleet.getWorkerApi().updateWorker("sFtvhYK2l26zS0imptJJdC2q", updateParams);
+		onfleet.getWorkerApi().updateWorker("sFtvhYK2l26zS0imptJJdC2q", updateParams);
 	}
 
 	public void deleteWorker() {
 		// https://docs.onfleet.com/reference/delete-worker
-		onFleet.getWorkerApi().deleteWorker("sFtvhYK2l26zS0imptJJdC2q");
+		onfleet.getWorkerApi().deleteWorker("sFtvhYK2l26zS0imptJJdC2q");
 	}
 
 	public void getWorkerSchedule() {
 		// https://docs.onfleet.com/reference/get-workers-schedule
-		onFleet.getWorkerApi().getWorkerSchedule("GPOQQjU84QPN~fP*pbunT2CW");
+		onfleet.getWorkerApi().getWorkerSchedule("GPOQQjU84QPN~fP*pbunT2CW");
 	}
 
 	public void setWorkerSchedule() {
@@ -79,6 +79,6 @@ public class Workers {
 						.setTimezone("America/Los_Angeles")
 						.build()
 		);
-		onFleet.getWorkerApi().setWorkerSchedule("GPOQQjU84QPN~fP*pbunT2CW", entries);
+		onfleet.getWorkerApi().setWorkerSchedule("GPOQQjU84QPN~fP*pbunT2CW", entries);
 	}
 }

@@ -1,5 +1,5 @@
 public class Tasks {
-	private static final OnFleet onFleet = new OnFleet("ApiKey");
+	private static final Onfleet onfleet = new Onfleet("ApiKey");
 
 	public void createTask() {
 		// https://docs.onfleet.com/reference/create-task
@@ -16,7 +16,7 @@ public class Tasks {
 				.setCompleteAfter(1455151071727L)
 				.setAutoAssign(new TaskAutoAssignParam.Builder().setMode(TaskAutoAssignMode.DISTANCE).build())
 				.build();
-		onFleet.getTaskApi().createTask(params);
+		onfleet.getTaskApi().createTask(params);
 	}
 
 	public void createTasksBatch() {
@@ -67,12 +67,12 @@ public class Tasks {
 								.build()))
 						.build()
 		);
-		onFleet.getTaskApi().createTasksBatch(tasks);
+		onfleet.getTaskApi().createTasksBatch(tasks);
 	}
 
 	public void getBatchJobStatus() {
 		// https://docs.onfleet.com/reference/batch-job-status
-		onFleet.getTaskApi().getBatchJobStatus("S3oI~WNX4b5cbF1adQxuEeJD");
+		onfleet.getTaskApi().getBatchJobStatus("S3oI~WNX4b5cbF1adQxuEeJD");
 	}
 
 	public void listTasks() {
@@ -81,22 +81,22 @@ public class Tasks {
 				.Builder(1455072025000L)
 				.setLastId("tPMO~h03sOIqFbnhqaOXgUsd")
 				.build();
-		onFleet.getTaskApi().listTasks(queryParams);
+		onfleet.getTaskApi().listTasks(queryParams);
 	}
 
 	public void getSingleTask() {
 		// https://docs.onfleet.com/reference/get-single-task
-		onFleet.getTaskApi().getSingleTask("qNMz6CKwQ*26FOslywsiQxhY");
+		onfleet.getTaskApi().getSingleTask("qNMz6CKwQ*26FOslywsiQxhY");
 	}
 
 	public void getTaskByShortId() {
 		// https://docs.onfleet.com/reference/get-single-task-by-shortid
-		onFleet.getTaskApi().getTaskByShortId("e5f0cc28");
+		onfleet.getTaskApi().getTaskByShortId("e5f0cc28");
 	}
 
 	public void updateTask() {
 		// https://docs.onfleet.com/reference/update-task
-		onFleet.getTaskApi().updateTask("kc8SS1tzuZ~jqjlebKGrUmpe",
+		onfleet.getTaskApi().updateTask("kc8SS1tzuZ~jqjlebKGrUmpe",
 				new TaskParams.Builder()
 						.setNotes("Patxi's deep dish meat lover special, 2 bottles of Basque cider")
 						.setContainer(new TaskContainer.Builder()
@@ -108,18 +108,18 @@ public class Tasks {
 
 	public void completeTask() {
 		// https://docs.onfleet.com/reference/complete-task
-		onFleet.getTaskApi().completeTask("uO2vKr07h6zg7Fzf~2NC3KLg",
+		onfleet.getTaskApi().completeTask("uO2vKr07h6zg7Fzf~2NC3KLg",
 				new TaskForceCompletionParams(true));
 	}
 
 	public void cloneTask() {
 		// https://docs.onfleet.com/reference/clone-task
-		onFleet.getTaskApi().cloneTask("uO2vKr07h6zg7Fzf~2NC3KLg");
+		onfleet.getTaskApi().cloneTask("uO2vKr07h6zg7Fzf~2NC3KLg");
 	}
 
 	public void deleteTask() {
 		// https://docs.onfleet.com/reference/delete-task
-		onFleet.getTaskApi().deleteTask("d2N*68bTBAM6Rd6txuWdH9Xj");
+		onfleet.getTaskApi().deleteTask("d2N*68bTBAM6Rd6txuWdH9Xj");
 	}
 
 	public void autoAssign() {
@@ -132,6 +132,6 @@ public class Tasks {
 						.setConsiderDependencies(true)
 						.build())
 				.build();
-		onFleet.getTaskApi().autoAssign(autoAssignParams);
+		onfleet.getTaskApi().autoAssign(autoAssignParams);
 	}
 }

@@ -7,7 +7,7 @@ public class Teams {
 				Collections.singletonList("Mrq7aKqzPFKX22pmjdLx*ohM"))
 				.setHub("tKxSfU7psqDQEBVn5e2VQ~*O")
 				.build();
-		onFleet.getTeamApi().createTeam(params);
+		onfleet.getTeamApi().createTeam(params);
 	}
 
 	public void updateTeam() {
@@ -18,22 +18,22 @@ public class Teams {
 						"F8WPCqGmQYWpCkQ2c8zJTCpW",
 						"3joS0Jh19VpJZgSTxFOK9fTf"
 				)).build();
-		onFleet.getTeamApi().updateTeam("FFqPs1KHayxorfA~~xIj0us4", updateParams);
+		onfleet.getTeamApi().updateTeam("FFqPs1KHayxorfA~~xIj0us4", updateParams);
 	}
 
 	public void listTeams() {
 		// https://docs.onfleet.com/reference/list-teams
-		onFleet.getTeamApi().listTeams();
+		onfleet.getTeamApi().listTeams();
 	}
 
 	public void getSingleTeam() {
 		// https://docs.onfleet.com/reference/get-single-team
-		onFleet.getTeamApi().getTeam("9dyuPqHt6kDK5JKHFhE0xihh");
+		onfleet.getTeamApi().getTeam("9dyuPqHt6kDK5JKHFhE0xihh");
 	}
 
 	public void deleteTeam() {
 		// https://docs.onfleet.com/reference/delete-team
-		onFleet.getTeamApi().deleteTeam("FFqPs1KHayxorfA~~xIj0us4");
+		onfleet.getTeamApi().deleteTeam("FFqPs1KHayxorfA~~xIj0us4");
 	}
 
 	public void deliveryEstimate() {
@@ -45,7 +45,7 @@ public class Teams {
 				.setPickupTime(1614895847L)
 				.setRestrictedVehicleTypes(Collections.singletonList(VehicleType.CAR))
 				.build();
-		onFleet.getTeamApi().getDriverTimeEstimate("aasZ3KnsrPapys5M5Ug3qXom", queryParams);
+		onfleet.getTeamApi().getDriverTimeEstimate("aasZ3KnsrPapys5M5Ug3qXom", queryParams);
 	}
 
 	public void listTeamTasks() {
@@ -54,7 +54,7 @@ public class Teams {
 				.setFrom(1455072025000L)
 				.setLastId("tPMO~h03sOIqFbnhqaOXgUsd")
 				.build();
-		onFleet.getTeamApi().getUnassignedTasks("h*wSb*apKlDkUFnuLTtjPke7", tasksQueryParams);
+		onfleet.getTeamApi().getUnassignedTasks("h*wSb*apKlDkUFnuLTtjPke7", tasksQueryParams);
 	}
 
 }

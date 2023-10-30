@@ -55,7 +55,7 @@ dependencies {
 
 ## Authentication
 
-To use the API wrapper, you need to obtain API credentials from [OnFleet's Dashboard](https://onfleet.com/dashboard#/manage).
+To use the API wrapper, you need to obtain API credentials from [Onfleet's Dashboard](https://onfleet.com/dashboard#/manage).
 Once you have your credentials, you can set them as environment variables or directly in your Java code.
 
 ## Throttling
@@ -65,14 +65,14 @@ The Onfleet API enforces rate limiting with a threshold of 20 requests per secon
 We have implemented a rate limiter within this library to help you stay within the rate limitations without the need for manual management. The rate limiter automatically controls the rate at which API requests are made, ensuring compliance with the API's rate limits.
 
 ## Getting Started
-Create an instance of the `OnFleet` class and initialize it with your OnFleet API key:
+Create an instance of the `Onfleet` class and initialize it with your Onfleet API key:
 
 ```java
-OnFleet onFleet = new OnFleet("YOUR_API_KEY");
+Onfleet onfleet = new Onfleet("YOUR_API_KEY");
 ```
 
 ### Start Making API Calls
-Once you have initialized the OnFleet instance with your API key, 
+Once you have initialized the Onfleet instance with your API key, 
 you are ready to start making API calls. You can refer to the "Usage" and "API Reference" 
 for details on how to interact with the Onfleet API using the Java Wrapper.
 

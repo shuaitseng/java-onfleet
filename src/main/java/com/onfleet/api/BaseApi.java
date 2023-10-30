@@ -1,6 +1,6 @@
 package com.onfleet.api;
 
-import com.onfleet.OnFleet;
+import com.onfleet.Onfleet;
 import com.onfleet.exceptions.ApiException;
 import com.onfleet.utils.GsonSingleton;
 import com.onfleet.utils.HttpMethodType;
@@ -19,7 +19,7 @@ public class BaseApi {
 
 	public BaseApi(OkHttpClient client, String endpoint) {
 		this.client = client;
-		this.baseUrl = OnFleet.URL + endpoint;
+		this.baseUrl = Onfleet.URL + endpoint;
 	}
 
 	protected Response sendRequest(HttpMethodType method, RequestBody body, String url) throws ApiException {

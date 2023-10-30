@@ -1,5 +1,5 @@
 public class Destinations {
-	private static final OnFleet onFleet = new OnFleet("ApiKey");
+	private static final Onfleet onfleet = new Onfleet("ApiKey");
 
 	public void createDestination() {
 		// https://docs.onfleet.com/reference/create-destination
@@ -14,12 +14,12 @@ public class Destinations {
 		DestinationCreateParams params = new DestinationCreateParams.Builder(address)
 				.setNotes("Don't forget to check out the epic rooftop.")
 				.build();
-		onFleet.getDestinationApi().createDestination(params);
+		onfleet.getDestinationApi().createDestination(params);
 	}
 
 	public void getDestination() {
 		// https://docs.onfleet.com/reference/get-single-destination
-		onFleet.getDestinationApi().getDestination("0i~RR0SUIculbRFsIse6MENg");
+		onfleet.getDestinationApi().getDestination("0i~RR0SUIculbRFsIse6MENg");
 	}
 
 }

@@ -1,5 +1,5 @@
 public class Hubs {
-	private static final OnFleet onFleet = new OnFleet("ApiKey");
+	private static final Onfleet onfleet = new Onfleet("ApiKey");
 
 	public void createHub() {
 		// https://docs.onfleet.com/reference/create-hub
@@ -15,7 +15,7 @@ public class Hubs {
 		HubParams params = new HubParams.Builder(address, "VIP customer")
 				.setTeams(Collections.singletonList("kq5MFBzYNWhp1rumJEfGUTqS"))
 				.build();
-		onFleet.getHubApi().createHub(params);
+		onfleet.getHubApi().createHub(params);
 	}
 
 	public void updateHub() {
@@ -30,12 +30,12 @@ public class Hubs {
 				.setName("VIP customer")
 				.build();
 		HubParams updateParams = new HubParams.Builder(newAddress, "VIP customer Hub").setTeams(Collections.singletonList("kq5MFBzYNWhp1rumJEfGUTqS")).build();
-		onFleet.getHubApi().updateHub("i4FoP*dTVrdnGqvIVvvA69aB", updateParams);
+		onfleet.getHubApi().updateHub("i4FoP*dTVrdnGqvIVvvA69aB", updateParams);
 	}
 
 	public void listHubs() {
 		// https://docs.onfleet.com/reference/list-hubs
-		onFleet.getHubApi().listHubs();
+		onfleet.getHubApi().listHubs();
 	}
 
 }

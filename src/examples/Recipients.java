@@ -1,5 +1,5 @@
 public class Recipients {
-	private static final OnFleet onFleet = new OnFleet("ApiKey");
+	private static final Onfleet onfleet = new Onfleet("ApiKey");
 
 	public void createRecipient() {
 		// https://docs.onfleet.com/reference/create-recipient
@@ -7,7 +7,7 @@ public class Recipients {
 				.setNotes("Always orders our GSC special")
 				.setSkipPhoneNumberValidation(true)
 				.build();
-		onFleet.getRecipientApi().createRecipient(params);
+		onfleet.getRecipientApi().createRecipient(params);
 	}
 
 	public void updateRecipient() {
@@ -15,17 +15,17 @@ public class Recipients {
 		RecipientUpdateParams updateParams = new RecipientUpdateParams.Builder()
 				.setName("Neiman Runtilly")
 				.build();
-		onFleet.getRecipientApi().updateRecipient("VVLx5OdKvw0dRSjT2rGOc6Y*", updateParams);
+		onfleet.getRecipientApi().updateRecipient("VVLx5OdKvw0dRSjT2rGOc6Y*", updateParams);
 	}
 
 	public void findRecipientByName() {
 		// https://docs.onfleet.com/reference/find-recipient
-		onFleet.getRecipientApi().findRecipientByName("neiman runtilly");
+		onfleet.getRecipientApi().findRecipientByName("neiman runtilly");
 	}
 
 	public void getSingleRecipient() {
 		// https://docs.onfleet.com/reference/get-single-recipient
-		onFleet.getRecipientApi().getSingleRecipient("VVLx5OdKvw0dRSjT2rGOc6Y*");
+		onfleet.getRecipientApi().getSingleRecipient("VVLx5OdKvw0dRSjT2rGOc6Y*");
 	}
 
 }

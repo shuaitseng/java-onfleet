@@ -15,7 +15,7 @@ import okhttp3.Request;
 
 import java.util.Base64;
 
-public class OnFleet {
+public class Onfleet {
 	public static final String URL = "https://onfleet.com/api/v2";
 	private OkHttpClient client;
 	private final OrganizationApi organizationApi;
@@ -29,7 +29,7 @@ public class OnFleet {
 	private final ContainerApi containerApi;
 	private final WebhookApi webhookApi;
 
-	public OnFleet(String apiKey) {
+	public Onfleet(String apiKey) {
 		initClient(apiKey);
 		organizationApi = new OrganizationApi(client);
 		administratorApi = new AdministratorApi(client);
