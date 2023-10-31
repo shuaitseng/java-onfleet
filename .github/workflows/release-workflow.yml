@@ -20,7 +20,6 @@ jobs:
         name: Install gpg secret key
         run: |
           cat <(echo -e "${{ secrets.GPG_PRIVATE_KEY }}") | gpg --batch --import
-          gpg --list-secret-keys --keyid-format LONG
       - id: publish-to-central
         name: Publish to Central Repository
         env:
