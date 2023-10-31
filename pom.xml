@@ -6,7 +6,7 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>java-api-wrapper</name>
+    <name>${project.groupId}:${project.artifactId}</name>
     <description>
         This library provides a wrapper for interacting with the Onfleet API. It simplifies the integration process with
         Onfleet's services.
