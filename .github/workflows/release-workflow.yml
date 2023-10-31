@@ -12,14 +12,14 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: 11
+          distribution: "temurin"
           server-id: ossrh
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
       - id: install-secret-key
         name: Install gpg secret key
         run: |
-          cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
-          gpg --list-secret-keys --keyid-format LONG
+          cat <(echo -e "${{ secrets.GPG_PRIVATE_KEY }}") | gpg --batch --import
       - id: publish-to-central
         name: Publish to Central Repository
         env:
@@ -29,5 +29,5 @@ jobs:
           mvn \
             --no-transfer-progress \
             --batch-mode \
-            -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} \
+            -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} \
             clean deploy
