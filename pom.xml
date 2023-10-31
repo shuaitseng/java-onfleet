@@ -3,7 +3,43 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.onfleet</groupId>
     <artifactId>java-api-wrapper</artifactId>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
+
+    <name>java-api-wrapper</name>
+    <description>
+        This library provides a wrapper for interacting with the Onfleet API. It simplifies the integration process with
+        Onfleet's services.
+    </description>
+    <url>https://github.com/onfleet/java-onfleet</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Onfleet</name>
+            <email>support@onfleet.com</email>
+            <organizationUrl>https://onfleet.com</organizationUrl>
+        </developer>
+        <developer>
+            <name>Gonzalo Alejandro Grisafi</name>
+            <email>gonzalogrisafi@onfleet.com</email>
+            <url>https://github.com/gonzalogrisafi</url>
+            <organizationUrl>https://onfleet.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/onfleet/java-onfleet.git</connection>
+        <developerConnection>scm:git:https://github.com/onfleet/java-onfleet.git</developerConnection>
+        <url>https://github.com/onfleet/java-onfleet</url>
+    </scm>
+
     <build>
         <plugins>
             <plugin>
@@ -41,9 +77,6 @@
             </plugin>
         </plugins>
     </build>
-    <version>1.0</version>
-    <name>java-api-wrapper</name>
-    <url>http://maven.apache.org</url>
     <properties>
         <jacoco.version>0.8.11</jacoco.version>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
