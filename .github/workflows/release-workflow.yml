@@ -32,4 +32,4 @@ jobs:
             --no-transfer-progress \
             --batch-mode \
             -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} \
-            clean deploy
+            clean verify deploy
