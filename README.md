@@ -53,6 +53,8 @@ dependencies {
 }
 ```
 
+You can also check for other versions and installation options on [Maven Repository](https://mvnrepository.com/artifact/com.onfleet/java-api-wrapper)
+
 ## Authentication
 
 To use the API wrapper, you need to obtain API credentials from [Onfleet's Dashboard](https://onfleet.com/dashboard#/manage).
